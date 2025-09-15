@@ -1,0 +1,30 @@
+import { Hono } from "hono"
+import { cors } from "hono/cors"
+import { handle } from "hono/vercel"
+
+import { contextVariables, fail, send } from "@/api/utils/context"
+
+const app = new Hono().basePath("/api")
+
+app.use(cors(), (ctx, next) => {
+  Object.entries(contextVariables).forEach(([name, value]) => {
+    ctx.set(name as never, value as never)
+  })
+  ctx.set("send", send(ctx))
+  ctx.set("fail", fail(ctx))
+
+  return next()
+})
+
+app.get("/hello", ({ var: { send: ctxSend } }) =>
+  ctxSend({ message: "Hello World!" }),
+)
+
+app.onError((error, { var: { fail: ctxFail } }) => {
+  // eslint-disable-next-line no-console
+  console.error(error)
+
+  return ctxFail("SOMETHING_WENT_WRONG")
+})
+
+export default handle(app)

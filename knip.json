@@ -1,0 +1,16 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "rules": {
+    "duplicates": "warn",
+    "binaries": "warn"
+  },
+  "ignoreDependencies": [
+    "tailwindcss",
+    "@base-ui-components/react",
+    "@hono/zod-validator",
+    "zod",
+    "@testing-library/dom",
+    "@testing-library/react"
+  ],
+  "ignore": ["postcss.config.mjs", "src/utils/auth/auth-client.ts"]
+}
