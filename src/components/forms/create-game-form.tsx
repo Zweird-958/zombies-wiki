@@ -24,7 +24,7 @@ const CreateGameForm = () => {
     resolver: zodResolver(CreateGameSchema),
   })
 
-  const { mutate: createGame } = useMutation(client.games.$post, {
+  const { mutate: createGame, isPending } = useMutation(client.games.$post, {
     onSuccess: () => {
       toast.success(t("success"))
     },
@@ -57,7 +57,7 @@ const CreateGameForm = () => {
               name="image"
             />
 
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" isPending={isPending}>
               {t("submit")}
             </Button>
           </form>
