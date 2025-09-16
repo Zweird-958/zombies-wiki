@@ -6,10 +6,12 @@ import type {
 
 import type { ERROR_RESPONSES } from "@/api/utils/constants"
 
+export type ErrorCode = keyof typeof ERROR_RESPONSES
+
 export type ApiError = {
   error: string
   message?: string
-  code: keyof typeof ERROR_RESPONSES
+  code: ErrorCode
 }
 
 export type HonoClientFunction =

@@ -16,6 +16,8 @@
   },
   "errors": {
     "SOMETHING_WENT_WRONG": "Something went wrong. Please try again.",
+    "FORBIDDEN": "You are not authorized to perform this action.",
+    "UNAUTHORIZED": "You must be logged in to perform this action.",
     "name": {
       "required": "Name is required"
     },

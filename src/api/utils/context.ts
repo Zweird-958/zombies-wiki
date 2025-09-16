@@ -1,6 +1,7 @@
 import type { Context } from "hono"
 
 import db from "@/db"
+import type { ErrorCode } from "@/types/api"
 
 import { ERROR_RESPONSES } from "./constants"
 
@@ -21,8 +22,7 @@ export const send =
     })
 
 export const fail =
-  (ctx: Context) =>
-  (errorName: keyof typeof ERROR_RESPONSES, message?: string) => {
+  (ctx: Context) => (errorName: ErrorCode, message?: string) => {
     const result = {
       error: ERROR_RESPONSES[errorName].message,
       code: errorName,

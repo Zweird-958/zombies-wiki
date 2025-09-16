@@ -1,6 +1,7 @@
 import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 
+import isAuthorized from "@/api/handlers/is-authorized"
 import isGameExists from "@/api/utils/games/is-game-exists"
 import normalizeGameName from "@/api/utils/games/normalize-game-name"
 import uploadImage from "@/api/utils/upload-image"
@@ -12,6 +13,7 @@ const gamesApp = new Hono()
   .post(
     "/",
     zValidator("form", CreateGameSchema),
+    ...isAuthorized({ games: ["create"] }),
     async ({ req, var: { send, db, fail } }) => {
       const { name, image } = req.valid("form")
 

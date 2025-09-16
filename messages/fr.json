@@ -16,6 +16,8 @@
   },
   "errors": {
     "SOMETHING_WENT_WRONG": "Une erreur est survenue. Veuillez réessayer.",
+    "FORBIDDEN": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "UNAUTHORIZED": "Vous devez être connecté pour effectuer cette action.",
     "name": {
       "required": "Le nom est requis"
     },
