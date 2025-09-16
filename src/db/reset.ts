@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { reset as drizzleReset } from "drizzle-seed"
 
-import db from "@/db"
+import { db } from "@/db"
 import * as schema from "@/db/schemas"
 
 const reset = async () => {

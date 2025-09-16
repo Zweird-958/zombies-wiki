@@ -1,14 +1,14 @@
 import { zValidator } from "@hono/zod-validator"
 import { Hono } from "hono"
 
-import isAuthorized from "@/api/handlers/is-authorized"
-import isGameExists from "@/api/utils/games/is-game-exists"
-import normalizeGameName from "@/api/utils/games/normalize-game-name"
-import uploadImage from "@/api/utils/upload-image"
+import { isAuthorized } from "@/api/handlers/is-authorized"
+import { isGameExists } from "@/api/utils/games/is-game-exists"
+import { normalizeGameName } from "@/api/utils/games/normalize-game-name"
+import { uploadImage } from "@/api/utils/upload-image"
 import { games } from "@/db/schemas/games"
 import { CreateGameSchema } from "@/schemas/games"
 
-const gamesApp = new Hono()
+export const gamesApp = new Hono()
   .basePath("/games")
   .post(
     "/",
@@ -38,5 +38,3 @@ const gamesApp = new Hono()
       return send(game)
     },
   )
-
-export default gamesApp

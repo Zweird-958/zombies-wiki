@@ -10,7 +10,7 @@ const GLOBAL_ERRORS_CODES: ErrorCode[] = [
   "UNAUTHORIZED",
 ]
 
-const useError = (key: string) => {
+export const useError = (key: string) => {
   const t = useTranslations(`errors.${key}`)
   const errorT = useTranslations("errors")
 
@@ -26,5 +26,3 @@ const useError = (key: string) => {
 
   return { onError }
 }
-
-export default useError

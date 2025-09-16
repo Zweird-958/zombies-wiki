@@ -2,7 +2,7 @@ import { LoaderCircleIcon } from "lucide-react"
 import type { ComponentProps } from "react"
 
 import { type ButtonVariants, button } from "@/components/ui/button/variants"
-import cn from "@/utils/cn"
+import { cn } from "@/utils/cn"
 
 export type ButtonProps = { isPending?: boolean } & ComponentProps<"button"> &
   ButtonVariants

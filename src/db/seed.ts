@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { faker } from "@faker-js/faker"
 
-import db from "@/db"
+import { db } from "@/db"
 import { auth } from "@/utils/auth/auth"
 
 const EMAIL = "test@example.com"

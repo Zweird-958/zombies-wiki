@@ -1,6 +1,6 @@
 import type { Context } from "hono"
 
-import db from "@/db"
+import { db } from "@/db"
 import type { ErrorCode } from "@/types/api"
 
 import { ERROR_RESPONSES } from "./constants"

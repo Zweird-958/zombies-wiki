@@ -1,6 +1,6 @@
 import { createFactory } from "hono/factory"
 
-import auth from "@/api/middlewares/auth"
+import { auth } from "@/api/middlewares/auth"
 import { auth as authConfig } from "@/utils/auth/auth"
 
 type Permissions = NonNullable<
@@ -9,7 +9,7 @@ type Permissions = NonNullable<
 
 const factory = createFactory()
 
-const isAuthorized = (permissions: Permissions) =>
+export const isAuthorized = (permissions: Permissions) =>
   factory.createHandlers(auth, async ({ var: { fail, user } }, next) => {
     const result = await authConfig.api.userHasPermission({
       body: {
@@ -24,5 +24,3 @@ const isAuthorized = (permissions: Permissions) =>
 
     return next()
   })
-
-export default isAuthorized

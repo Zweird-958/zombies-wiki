@@ -1,12 +1,12 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3"
 
-import s3 from "@/api/utils/s3"
-import config from "@/configs/api"
+import { s3 } from "@/api/utils/s3"
+import { config } from "@/configs/api"
 import type { DB } from "@/db"
 import { images } from "@/db/schemas"
 import type { Image } from "@/types/images"
 
-const uploadImage = async ({
+export const uploadImage = async ({
   image,
   name,
   folder,
@@ -35,5 +35,3 @@ const uploadImage = async ({
 
   return id
 }
-
-export default uploadImage

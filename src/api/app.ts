@@ -2,7 +2,7 @@ import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { handle } from "hono/vercel"
 
-import gamesApp from "@/api/routes/games"
+import { gamesApp } from "@/api/routes/games"
 import { contextVariables, fail, send } from "@/api/utils/context"
 import { auth } from "@/utils/auth/auth"
 

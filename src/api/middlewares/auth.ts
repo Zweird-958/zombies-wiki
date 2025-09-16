@@ -9,7 +9,7 @@ type Env = {
   }
 }
 
-const auth = createMiddleware<Env>(
+export const auth = createMiddleware<Env>(
   async ({ set, req, var: { fail } }, next) => {
     const session = await authConfig.api.getSession({
       headers: req.raw.headers,
@@ -24,5 +24,3 @@ const auth = createMiddleware<Env>(
     return next()
   },
 )
-
-export default auth

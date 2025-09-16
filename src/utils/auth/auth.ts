@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { admin as adminPlugin } from "better-auth/plugins"
 
-import db from "@/db"
+import { db } from "@/db"
 import { ac, admin, user } from "@/utils/auth/permissions"
 
 export const auth = betterAuth({

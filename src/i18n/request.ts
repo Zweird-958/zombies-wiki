@@ -2,7 +2,7 @@ import { hasLocale } from "next-intl"
 import { getRequestConfig } from "next-intl/server"
 import { cookies } from "next/headers"
 
-import config from "@/configs/locale"
+import { config } from "@/configs/locale"
 
 const getCookieLocale = async () => {
   const cookieList = await cookies()

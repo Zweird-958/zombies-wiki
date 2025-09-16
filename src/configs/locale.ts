@@ -8,10 +8,8 @@ const schema = z.object({
   cookie: z.string(),
 })
 
-const config = schema.parse({
+export const config = schema.parse({
   defaultLocale: "en",
   locales: locale.options,
   cookie: "locale",
 })
-
-export default config

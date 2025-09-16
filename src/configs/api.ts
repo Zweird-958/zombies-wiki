@@ -10,7 +10,7 @@ const schema = z.object({
   }),
 })
 
-const config = schema.parse({
+export const config = schema.parse({
   upload: {
     url: process.env.S3_URL,
     bucket: process.env.S3_BUCKET_NAME,
@@ -19,5 +19,3 @@ const config = schema.parse({
     publicUrl: process.env.S3_PUBLIC_URL,
   },
 })
-
-export default config
