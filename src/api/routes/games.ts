@@ -1,7 +1,9 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
+import isGameExists from "@/api/utils/games/is-game-exists"
+import normalizeGameName from "@/api/utils/games/normalize-game-name"
+import uploadImage from "@/api/utils/upload-image"
 import { games } from "@/db/schemas/games"
 import { CreateGameSchema } from "@/schemas/games"
 
@@ -9,21 +11,27 @@ const gamesApp = new Hono()
   .basePath("/games")
   .post(
     "/",
-    zValidator("json", CreateGameSchema),
+    zValidator("form", CreateGameSchema),
     async ({ req, var: { send, db, fail } }) => {
-      const { name } = req.valid("json")
+      const { name, image } = req.valid("form")
 
-      const existingGames = await db
-        .select({ name: games.name })
-        .from(games)
-        .where(eq(games.name, name))
-        .limit(1)
+      const normalizedName = normalizeGameName(name)
 
-      if (existingGames.length > 0) {
-        return fail("CONFLICT", `${existingGames[0].name} already exists`)
+      if (await isGameExists(normalizedName, db)) {
+        return fail("CONFLICT", `${name} already exists`)
       }
 
-      const [game] = await db.insert(games).values({ name }).returning()
+      const imageId = await uploadImage({
+        image,
+        name: normalizedName,
+        folder: "games",
+        db,
+      })
+
+      const [game] = await db
+        .insert(games)
+        .values({ name, imageId, normalizedName })
+        .returning()
 
       return send(game)
     },

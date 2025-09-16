@@ -1,19 +1,30 @@
 {
   "forms": {
     "createGame": {
-      "title": "Créeer un jeu",
+      "title": "Créer un jeu",
       "name": {
         "label": "Nom",
         "placeholder": "Entrez le nom du jeu"
       },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
       "success": "Jeu créé avec succès",
-      "submit": "Créer un jeu",
-      "CONFLICT": "Un jeu avec ce nom existe déjà"
+      "submit": "Créer un jeu"
     }
   },
   "errors": {
+    "SOMETHING_WENT_WRONG": "Une erreur est survenue. Veuillez réessayer.",
     "name": {
       "required": "Le nom est requis"
+    },
+    "image": {
+      "file-invalid-type": "Type de fichier invalide. Veuillez télécharger une image (PNG, JPG).",
+      "tooLarge": "Le fichier est trop volumineux. La taille maximale est de 5 Mo."
+    },
+    "createGame": {
+      "CONFLICT": "Un jeu avec ce nom existe déjà"
     }
   }
 }

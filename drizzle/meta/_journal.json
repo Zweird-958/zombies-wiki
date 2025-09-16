@@ -15,6 +15,13 @@
       "when": 1758011949498,
       "tag": "0001_magical_red_hulk",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1758027699581,
+      "tag": "0002_cynical_elektra",
+      "breakpoints": true
     }
   ]
 }

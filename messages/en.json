@@ -6,14 +6,25 @@
         "label": "Name",
         "placeholder": "Enter game name"
       },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
       "success": "Game created successfully",
-      "submit": "Create Game",
-      "CONFLICT": "A game with this name already exists"
+      "submit": "Create Game"
     }
   },
   "errors": {
+    "SOMETHING_WENT_WRONG": "Something went wrong. Please try again.",
     "name": {
       "required": "Name is required"
+    },
+    "image": {
+      "file-invalid-type": "Invalid file type. Please upload an image (PNG, JPG).",
+      "tooLarge": "File is too large. Maximum size is 5MB."
+    },
+    "createGame": {
+      "CONFLICT": "A game with this name already exists"
     }
   }
 }

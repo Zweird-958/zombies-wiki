@@ -8,13 +8,15 @@ import { toast } from "sonner"
 import { client } from "@/api/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormFieldInput } from "@/components/ui/form"
+import { Form, FormFieldInput, ImageInputField } from "@/components/ui/form"
+import useError from "@/hooks/use-error"
 import { useMutation } from "@/hooks/use-mutation"
 import { CreateGameSchema } from "@/schemas/games"
 import type { CreateGame } from "@/types/games"
 
 const CreateGameForm = () => {
   const t = useTranslations("forms.createGame")
+  const { onError } = useError("createGame")
   const form = useForm({
     defaultValues: {
       name: "",
@@ -26,17 +28,15 @@ const CreateGameForm = () => {
     onSuccess: () => {
       toast.success(t("success"))
     },
-    onError: (error) => {
-      toast.error(t(error.code))
-    },
+    onError,
   })
 
   const onSubmit = (data: CreateGame) => {
-    createGame({ json: data })
+    createGame({ form: data })
   }
 
   return (
-    <Card className="w-full max-w-[300px]">
+    <Card className="w-full max-w-[400px]">
       <CardHeader>
         <CardTitle>{t("title")}</CardTitle>
       </CardHeader>
@@ -50,6 +50,11 @@ const CreateGameForm = () => {
               name="name"
               label={t("name.label")}
               placeholder={t("name.placeholder")}
+            />
+            <ImageInputField
+              label={t("image.label")}
+              description={t("image.description")}
+              name="image"
             />
 
             <Button type="submit" className="w-full">
