@@ -4,13 +4,7 @@
     "duplicates": "warn",
     "binaries": "warn"
   },
-  "ignoreDependencies": [
-    "tailwindcss",
-    "@base-ui-components/react",
-    "@hono/zod-validator",
-    "zod",
-    "@testing-library/dom",
-    "@testing-library/react"
-  ],
+  "entry": ["src/components/ui/**/*.{ts,tsx}", "src/i18n/request.ts"],
+  "ignoreDependencies": ["@testing-library/dom", "@testing-library/react"],
   "ignore": ["postcss.config.mjs", "src/utils/auth/auth-client.ts"]
 }

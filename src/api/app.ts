@@ -2,6 +2,7 @@ import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { handle } from "hono/vercel"
 
+import gamesApp from "@/api/routes/games"
 import { contextVariables, fail, send } from "@/api/utils/context"
 
 const app = new Hono().basePath("/api")
@@ -16,9 +17,8 @@ app.use(cors(), (ctx, next) => {
   return next()
 })
 
-app.get("/hello", ({ var: { send: ctxSend } }) =>
-  ctxSend({ message: "Hello World!" }),
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const routes = app.route("/", gamesApp)
 
 app.onError((error, { var: { fail: ctxFail } }) => {
   // eslint-disable-next-line no-console
@@ -26,5 +26,7 @@ app.onError((error, { var: { fail: ctxFail } }) => {
 
   return ctxFail("SOMETHING_WENT_WRONG")
 })
+
+export type AppType = typeof routes
 
 export default handle(app)

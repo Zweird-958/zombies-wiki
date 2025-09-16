@@ -1,0 +1,19 @@
+{
+  "forms": {
+    "createGame": {
+      "title": "Créeer un jeu",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom du jeu"
+      },
+      "success": "Jeu créé avec succès",
+      "submit": "Créer un jeu",
+      "CONFLICT": "Un jeu avec ce nom existe déjà"
+    }
+  },
+  "errors": {
+    "name": {
+      "required": "Le nom est requis"
+    }
+  }
+}

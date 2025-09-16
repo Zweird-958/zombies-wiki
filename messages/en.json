@@ -1,0 +1,19 @@
+{
+  "forms": {
+    "createGame": {
+      "title": "Create Game",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter game name"
+      },
+      "success": "Game created successfully",
+      "submit": "Create Game",
+      "CONFLICT": "A game with this name already exists"
+    }
+  },
+  "errors": {
+    "name": {
+      "required": "Name is required"
+    }
+  }
+}
