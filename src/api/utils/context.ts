@@ -1,6 +1,7 @@
 import type { Context } from "hono"
 
-import db from "@/db"
+import { db } from "@/db"
+import type { ErrorCode } from "@/types/api"
 
 import { ERROR_RESPONSES } from "./constants"
 
@@ -21,11 +22,17 @@ export const send =
     })
 
 export const fail =
-  (ctx: Context) => (errorName: keyof typeof ERROR_RESPONSES) =>
-    ctx.json(
-      { error: ERROR_RESPONSES[errorName].message },
+  (ctx: Context) => (errorName: ErrorCode, message?: string) => {
+    const result = {
+      error: ERROR_RESPONSES[errorName].message,
+      code: errorName,
+    }
+
+    return ctx.json(
+      message ? { ...result, message } : result,
       ERROR_RESPONSES[errorName].code,
     )
+  }
 
 declare module "hono" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions

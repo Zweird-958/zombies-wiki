@@ -1,0 +1,53 @@
+{
+  "forms": {
+    "createGame": {
+      "title": "Créer un jeu",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom du jeu"
+      },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
+      "success": "Jeu créé avec succès",
+      "submit": "Créer un jeu"
+    },
+    "signIn": {
+      "title": "Se connecter",
+      "email": {
+        "label": "Email",
+        "placeholder": "Entrez votre email"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Entrez votre mot de passe"
+      },
+      "submit": "Se connecter"
+    }
+  },
+  "errors": {
+    "SOMETHING_WENT_WRONG": "Une erreur est survenue. Veuillez réessayer.",
+    "FORBIDDEN": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "UNAUTHORIZED": "Vous devez être connecté pour effectuer cette action.",
+    "name": {
+      "required": "Le nom est requis"
+    },
+    "image": {
+      "file-invalid-type": "Type de fichier invalide. Veuillez télécharger une image (PNG, JPG).",
+      "tooLarge": "Le fichier est trop volumineux. La taille maximale est de 5 Mo."
+    },
+    "email": {
+      "invalid": "Adresse email invalide"
+    },
+    "password": {
+      "required": "Le mot de passe est requis"
+    },
+    "createGame": {
+      "CONFLICT": "Un jeu avec ce nom existe déjà"
+    },
+    "signIn": {
+      "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
+    }
+  }
+}

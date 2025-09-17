@@ -3,11 +3,11 @@ import { drizzle } from "drizzle-orm/node-postgres"
 
 import * as schema from "./schemas"
 
-const db = drizzle(
+export const db = drizzle(
   process.env.NODE_ENV === "test"
     ? process.env.DATABASE_URL_TEST!
     : process.env.DATABASE_URL!,
   { schema },
 )
 
-export default db
+export type DB = typeof db

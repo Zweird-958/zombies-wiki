@@ -1,0 +1,5 @@
+import type z from "zod"
+
+import type { CreateGameSchema } from "@/schemas/games"
+
+export type CreateGame = z.infer<typeof CreateGameSchema>

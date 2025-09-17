@@ -1,5 +1,9 @@
 import type { Metadata } from "next"
+import { NextIntlClientProvider } from "next-intl"
 import type { PropsWithChildren } from "react"
+import { Toaster } from "sonner"
+
+import Providers from "@/components/providers"
 
 import "./globals.css"
 
@@ -10,8 +14,13 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: PropsWithChildren) => (
   <html lang="en">
-    <body>
-      <main className="root">{children}</main>
+    <body className="flex min-h-dvh flex-col">
+      <Toaster />
+      <Providers>
+        <NextIntlClientProvider>
+          <main className="root flex grow p-4">{children}</main>
+        </NextIntlClientProvider>
+      </Providers>
     </body>
   </html>
 )

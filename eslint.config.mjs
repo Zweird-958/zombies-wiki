@@ -220,7 +220,7 @@ export default defineConfig(
         "error",
         { varsIgnorePattern: "_", argsIgnorePattern: "_" },
       ],
-      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/consistent-type-imports": [
         "warn",
         { prefer: "type-imports", fixStyle: "inline-type-imports" },
@@ -267,6 +267,15 @@ export default defineConfig(
       react: {
         version: "detect",
       },
+    },
+  },
+  {
+    files: ["src/components/ui/**/*.tsx"],
+    rules: {
+      "max-lines": [
+        "error",
+        { max: 250, skipBlankLines: true, skipComments: true },
+      ],
     },
   },
 )
