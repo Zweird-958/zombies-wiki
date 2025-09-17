@@ -5,8 +5,10 @@ import type {
 } from "hono/client"
 
 import type { ERROR_RESPONSES } from "@/api/utils/constants"
+import type { authClient } from "@/utils/auth/auth-client"
 
 export type ErrorCode = keyof typeof ERROR_RESPONSES
+export type AuthErrorCode = keyof typeof authClient.$ERROR_CODES
 
 export type ApiError = {
   error: string

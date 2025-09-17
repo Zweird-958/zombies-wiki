@@ -1,9 +1,10 @@
 import CreateGameForm from "@/components/forms/create-game-form"
+import CenteredDiv from "@/components/ui/centered-div"
 
 const Home = () => (
-  <div className="flex w-full items-center justify-center">
+  <CenteredDiv>
     <CreateGameForm />
-  </div>
+  </CenteredDiv>
 )
 
 export default Home

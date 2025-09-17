@@ -30,13 +30,14 @@ export type FormInputProps = { className?: string } & Omit<
 
 export type FormFieldInputProps = {
   name: string
-  placeholder?: string
   label?: string
   description?: string
-} & Omit<React.ComponentProps<typeof FormField>, "render" | "defaultValue">
+} & FormInputProps
 
 export type ImageInputFieldProps = { name: string } & Pick<
   InputImageControllerProps,
   "label" | "description"
 > &
   Omit<React.ComponentProps<typeof FormField>, "render" | "defaultValue">
+
+export type FormWrapperProps = React.ComponentProps<"form">

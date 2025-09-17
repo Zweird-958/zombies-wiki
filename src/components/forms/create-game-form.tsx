@@ -8,7 +8,12 @@ import { toast } from "sonner"
 import { client } from "@/api/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormFieldInput, ImageInputField } from "@/components/ui/form"
+import {
+  Form,
+  FormFieldInput,
+  FormWrapper,
+  ImageInputField,
+} from "@/components/ui/form"
 import { useError } from "@/hooks/use-error"
 import { useMutation } from "@/hooks/use-mutation"
 import { CreateGameSchema } from "@/schemas/games"
@@ -42,10 +47,7 @@ const CreateGameForm = () => {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
-          >
+          <FormWrapper onSubmit={form.handleSubmit(onSubmit)}>
             <FormFieldInput
               name="name"
               label={t("name.label")}
@@ -60,7 +62,7 @@ const CreateGameForm = () => {
             <Button type="submit" className="w-full" isPending={isPending}>
               {t("submit")}
             </Button>
-          </form>
+          </FormWrapper>
         </Form>
       </CardContent>
     </Card>

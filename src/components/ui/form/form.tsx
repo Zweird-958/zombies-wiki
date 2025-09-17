@@ -20,6 +20,7 @@ import type {
   FormInputProps,
   FormItemProps,
   FormLabelProps,
+  FormWrapperProps,
   ImageInputFieldProps,
 } from "@/components/ui/form/types"
 import { form } from "@/components/ui/form/variants"
@@ -99,7 +100,6 @@ export const FormInput = ({ className, ...props }: FormInputProps) => {
 export const FormFieldInput = ({
   name,
   label,
-  placeholder,
   description,
   ...props
 }: FormFieldInputProps) => (
@@ -107,13 +107,12 @@ export const FormFieldInput = ({
     name={name}
     render={({ field }) => (
       <FormItem>
-        <FormLabel>{label}</FormLabel>
-        <FormInput placeholder={placeholder} {...field} />
+        {label && <FormLabel>{label}</FormLabel>}
+        <FormInput {...field} {...props} />
         <FormError />
         {description && <FormDescription>{description}</FormDescription>}
       </FormItem>
     )}
-    {...props}
   />
 )
 
@@ -137,6 +136,10 @@ export const ImageInputField = ({
     )}
     {...props}
   />
+)
+
+export const FormWrapper = ({ className, ...props }: FormWrapperProps) => (
+  <form className={form().wrapper({ className })} {...props} />
 )
 
 export { FormError }

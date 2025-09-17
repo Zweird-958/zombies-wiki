@@ -12,6 +12,18 @@
       },
       "success": "Game created successfully",
       "submit": "Create Game"
+    },
+    "signIn": {
+      "title": "Sign In",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "submit": "Sign In"
     }
   },
   "errors": {
@@ -25,8 +37,17 @@
       "file-invalid-type": "Invalid file type. Please upload an image (PNG, JPG).",
       "tooLarge": "File is too large. Maximum size is 5MB."
     },
+    "email": {
+      "invalid": "Invalid email address"
+    },
+    "password": {
+      "required": "Password is required"
+    },
     "createGame": {
       "CONFLICT": "A game with this name already exists"
+    },
+    "signIn": {
+      "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
     }
   }
 }
