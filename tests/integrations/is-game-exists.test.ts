@@ -11,6 +11,7 @@ const name = faker.word.words({ count: { min: 1, max: 5 } })
 const data: Omit<typeof games.$inferInsert, "imageId"> = {
   name,
   normalizedName: normalizeGameName(name),
+  releaseYear: faker.number.int({ min: 1970, max: 2050 }),
 }
 
 beforeAll(async () => {
