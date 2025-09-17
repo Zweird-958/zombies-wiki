@@ -56,5 +56,10 @@
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
     }
+  },
+  "header": {
+    "title": "Zombies Wiki",
+    "home": "Accueil",
+    "createGame": "Créer un jeu"
   }
 }

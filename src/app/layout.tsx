@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl"
 import type { PropsWithChildren } from "react"
 import { Toaster } from "sonner"
 
+import Header from "@/components/header"
 import Providers from "@/components/providers"
 
 import "./globals.css"
@@ -18,6 +19,7 @@ const RootLayout = ({ children }: PropsWithChildren) => (
       <Toaster />
       <Providers>
         <NextIntlClientProvider>
+          <Header />
           <main className="root flex grow p-4">{children}</main>
         </NextIntlClientProvider>
       </Providers>
