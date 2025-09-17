@@ -1,2 +1,7 @@
 export const normalizeGameName = (name: string) =>
-  name.toLowerCase().replace(/\s+/gu, "-").replaceAll(":", "").toLowerCase()
+  name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/gu, "-")
+    .replaceAll(":", "")
+    .toLowerCase()
