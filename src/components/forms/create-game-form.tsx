@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Form,
   FormFieldInput,
+  FormFieldNumberInput,
   FormWrapper,
   ImageInputField,
 } from "@/components/ui/form"
@@ -25,6 +26,7 @@ const CreateGameForm = () => {
   const form = useForm({
     defaultValues: {
       name: "",
+      releaseYear: "",
     },
     resolver: zodResolver(CreateGameSchema),
   })
@@ -37,7 +39,12 @@ const CreateGameForm = () => {
   })
 
   const onSubmit = (data: CreateGame) => {
-    createGame({ form: data })
+    createGame({
+      form: {
+        ...data,
+        releaseYear: data.releaseYear.toString(),
+      },
+    })
   }
 
   return (
@@ -57,6 +64,11 @@ const CreateGameForm = () => {
               label={t("image.label")}
               description={t("image.description")}
               name="image"
+            />
+            <FormFieldNumberInput
+              name="releaseYear"
+              label={t("releaseYear.label")}
+              placeholder={t("releaseYear.placeholder")}
             />
 
             <Button type="submit" className="w-full" isPending={isPending}>

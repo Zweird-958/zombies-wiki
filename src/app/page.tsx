@@ -1,9 +1,15 @@
-import CenteredDiv from "@/components/ui/centered-div"
+import { client } from "@/api/client"
+import GamesList from "@/components/games/games-list"
 
-const Home = () => (
-  <CenteredDiv>
-    <p>hello</p>
-  </CenteredDiv>
-)
+const Home = async () => {
+  const result = await client.games.$get()
+  const games = (await result.json()).result
+
+  return (
+    <div className="mx-auto w-full max-w-6xl px-8">
+      <GamesList games={games} />
+    </div>
+  )
+}
 
 export default Home

@@ -1,12 +1,19 @@
+import { Slot } from "@radix-ui/react-slot"
 import * as React from "react"
 
 import { card } from "@/components/ui/card/variants"
 
-export type CardProps = React.ComponentProps<"div">
+export type CardProps = {
+  asChild?: boolean
+} & React.ComponentProps<"div">
 
-export const Card = ({ className, ...props }: CardProps) => (
-  <div data-slot="card" className={card().base({ className })} {...props} />
-)
+export const Card = ({ asChild, className, ...props }: CardProps) => {
+  const Comp = asChild ? Slot : "div"
+
+  return (
+    <Comp data-slot="card" className={card().base({ className })} {...props} />
+  )
+}
 
 export type CardHeaderProps = React.ComponentProps<"div">
 
