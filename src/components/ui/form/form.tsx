@@ -1,6 +1,7 @@
 "use client"
 
 import { Field } from "@base-ui-components/react/field"
+import { NumberField } from "@base-ui-components/react/number-field"
 import * as React from "react"
 import {
   Controller,
@@ -17,9 +18,11 @@ import { InputImageController } from "@/components/ui/form/image"
 import type {
   FormDescriptionProps,
   FormFieldInputProps,
+  FormFieldNumberInputProps,
   FormInputProps,
   FormItemProps,
   FormLabelProps,
+  FormNumberInputProps,
   FormWrapperProps,
   ImageInputFieldProps,
 } from "@/components/ui/form/types"
@@ -97,6 +100,28 @@ export const FormInput = ({ className, ...props }: FormInputProps) => {
   )
 }
 
+export const FormNumberInput = ({
+  className,
+  ...props
+}: FormNumberInputProps) => {
+  const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
+
+  return (
+    <NumberField.Input
+      data-slot="form-control"
+      id={formItemId}
+      aria-describedby={
+        !error
+          ? `${formDescriptionId}`
+          : `${formDescriptionId} ${formMessageId}`
+      }
+      aria-invalid={Boolean(error)}
+      className={form().input({ className })}
+      {...props}
+    />
+  )
+}
+
 export const FormFieldInput = ({
   name,
   label,
@@ -135,6 +160,27 @@ export const ImageInputField = ({
       </FormItem>
     )}
     {...props}
+  />
+)
+
+export const FormFieldNumberInput = ({
+  name,
+  label,
+  description,
+  ...props
+}: FormFieldNumberInputProps) => (
+  <FormField
+    name={name}
+    render={({ field }) => (
+      <FormItem>
+        <NumberField.Root className={form().root()}>
+          {label && <FormLabel>{label}</FormLabel>}
+          <FormNumberInput {...field} {...props} />
+          <FormError />
+          {description && <FormDescription>{description}</FormDescription>}
+        </NumberField.Root>
+      </FormItem>
+    )}
   />
 )
 

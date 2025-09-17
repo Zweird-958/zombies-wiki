@@ -10,6 +10,10 @@
         "label": "Télécharger une image",
         "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
       },
+      "releaseYear": {
+        "label": "Année de sortie",
+        "placeholder": "Entrez l'année de sortie"
+      },
       "success": "Jeu créé avec succès",
       "submit": "Créer un jeu"
     },
@@ -42,6 +46,9 @@
     },
     "password": {
       "required": "Le mot de passe est requis"
+    },
+    "releaseYear": {
+      "invalid": "Année de sortie invalide"
     },
     "createGame": {
       "CONFLICT": "Un jeu avec ce nom existe déjà"

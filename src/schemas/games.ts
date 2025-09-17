@@ -9,4 +9,5 @@ export const CreateGameSchema = z.object({
     .min(1, "required")
     .transform((text) => text.replace(/\s+/gu, " ")),
   image,
+  releaseYear: z.coerce.number("invalid").positive("invalid").int("invalid"),
 })

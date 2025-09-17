@@ -10,6 +10,10 @@
         "label": "Upload an image",
         "description": "Image must be less than 5MB and in PNG, JPG format"
       },
+      "releaseYear": {
+        "label": "Release Year",
+        "placeholder": "Enter release year"
+      },
       "success": "Game created successfully",
       "submit": "Create Game"
     },
@@ -42,6 +46,9 @@
     },
     "password": {
       "required": "Password is required"
+    },
+    "releaseYear": {
+      "invalid": "Invalid release year"
     },
     "createGame": {
       "CONFLICT": "A game with this name already exists"

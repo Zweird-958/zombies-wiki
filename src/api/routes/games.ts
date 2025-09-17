@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
+import { desc, eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
@@ -18,7 +18,7 @@ export const gamesApp = new Hono()
     zValidator("form", CreateGameSchema),
     ...isAuthorized({ games: ["create"] }),
     async ({ req, var: { send, db, fail } }) => {
-      const { name, image } = req.valid("form")
+      const { name, image, releaseYear } = req.valid("form")
 
       const normalizedName = normalizeGameName(name)
 
@@ -35,7 +35,7 @@ export const gamesApp = new Hono()
 
       const [game] = await db
         .insert(games)
-        .values({ name, imageId, normalizedName })
+        .values({ name, imageId, normalizedName, releaseYear })
         .returning()
 
       return send(game)
@@ -50,7 +50,7 @@ export const gamesApp = new Hono()
       })
       .from(games)
       .innerJoin(images, eq(games.imageId, images.id))
-      .orderBy(games.name)
+      .orderBy(desc(games.releaseYear))
 
     return send(allGames.map(formatGame))
   })

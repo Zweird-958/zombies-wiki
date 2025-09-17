@@ -1,4 +1,5 @@
 import type { Field } from "@base-ui-components/react/field"
+import type { NumberField } from "@base-ui-components/react/number-field"
 
 import type { FormField } from "@/components/ui/form/form"
 import type { InputImageControllerProps } from "@/components/ui/form/image"
@@ -28,11 +29,22 @@ export type FormInputProps = { className?: string } & Omit<
   "className"
 >
 
+export type FormNumberInputProps = { className?: string } & Omit<
+  React.ComponentProps<typeof NumberField.Input>,
+  "className"
+>
+
 export type FormFieldInputProps = {
   name: string
   label?: string
   description?: string
 } & FormInputProps
+
+export type FormFieldNumberInputProps = {
+  name: string
+  label?: string
+  description?: string
+} & FormNumberInputProps
 
 export type ImageInputFieldProps = { name: string } & Pick<
   InputImageControllerProps,
