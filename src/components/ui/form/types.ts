@@ -9,7 +9,7 @@ export type FormItemProps = { className?: string } & Omit<
   "className"
 >
 
-export type FormLabelProps = { className?: string } & Omit<
+export type FormLabelProps = { className?: string; isField?: boolean } & Omit<
   React.ComponentProps<typeof Field.Label>,
   "className" | "htmlFor"
 >

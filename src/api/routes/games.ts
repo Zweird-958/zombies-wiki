@@ -44,6 +44,7 @@ export const gamesApp = new Hono()
   .get("/", async ({ var: { db, send } }) => {
     const allGames = await db
       .select({
+        id: games.id,
         name: games.name,
         normalizedName: games.normalizedName,
         image: images.url,

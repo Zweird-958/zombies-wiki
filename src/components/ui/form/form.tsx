@@ -11,6 +11,10 @@ import {
   FormProvider,
 } from "react-hook-form"
 
+import {
+  ComboboxInput,
+  type ComboboxInputProps,
+} from "@/components/ui/combobox"
 import { FormFieldContext, FormItemContext } from "@/components/ui/form/context"
 import { FormError } from "@/components/ui/form/form-error"
 import { useFormField } from "@/components/ui/form/hooks"
@@ -27,6 +31,7 @@ import type {
   ImageInputFieldProps,
 } from "@/components/ui/form/types"
 import { form } from "@/components/ui/form/variants"
+import { Label } from "@/components/ui/label"
 
 export const Form = FormProvider
 
@@ -51,11 +56,27 @@ export const FormItem = ({ className, ...props }: FormItemProps) => {
   )
 }
 
-export const FormLabel = ({ className, ...props }: FormLabelProps) => {
+export const FormLabel = ({
+  className,
+  isField = true,
+  ...props
+}: FormLabelProps) => {
   const { error, formItemId } = useFormField()
 
+  if (isField) {
+    return (
+      <Field.Label
+        data-slot="form-label"
+        data-error={Boolean(error)}
+        className={form().label({ className })}
+        htmlFor={formItemId}
+        {...props}
+      />
+    )
+  }
+
   return (
-    <Field.Label
+    <Label
       data-slot="form-label"
       data-error={Boolean(error)}
       className={form().label({ className })}
@@ -95,6 +116,24 @@ export const FormInput = ({ className, ...props }: FormInputProps) => {
       }
       aria-invalid={Boolean(error)}
       className={form().input({ className })}
+      {...props}
+    />
+  )
+}
+
+export const FormComboboxInput = (props: ComboboxInputProps) => {
+  const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
+
+  return (
+    <ComboboxInput
+      data-slot="form-control"
+      id={formItemId}
+      aria-describedby={
+        !error
+          ? `${formDescriptionId}`
+          : `${formDescriptionId} ${formMessageId}`
+      }
+      aria-invalid={Boolean(error)}
       {...props}
     />
   )
