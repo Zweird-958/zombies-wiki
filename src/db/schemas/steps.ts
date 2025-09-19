@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm"
 import { integer, pgTable, text, uuid } from "drizzle-orm/pg-core"
 
 import { guides } from "@/db/schemas/guides"
@@ -12,3 +13,10 @@ export const steps = pgTable("steps", {
     .references(() => guides.id)
     .notNull(),
 })
+
+export const stepsRelations = relations(steps, ({ one }) => ({
+  guide: one(guides, {
+    fields: [steps.guideId],
+    references: [guides.id],
+  }),
+}))

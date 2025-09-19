@@ -1,9 +1,10 @@
 import { zValidator } from "@hono/zod-validator"
+import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { guides, steps as stepsTable } from "@/db/schemas"
-import { CreateGuideSchema } from "@/schemas/guides"
+import { CreateGuideSchema, GetGuideSchema } from "@/schemas/guides"
 
 export const guidesApp = new Hono()
   .basePath("/guides")
@@ -35,5 +36,35 @@ export const guidesApp = new Hono()
       })
 
       return send(result)
+    },
+  )
+  .get(
+    "/:id",
+    zValidator("param", GetGuideSchema),
+    async ({ var: { db, send, fail }, req }) => {
+      const { id } = req.valid("param")
+
+      const guide = await db.query.guides.findFirst({
+        columns: {
+          name: true,
+        },
+        where: eq(guides.id, id),
+        with: {
+          steps: {
+            columns: {
+              id: true,
+              name: true,
+              content: true,
+            },
+            orderBy: stepsTable.order,
+          },
+        },
+      })
+
+      if (!guide) {
+        return fail("NOT_FOUND")
+      }
+
+      return send(guide)
     },
   )

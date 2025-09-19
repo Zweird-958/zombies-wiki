@@ -5,3 +5,5 @@ export const name = z
   .trim()
   .min(1, "required")
   .transform((text) => text.replace(/\s+/gu, " "))
+
+export const id = z.uuid()

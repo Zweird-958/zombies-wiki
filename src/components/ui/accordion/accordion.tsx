@@ -12,7 +12,7 @@ export type AccordionProps = OmitClassName<
 export const Accordion = ({ className, ...props }: AccordionProps) => (
   <BaseAccordion.Root
     className={cn(
-      "flex w-96 max-w-[calc(100vw-8rem)] flex-col justify-center",
+      "flex max-w-[calc(100vw-8rem)] min-w-96 flex-col justify-center",
       className,
     )}
     {...props}
