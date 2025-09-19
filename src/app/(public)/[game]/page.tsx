@@ -1,9 +1,7 @@
-import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { client } from "@/api/client"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import { routes } from "@/utils/routes"
+import MapCard from "@/components/maps/map-card"
 
 type Props = {
   params: Promise<{ game: string }>
@@ -24,14 +22,8 @@ const GamePage = async ({ params }: Props) => {
         {data.result.name}
       </h1>
       <div className="flex w-full flex-wrap justify-center gap-8">
-        {data.result.guides.map(({ id, name }) => (
-          <Card key={id} className="w-fit" asChild>
-            <Link href={routes.guide(game, id)}>
-              <CardHeader>
-                <CardTitle>{name}</CardTitle>
-              </CardHeader>
-            </Link>
-          </Card>
+        {data.result.maps.map((map) => (
+          <MapCard key={map.id} game={game} {...map} />
         ))}
       </div>
     </div>

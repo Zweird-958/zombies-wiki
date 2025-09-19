@@ -3,7 +3,7 @@ import { eq, sql } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
-import { formatGame } from "@/api/utils/games/format-game"
+import { formatGame, formatSingleGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
@@ -110,8 +110,11 @@ export const gamesApp = new Hono()
         },
         where: eq(games.normalizedName, normalizeName(name)),
         with: {
-          guides: {
+          maps: {
             columns: { id: true, name: true },
+            with: {
+              image: { columns: { url: true } },
+            },
           },
         },
       })
@@ -120,6 +123,6 @@ export const gamesApp = new Hono()
         return fail("NOT_FOUND", `Game with name '${name}' not found`)
       }
 
-      return send(gamesResult)
+      return send(formatSingleGame(gamesResult))
     },
   )
