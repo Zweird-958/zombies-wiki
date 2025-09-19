@@ -3,9 +3,9 @@ import { cors } from "hono/cors"
 import { handle } from "hono/vercel"
 
 import { gamesApp } from "@/api/routes/games"
+import { guidesApp } from "@/api/routes/guides"
 import { contextVariables, fail, send } from "@/api/utils/context"
 import { auth } from "@/utils/auth/auth"
-import { guidesApp } from "@/api/routes/guides"
 
 const app = new Hono().basePath("/api")
 
