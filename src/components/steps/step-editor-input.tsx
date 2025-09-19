@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useEffect } from "react"
 import type { ControllerRenderProps, FieldValues } from "react-hook-form"
 
+import EditorToolbar from "@/components/guides/editor/editor-toolbar"
 import { useEditor } from "@/components/guides/editor/use-editor"
 import { FormError, FormItem, FormLabel } from "@/components/ui/form"
 import { ScrollArea } from "@/components/ui/scrollbar"
@@ -24,6 +25,7 @@ const StepEditorInput = ({ field }: Props) => {
   return (
     <FormItem>
       <FormLabel>{t("content.label")}</FormLabel>
+      <EditorToolbar />
       <ScrollArea className="[&_[data-slot=scroll-area-content]]:h-full [&_[data-slot=scroll-area-content]]:p-0">
         <EditorContent
           editor={editor}
