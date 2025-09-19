@@ -1,33 +1,33 @@
-import type { Field } from "@base-ui-components/react/field"
 import type { NumberField } from "@base-ui-components/react/number-field"
+import type { ComponentProps } from "react"
 
+import type { ComboboxInputProps } from "@/components/ui/combobox"
 import type { FormField } from "@/components/ui/form/form"
 import type { InputImageControllerProps } from "@/components/ui/form/image"
+import type { InputProps } from "@/components/ui/input"
+import type { LabelProps } from "@/components/ui/label"
+import type { NumberFieldInputProps } from "@/components/ui/number-field"
 
-export type FormItemProps = { className?: string } & Omit<
-  React.ComponentProps<typeof Field.Root>,
-  "className"
->
+export type FormItemProps = {
+  asChild?: boolean
+} & ComponentProps<"div">
 
-export type FormLabelProps = { className?: string; isField?: boolean } & Omit<
-  React.ComponentProps<typeof Field.Label>,
-  "className" | "htmlFor"
->
+export type FormLabelProps = LabelProps
 
-export type FormDescriptionProps = { className?: string } & Omit<
-  React.ComponentProps<typeof Field.Description>,
-  "className"
->
+export type FormDescriptionProps = ComponentProps<"p">
 
-export type FormErrorProps = { className?: string } & Omit<
-  React.ComponentProps<typeof Field.Error>,
-  "className"
->
+export type FormErrorProps = ComponentProps<"p">
 
-export type FormInputProps = { className?: string } & Omit<
-  React.ComponentProps<typeof Field.Control>,
-  "className"
->
+export type FormInputProps =
+  | ({
+      inputType?: "input"
+    } & InputProps)
+  | ({
+      inputType: "combobox"
+    } & ComboboxInputProps)
+  | ({
+      inputType: "number"
+    } & NumberFieldInputProps)
 
 export type FormNumberInputProps = { className?: string } & Omit<
   React.ComponentProps<typeof NumberField.Input>,

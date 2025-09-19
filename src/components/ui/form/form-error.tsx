@@ -1,9 +1,8 @@
-import { Field } from "@base-ui-components/react/field"
 import { useTranslations } from "next-intl"
 
 import { useFormField } from "@/components/ui/form/hooks"
 import type { FormErrorProps } from "@/components/ui/form/types"
-import { form } from "@/components/ui/form/variants"
+import { cn } from "@/utils/cn"
 
 export const FormError = ({ className, ...props }: FormErrorProps) => {
   const { error, formMessageId, name } = useFormField()
@@ -15,14 +14,14 @@ export const FormError = ({ className, ...props }: FormErrorProps) => {
   }
 
   return (
-    <Field.Description
-      data-slot="form-message"
+    <p
+      data-slot="form-error"
       data-error={Boolean(error)}
       id={formMessageId}
-      className={form().error({ className })}
+      className={cn("text-danger text-sm", className)}
       {...props}
     >
       {body}
-    </Field.Description>
+    </p>
   )
 }
