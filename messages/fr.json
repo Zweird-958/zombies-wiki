@@ -42,6 +42,17 @@
       },
       "success": "Guide créé avec succès",
       "submit": "Créer un guide"
+    },
+    "createStep": {
+      "title": "Créer une étape",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom de l'étape"
+      },
+      "content": {
+        "label": "Contenu de l'étape"
+      },
+      "submit": "Ajouter une étape"
     }
   },
   "errors": {
@@ -66,6 +77,12 @@
     },
     "gameId": {
       "required": "Le jeu est requis"
+    },
+    "content": {
+      "required": "Le contenu de l'étape ne peut pas être vide"
+    },
+    "steps": {
+      "required": "Au moins une étape est requise"
     },
     "createGame": {
       "CONFLICT": "Un jeu avec ce nom existe déjà"

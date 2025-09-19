@@ -43,6 +43,13 @@
       "when": 1758179911065,
       "tag": "0005_happy_rictor",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1758191129556,
+      "tag": "0006_real_iceman",
+      "breakpoints": true
     }
   ]
 }

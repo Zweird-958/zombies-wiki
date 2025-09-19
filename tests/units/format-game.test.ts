@@ -9,6 +9,7 @@ const name = faker.lorem.words(3)
 const normalizedName = normalizeGameName(name)
 
 const game = {
+  id: faker.string.uuid(),
   name,
   normalizedName,
   image: normalizedName,

@@ -14,11 +14,12 @@ import {
 import {
   FormComboboxInput,
   FormError,
-  FormField,
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
 import { useQuery } from "@/hooks/use-query"
+
+type Item = { label: string; value: string }
 
 type Props = {
   value: string
@@ -32,7 +33,7 @@ const GamesCombobox = (props: Props) => {
     queryKey: ["games-combobox"],
   })
 
-  const items = useMemo(() => {
+  const items = useMemo<Item[]>(() => {
     const commonItems = [{ label: t("game.placeholder"), value: "" }]
 
     if (data) {
@@ -49,38 +50,28 @@ const GamesCombobox = (props: Props) => {
   }, [data, t])
 
   return (
-    <FormField
-      name="gameId"
-      render={() => (
-        <FormItem>
-          <Combobox
-            items={items}
-            defaultValue=""
-            disabled={isPending}
-            {...props}
-          >
-            <FormLabel isField={false}>{t("game.label")}</FormLabel>
-            <ComboboxTrigger />
-            <FormError />
-            <ComboboxPopup>
-              <FormComboboxInput
-                name="gameId"
-                placeholder={t("game.placeholder")}
-              />
-              <ComboboxSeparator />
-              <ComboboxEmpty>{t("game.empty")}</ComboboxEmpty>
-              <ComboboxList>
-                {(item: { label: string; value: string }) => (
-                  <ComboboxItem key={item.value} value={item.value}>
-                    {item.label}
-                  </ComboboxItem>
-                )}
-              </ComboboxList>
-            </ComboboxPopup>
-          </Combobox>
-        </FormItem>
-      )}
-    />
+    <FormItem>
+      <Combobox items={items} defaultValue="" disabled={isPending} {...props}>
+        <FormLabel isField={false}>{t("game.label")}</FormLabel>
+        <ComboboxTrigger />
+        <FormError />
+        <ComboboxPopup>
+          <FormComboboxInput
+            name="gameId"
+            placeholder={t("game.placeholder")}
+          />
+          <ComboboxSeparator />
+          <ComboboxEmpty>{t("game.empty")}</ComboboxEmpty>
+          <ComboboxList>
+            {(item: Item) => (
+              <ComboboxItem key={item.value} value={item.value}>
+                {item.label}
+              </ComboboxItem>
+            )}
+          </ComboboxList>
+        </ComboboxPopup>
+      </Combobox>
+    </FormItem>
   )
 }
 

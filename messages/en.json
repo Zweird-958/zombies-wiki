@@ -42,6 +42,17 @@
       },
       "success": "Guide created successfully",
       "submit": "Create Guide"
+    },
+    "createStep": {
+      "title": "Create Step",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter step name"
+      },
+      "content": {
+        "label": "Step content"
+      },
+      "submit": "Add Step"
     }
   },
   "errors": {
@@ -66,6 +77,12 @@
     },
     "gameId": {
       "required": "Game is required"
+    },
+    "content": {
+      "required": "Step content cannot be empty"
+    },
+    "steps": {
+      "required": "At least one step is required"
     },
     "createGame": {
       "CONFLICT": "A game with this name already exists"

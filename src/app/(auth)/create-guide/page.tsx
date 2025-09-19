@@ -1,10 +1,10 @@
-import CreatGuideForm from "@/components/forms/create-guide-form"
-import CenteredDiv from "@/components/ui/centered-div"
+import CreatGuideForm from "@/components/forms/create-guide-builder-form"
+import { EditorProvider } from "@/components/guides/editor/use-editor"
 
 const CreatGuidePage = () => (
-  <CenteredDiv>
+  <EditorProvider>
     <CreatGuideForm />
-  </CenteredDiv>
+  </EditorProvider>
 )
 
 export default CreatGuidePage
