@@ -31,9 +31,12 @@ type Props = {
 const MapsCombobox = (props: Props) => {
   const t = useTranslations("forms.createGuide")
 
-  const { data, isPending } = useQuery(client.games.$get, {
-    queryKey: ["games-combobox"],
-  })
+  const { data, isPending } = useQuery(
+    () => client.games.$get({ query: { maps: "true" } }),
+    {
+      queryKey: ["games-combobox"],
+    },
+  )
 
   const items = useMemo<GroupItems[]>(() => {
     if (data) {
@@ -41,7 +44,8 @@ const MapsCombobox = (props: Props) => {
         ...data.result.map((game) => ({
           label: game.name,
           value: game.id,
-          items: game.maps.map((map) => ({ label: map.name, value: map.id })),
+          items:
+            game.maps?.map((map) => ({ label: map.name, value: map.id })) ?? [],
         })),
       ]
     }

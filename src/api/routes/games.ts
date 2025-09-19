@@ -9,7 +9,7 @@ import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
 import { images, maps } from "@/db/schemas"
 import { games } from "@/db/schemas/games"
-import { CreateGameSchema } from "@/schemas/games"
+import { CreateGameSchema, GetGamesQueryParamsSchema } from "@/schemas/games"
 import type { UnformattedMap } from "@/types/maps"
 
 export const gamesApp = new Hono()
@@ -42,16 +42,22 @@ export const gamesApp = new Hono()
       return send(game)
     },
   )
-  .get("/", async ({ var: { db, send } }) => {
-    const allGames = await db
-      .select({
-        id: games.id,
-        name: games.name,
-        normalizedName: games.normalizedName,
-        image: {
-          url: images.url,
-        },
-        maps: sql`
+  .get(
+    "/",
+    zValidator("query", GetGamesQueryParamsSchema),
+    async ({ req, var: { db, send } }) => {
+      const { maps: withMaps } = req.valid("query")
+
+      if (withMaps) {
+        const allGames = await db
+          .select({
+            id: games.id,
+            name: games.name,
+            normalizedName: games.normalizedName,
+            image: {
+              url: images.url,
+            },
+            maps: sql`
           json_agg(
             json_build_object(
               'id', ${maps.id},
@@ -60,21 +66,38 @@ export const gamesApp = new Hono()
             )
           )
         `.as("maps"),
+          })
+          .from(games)
+          .innerJoin(maps, eq(maps.gameId, games.id))
+          .innerJoin(images, eq(images.id, games.imageId))
+          .groupBy(games.id, games.name, images.url)
+
+        const typedGames = allGames as unknown as (Omit<
+          (typeof allGames)[number],
+          "maps"
+        > & {
+          maps: UnformattedMap[]
+        })[]
+
+        return send(typedGames.map(formatGame))
+      }
+
+      const gamesResult = await db.query.games.findMany({
+        columns: {
+          id: true,
+          name: true,
+          normalizedName: true,
+        },
+        with: {
+          image: {
+            columns: { url: true },
+          },
+        },
       })
-      .from(games)
-      .innerJoin(maps, eq(maps.gameId, games.id))
-      .innerJoin(images, eq(images.id, games.imageId))
-      .groupBy(games.id, games.name, images.url)
 
-    const typedGames = allGames as unknown as (Omit<
-      (typeof allGames)[number],
-      "maps"
-    > & {
-      maps: UnformattedMap[]
-    })[]
-
-    return send(typedGames.map(formatGame))
-  })
+      return send(gamesResult.map(formatGame))
+    },
+  )
   .get(
     "/:name",
     zValidator("param", CreateGameSchema.pick({ name: true })),

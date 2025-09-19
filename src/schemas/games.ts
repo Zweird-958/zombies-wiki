@@ -8,3 +8,7 @@ export const CreateGameSchema = z.object({
   image,
   releaseYear: z.coerce.number("invalid").positive("invalid").int("invalid"),
 })
+
+export const GetGamesQueryParamsSchema = z.object({
+  maps: z.coerce.boolean().optional(),
+})

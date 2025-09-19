@@ -8,7 +8,7 @@ type Game = {
   image: {
     url: string
   }
-  maps: UnformattedMap[]
+  maps?: UnformattedMap[]
 }
 
 export const formatGame = (game: Game) => ({
