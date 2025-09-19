@@ -11,12 +11,7 @@ import {
   ComboboxSeparator,
   ComboboxTrigger,
 } from "@/components/ui/combobox"
-import {
-  FormComboboxInput,
-  FormError,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form"
+import { FormError, FormInput, FormItem, FormLabel } from "@/components/ui/form"
 import { useQuery } from "@/hooks/use-query"
 
 type Item = { label: string; value: string }
@@ -52,11 +47,12 @@ const GamesCombobox = (props: Props) => {
   return (
     <FormItem>
       <Combobox items={items} defaultValue="" disabled={isPending} {...props}>
-        <FormLabel isField={false}>{t("game.label")}</FormLabel>
+        <FormLabel>{t("game.label")}</FormLabel>
         <ComboboxTrigger />
         <FormError />
         <ComboboxPopup>
-          <FormComboboxInput
+          <FormInput
+            inputType="combobox"
             name="gameId"
             placeholder={t("game.placeholder")}
           />

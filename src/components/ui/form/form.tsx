@@ -1,7 +1,6 @@
 "use client"
 
-import { Field } from "@base-ui-components/react/field"
-import { NumberField } from "@base-ui-components/react/number-field"
+import { Slot } from "@radix-ui/react-slot"
 import * as React from "react"
 import {
   Controller,
@@ -15,7 +14,10 @@ import {
   ComboboxInput,
   type ComboboxInputProps,
 } from "@/components/ui/combobox"
-import { FormFieldContext, FormItemContext } from "@/components/ui/form/context"
+import {
+  FormFieldContext,
+  FormItemContext,
+} from "@/components/ui/form/contexts"
 import { FormError } from "@/components/ui/form/form-error"
 import { useFormField } from "@/components/ui/form/hooks"
 import { InputImageController } from "@/components/ui/form/image"
@@ -26,12 +28,17 @@ import type {
   FormInputProps,
   FormItemProps,
   FormLabelProps,
-  FormNumberInputProps,
   FormWrapperProps,
   ImageInputFieldProps,
 } from "@/components/ui/form/types"
-import { form } from "@/components/ui/form/variants"
+import { Input, type InputProps } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  NumberField,
+  NumberFieldInput,
+  type NumberFieldInputProps,
+} from "@/components/ui/number-field"
+import { cn } from "@/utils/cn"
 
 export const Form = FormProvider
 
@@ -46,40 +53,32 @@ export const FormField = <
   </FormFieldContext>
 )
 
-export const FormItem = ({ className, ...props }: FormItemProps) => {
+export const FormItem = ({ asChild, className, ...props }: FormItemProps) => {
   const id = React.useId()
+  const Comp = asChild ? Slot : "div"
 
   return (
     <FormItemContext value={{ id }}>
-      <Field.Root className={form().root({ className })} {...props} />
+      <Comp
+        data-slot="form-item"
+        className={cn("flex flex-col gap-2", className)}
+        {...props}
+      />
     </FormItemContext>
   )
 }
 
-export const FormLabel = ({
-  className,
-  isField = true,
-  ...props
-}: FormLabelProps) => {
+export const FormLabel = ({ className, ...props }: FormLabelProps) => {
   const { error, formItemId } = useFormField()
-
-  if (isField) {
-    return (
-      <Field.Label
-        data-slot="form-label"
-        data-error={Boolean(error)}
-        className={form().label({ className })}
-        htmlFor={formItemId}
-        {...props}
-      />
-    )
-  }
 
   return (
     <Label
       data-slot="form-label"
       data-error={Boolean(error)}
-      className={form().label({ className })}
+      className={cn(
+        "data-[error=true]:text-danger transition-colors",
+        className,
+      )}
       htmlFor={formItemId}
       {...props}
     />
@@ -93,72 +92,44 @@ export const FormDescription = ({
   const { formDescriptionId } = useFormField()
 
   return (
-    <Field.Description
+    <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={form().description({ className })}
+      className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
   )
 }
 
-export const FormInput = ({ className, ...props }: FormInputProps) => {
-  const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
-
-  return (
-    <Field.Control
-      data-slot="form-control"
-      id={formItemId}
-      aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
-      }
-      aria-invalid={Boolean(error)}
-      className={form().input({ className })}
-      {...props}
-    />
-  )
-}
-
-export const FormComboboxInput = (props: ComboboxInputProps) => {
-  const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
-
-  return (
-    <ComboboxInput
-      data-slot="form-control"
-      id={formItemId}
-      aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
-      }
-      aria-invalid={Boolean(error)}
-      {...props}
-    />
-  )
-}
-
-export const FormNumberInput = ({
-  className,
+export const FormInput = ({
+  inputType = "input",
   ...props
-}: FormNumberInputProps) => {
+}: FormInputProps) => {
   const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
 
-  return (
-    <NumberField.Input
-      data-slot="form-control"
-      id={formItemId}
-      aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
-      }
-      aria-invalid={Boolean(error)}
-      className={form().input({ className })}
-      {...props}
-    />
-  )
+  const commonProps = {
+    "data-slot": "form-control",
+    id: formItemId,
+    "aria-describedby": !error
+      ? `${formDescriptionId}`
+      : `${formDescriptionId} ${formMessageId}`,
+    "aria-invalid": Boolean(error),
+  }
+
+  if (inputType === "input") {
+    return <Input {...commonProps} {...(props as InputProps)} />
+  }
+
+  if (inputType === "number") {
+    return (
+      <NumberFieldInput
+        {...commonProps}
+        {...(props as NumberFieldInputProps)}
+      />
+    )
+  }
+
+  return <ComboboxInput {...commonProps} {...(props as ComboboxInputProps)} />
 }
 
 export const FormFieldInput = ({
@@ -173,8 +144,8 @@ export const FormFieldInput = ({
       <FormItem>
         {label && <FormLabel>{label}</FormLabel>}
         <FormInput {...field} {...props} />
-        <FormError />
         {description && <FormDescription>{description}</FormDescription>}
+        <FormError />
       </FormItem>
     )}
   />
@@ -211,20 +182,20 @@ export const FormFieldNumberInput = ({
   <FormField
     name={name}
     render={({ field }) => (
-      <FormItem>
-        <NumberField.Root className={form().root()}>
+      <FormItem asChild>
+        <NumberField>
           {label && <FormLabel>{label}</FormLabel>}
-          <FormNumberInput {...field} {...props} />
-          <FormError />
+          <FormInput inputType="number" {...field} {...props} />
           {description && <FormDescription>{description}</FormDescription>}
-        </NumberField.Root>
+          <FormError />
+        </NumberField>
       </FormItem>
     )}
   />
 )
 
 export const FormWrapper = ({ className, ...props }: FormWrapperProps) => (
-  <form className={form().wrapper({ className })} {...props} />
+  <form className={cn("flex flex-col gap-4", className)} {...props} />
 )
 
 export { FormError }
