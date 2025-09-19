@@ -9,7 +9,8 @@ import { toast } from "sonner"
 import { client } from "@/api/client"
 import CreateGuideForm from "@/components/forms/create-guide-form"
 import CreateStepForm from "@/components/forms/create-step-form"
-import StepAccordion from "@/components/steps/step-accordion"
+import StepAccordionItem from "@/components/steps/step-accordion-item"
+import { Accordion } from "@/components/ui/accordion/accordion"
 import { Form, FormWrapper } from "@/components/ui/form"
 import { useError } from "@/hooks/use-error"
 import { useMutation } from "@/hooks/use-mutation"
@@ -64,9 +65,11 @@ const CreateGuideBuilderForm = () => {
           <CreateStepForm addStep={addStep} />
         </FormWrapper>
       </Form>
-      {steps.map((step) => (
-        <StepAccordion key={step.id} {...step} />
-      ))}
+      <Accordion>
+        {steps.map((step) => (
+          <StepAccordionItem key={step.id} {...step} />
+        ))}
+      </Accordion>
     </div>
   )
 }
