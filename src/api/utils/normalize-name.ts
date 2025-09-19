@@ -1,4 +1,4 @@
-export const normalizeGameName = (name: string) =>
+export const normalizeName = (name: string) =>
   name
     .toLowerCase()
     .trim()

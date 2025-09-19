@@ -5,7 +5,7 @@ import { Hono } from "hono"
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { formatGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
-import { normalizeGameName } from "@/api/utils/games/normalize-game-name"
+import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
 import { images } from "@/db/schemas"
 import { games } from "@/db/schemas/games"
@@ -20,7 +20,7 @@ export const gamesApp = new Hono()
     async ({ req, var: { send, db, fail } }) => {
       const { name, image, releaseYear } = req.valid("form")
 
-      const normalizedName = normalizeGameName(name)
+      const normalizedName = normalizeName(name)
 
       if (await isGameExists(normalizedName, db)) {
         return fail("CONFLICT", `${name} already exists`)
@@ -65,7 +65,7 @@ export const gamesApp = new Hono()
         columns: {
           name: true,
         },
-        where: eq(games.normalizedName, normalizeGameName(name)),
+        where: eq(games.normalizedName, normalizeName(name)),
         with: {
           guides: {
             columns: { id: true, name: true },

@@ -7,5 +7,6 @@ export const routes = {
     createGame: "/create-game",
     createGuide: (game?: string) =>
       `/create-guide${game ? `?game=${game}` : ""}`,
+    createMap: (game?: string) => `/create-map${game ? `?game=${game}` : ""}`,
   },
 }

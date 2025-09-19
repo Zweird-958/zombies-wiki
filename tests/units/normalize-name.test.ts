@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
 
-import { normalizeGameName } from "@/api/utils/games/normalize-game-name"
+import { normalizeName } from "@/api/utils/normalize-name"
 
-describe("normalizeGameName", () => {
+describe("normalizeName", () => {
   it("should normalize game names correctly", () => {
     const testCases = [
       { input: "Call of Duty: Black Ops", expected: "call-of-duty-black-ops" },
@@ -26,7 +26,7 @@ describe("normalizeGameName", () => {
     ]
 
     testCases.forEach(({ input, expected }) => {
-      const normalized = normalizeGameName(input)
+      const normalized = normalizeName(input)
 
       expect(normalized).toBe(expected)
     })
@@ -47,7 +47,7 @@ describe("normalizeGameName", () => {
     ]
 
     testCases.forEach(({ input, expected }) => {
-      const normalized = normalizeGameName(input)
+      const normalized = normalizeName(input)
       expect(normalized).toBe(expected)
     })
   })

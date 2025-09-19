@@ -50,6 +50,13 @@
       "when": 1758191129556,
       "tag": "0006_real_iceman",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1758283897936,
+      "tag": "0007_fantastic_giant_girl",
+      "breakpoints": true
     }
   ]
 }

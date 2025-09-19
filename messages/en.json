@@ -53,6 +53,19 @@
         "label": "Step content"
       },
       "submit": "Add Step"
+    },
+    "createMap": {
+      "title": "Create Map",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter map name"
+      },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
+      "success": "Map created successfully",
+      "submit": "Create Map"
     }
   },
   "errors": {
@@ -64,7 +77,7 @@
     },
     "image": {
       "file-invalid-type": "Invalid file type. Please upload an image (PNG, JPG).",
-      "tooLarge": "File is too large. Maximum size is 5MB."
+      "file-too-large": "File is too large. Maximum size is 5MB."
     },
     "email": {
       "invalid": "Invalid email address"
@@ -90,7 +103,10 @@
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
     },
-    "createGuide": {}
+    "createGuide": {},
+    "createMap": {
+      "CONFLICT": "A map with this name already exists"
+    }
   },
   "header": {
     "title": "Zombies Wiki",
