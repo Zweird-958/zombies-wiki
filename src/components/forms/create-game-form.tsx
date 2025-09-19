@@ -38,7 +38,7 @@ const CreateGameForm = () => {
   const { mutate: createGame, isPending } = useMutation(client.games.$post, {
     onSuccess: ({ result: { id } }) => {
       toast.success(t("success"))
-      router.push(routes.admin.createGuide(id))
+      router.push(routes.admin.createMap(id))
     },
     onError,
   })
