@@ -39,9 +39,9 @@ const CreateMapForm = () => {
   })
 
   const { mutate: createMap, isPending } = useMutation(client.maps.$post, {
-    onSuccess: () => {
+    onSuccess: ({ result: { id } }) => {
       toast.success(t("success"))
-      router.push(routes.admin.createGuide())
+      router.push(routes.admin.createGuide(id))
     },
     onError,
   })
