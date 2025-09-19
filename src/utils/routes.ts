@@ -5,5 +5,7 @@ export const routes = {
   guide: (gameName: string, guideId: string) => `/${gameName}/${guideId}`,
   admin: {
     createGame: "/create-game",
+    createGuide: (game?: string) =>
+      `/create-guide${game ? `?game=${game}` : ""}`,
   },
 }
