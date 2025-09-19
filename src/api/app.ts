@@ -3,6 +3,7 @@ import { cors } from "hono/cors"
 import { handle } from "hono/vercel"
 
 import { gamesApp } from "@/api/routes/games"
+import { guidesApp } from "@/api/routes/guides"
 import { contextVariables, fail, send } from "@/api/utils/context"
 import { auth } from "@/utils/auth/auth"
 
@@ -21,7 +22,7 @@ app.use(cors(), (ctx, next) => {
 app.on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const routes = app.route("/", gamesApp)
+const routes = app.route("/", gamesApp).route("/", guidesApp)
 
 app.onError((error, { var: { fail: ctxFail } }) => {
   // eslint-disable-next-line no-console

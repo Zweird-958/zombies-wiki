@@ -1,13 +1,10 @@
 import z from "zod"
 
+import { name } from "@/schemas/common"
 import { image } from "@/schemas/images"
 
 export const CreateGameSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, "required")
-    .transform((text) => text.replace(/\s+/gu, " ")),
+  name,
   image,
   releaseYear: z.coerce.number("invalid").positive("invalid").int("invalid"),
 })

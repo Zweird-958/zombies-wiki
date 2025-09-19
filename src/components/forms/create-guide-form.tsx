@@ -1,0 +1,44 @@
+"use client"
+
+import { useTranslations } from "next-intl"
+
+import GamesCombobox from "@/components/guides/games-combobox"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FormField, FormFieldInput } from "@/components/ui/form"
+
+type Props = {
+  isPending: boolean
+}
+
+const CreateGuideForm = ({ isPending }: Props) => {
+  const t = useTranslations("forms.createGuide")
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center gap-4 *:w-full">
+        <FormFieldInput
+          name="name"
+          label={t("name.label")}
+          placeholder={t("name.placeholder")}
+        />
+
+        <FormField
+          name="gameId"
+          render={({ field: { value, onChange } }) => (
+            <GamesCombobox value={value as string} onValueChange={onChange} />
+          )}
+        />
+
+        <Button type="submit" className="w-full" isPending={isPending}>
+          {t("submit")}
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
+
+export default CreateGuideForm

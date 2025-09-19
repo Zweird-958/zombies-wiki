@@ -28,6 +28,31 @@
         "placeholder": "Entrez votre mot de passe"
       },
       "submit": "Se connecter"
+    },
+    "createGuide": {
+      "title": "Créer un guide",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom du guide"
+      },
+      "game": {
+        "label": "Jeu",
+        "placeholder": "Sélectionnez un jeu",
+        "empty": "Aucun jeu trouvé."
+      },
+      "success": "Guide créé avec succès",
+      "submit": "Créer un guide"
+    },
+    "createStep": {
+      "title": "Créer une étape",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom de l'étape"
+      },
+      "content": {
+        "label": "Contenu de l'étape"
+      },
+      "submit": "Ajouter une étape"
     }
   },
   "errors": {
@@ -50,12 +75,22 @@
     "releaseYear": {
       "invalid": "Année de sortie invalide"
     },
+    "gameId": {
+      "required": "Le jeu est requis"
+    },
+    "content": {
+      "required": "Le contenu de l'étape ne peut pas être vide"
+    },
+    "steps": {
+      "required": "Au moins une étape est requise"
+    },
     "createGame": {
       "CONFLICT": "Un jeu avec ce nom existe déjà"
     },
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
-    }
+    },
+    "createGuide": {}
   },
   "header": {
     "title": "Zombies Wiki",
