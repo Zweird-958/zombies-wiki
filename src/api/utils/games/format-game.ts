@@ -1,4 +1,5 @@
 import { config } from "@/configs/api"
+import type { UnformattedMap } from "@/types/maps"
 
 type Game = {
   id: string
@@ -7,7 +8,7 @@ type Game = {
   image: {
     url: string
   }
-  maps: { id: string; name: string }[]
+  maps: UnformattedMap[]
 }
 
 export const formatGame = (game: Game) => ({

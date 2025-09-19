@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator"
-import { desc, eq } from "drizzle-orm"
+import { eq, sql } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
@@ -7,8 +7,10 @@ import { formatGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
+import { images, maps } from "@/db/schemas"
 import { games } from "@/db/schemas/games"
 import { CreateGameSchema } from "@/schemas/games"
+import type { UnformattedMap } from "@/types/maps"
 
 export const gamesApp = new Hono()
   .basePath("/games")
@@ -41,30 +43,37 @@ export const gamesApp = new Hono()
     },
   )
   .get("/", async ({ var: { db, send } }) => {
-    const allGames = await db.query.games.findMany({
-      columns: {
-        id: true,
-        name: true,
-        normalizedName: true,
-        imageId: true,
-      },
-      with: {
+    const allGames = await db
+      .select({
+        id: games.id,
+        name: games.name,
+        normalizedName: games.normalizedName,
         image: {
-          columns: {
-            url: true,
-          },
+          url: images.url,
         },
-        maps: {
-          columns: {
-            id: true,
-            name: true,
-          },
-        },
-      },
-      orderBy: [desc(games.releaseYear)],
-    })
+        maps: sql`
+          json_agg(
+            json_build_object(
+              'id', ${maps.id},
+              'name', ${maps.name},
+              'normalizedName', ${maps.normalizedName}
+            )
+          )
+        `.as("maps"),
+      })
+      .from(games)
+      .innerJoin(maps, eq(maps.gameId, games.id))
+      .innerJoin(images, eq(images.id, games.imageId))
+      .groupBy(games.id, games.name, images.url)
 
-    return send(allGames.filter((game) => game.maps.length > 0).map(formatGame))
+    const typedGames = allGames as unknown as (Omit<
+      (typeof allGames)[number],
+      "maps"
+    > & {
+      maps: UnformattedMap[]
+    })[]
+
+    return send(typedGames.map(formatGame))
   })
   .get(
     "/:name",
