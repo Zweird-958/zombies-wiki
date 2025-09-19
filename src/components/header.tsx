@@ -20,7 +20,7 @@ const Header = async () => {
 
   return (
     <header className="border-border flex items-center justify-between border-b px-8 py-4">
-      <h1>{t("title")}</h1>
+      <span>{t("title")}</span>
 
       <nav className="flex gap-4">
         {(isAdmin ? ADMIN_ROUTES : ROUTES).map(({ label, href }) => (

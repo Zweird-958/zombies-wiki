@@ -55,3 +55,28 @@ export const gamesApp = new Hono()
 
     return send(allGames.map(formatGame))
   })
+  .get(
+    "/:name",
+    zValidator("param", CreateGameSchema.pick({ name: true })),
+    async ({ req, var: { db, send, fail } }) => {
+      const { name } = req.valid("param")
+
+      const gamesResult = await db.query.games.findFirst({
+        columns: {
+          name: true,
+        },
+        where: eq(games.normalizedName, normalizeGameName(name)),
+        with: {
+          guides: {
+            columns: { id: true, name: true },
+          },
+        },
+      })
+
+      if (!gamesResult) {
+        return fail("NOT_FOUND", `Game with name '${name}' not found`)
+      }
+
+      return send(gamesResult)
+    },
+  )
