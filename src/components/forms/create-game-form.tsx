@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -19,10 +20,13 @@ import { useError } from "@/hooks/use-error"
 import { useMutation } from "@/hooks/use-mutation"
 import { CreateGameSchema } from "@/schemas/games"
 import type { CreateGame } from "@/types/games"
+import { routes } from "@/utils/routes"
 
 const CreateGameForm = () => {
   const t = useTranslations("forms.createGame")
   const { onError } = useError("createGame")
+  const router = useRouter()
+
   const form = useForm({
     defaultValues: {
       name: "",
@@ -32,8 +36,9 @@ const CreateGameForm = () => {
   })
 
   const { mutate: createGame, isPending } = useMutation(client.games.$post, {
-    onSuccess: () => {
+    onSuccess: ({ result: { id } }) => {
       toast.success(t("success"))
+      router.push(routes.admin.createGuide(id))
     },
     onError,
   })

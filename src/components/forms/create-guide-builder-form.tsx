@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useFieldArray, useForm, useFormState } from "react-hook-form"
 import { toast } from "sonner"
@@ -21,14 +22,17 @@ const CreateGuideBuilderForm = () => {
   const t = useTranslations("forms.createGuide")
   const errorsT = useTranslations("errors")
   const { onError } = useError("createGuide")
+  const defaultGame = useSearchParams().get("game")
+
   const form = useForm({
     defaultValues: {
       name: "",
-      gameId: "",
+      gameId: defaultGame ?? "",
       steps: [],
     },
     resolver: zodResolver(CreateGuideSchema),
   })
+
   const { fields: steps, append: addStep } = useFieldArray({
     control: form.control,
     name: "steps",
