@@ -1,7 +1,8 @@
 export const routes = {
   home: "/",
   signIn: "/sign-in",
-  game: (gameName: string) => `/games/${gameName}`,
+  game: (gameName: string) => `/${gameName}`,
+  guide: (gameName: string, guideId: string) => `/${gameName}/${guideId}`,
   admin: {
     createGame: "/create-game",
   },

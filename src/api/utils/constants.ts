@@ -5,6 +5,7 @@ export const ERROR_RESPONSES = {
   CONFLICT: { code: 409, message: "Conflict" },
   UNAUTHORIZED: { code: 401, message: "Unauthorized" },
   FORBIDDEN: { code: 403, message: "Forbidden" },
+  NOT_FOUND: { code: 404, message: "Not found" },
 } satisfies Record<string, { code: StatusCode; message: string }>
 
 // 5MB
