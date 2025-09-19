@@ -35,10 +35,10 @@
         "label": "Nom",
         "placeholder": "Entrez le nom du guide"
       },
-      "game": {
-        "label": "Jeu",
-        "placeholder": "Sélectionnez un jeu",
-        "empty": "Aucun jeu trouvé."
+      "map": {
+        "label": "Carte",
+        "placeholder": "Sélectionnez une carte",
+        "empty": "Aucune carte trouvée."
       },
       "success": "Guide créé avec succès",
       "submit": "Créer un guide"
@@ -63,6 +63,11 @@
       "image": {
         "label": "Télécharger une image",
         "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
+      "game": {
+        "label": "Jeu",
+        "placeholder": "Sélectionnez un jeu",
+        "empty": "Aucun jeu trouvé."
       },
       "success": "Carte créée avec succès",
       "submit": "Créer une carte"
@@ -90,6 +95,9 @@
     },
     "gameId": {
       "required": "Le jeu est requis"
+    },
+    "mapId": {
+      "required": "La carte est requise"
     },
     "content": {
       "required": "Le contenu de l'étape ne peut pas être vide"

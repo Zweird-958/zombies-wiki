@@ -13,12 +13,12 @@ export const guidesApp = new Hono()
     zValidator("json", CreateGuideSchema),
     ...isAuthorized({ guides: ["create"] }),
     async ({ req, var: { send, db } }) => {
-      const { name, gameId, steps } = req.valid("json")
+      const { name, mapId, steps } = req.valid("json")
 
       const result = await db.transaction(async (tx) => {
         const [guide] = await tx
           .insert(guides)
-          .values({ name, gameId })
+          .values({ name, mapId })
           .returning()
 
         const stepsResult = await tx

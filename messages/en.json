@@ -35,10 +35,10 @@
         "label": "Name",
         "placeholder": "Enter guide name"
       },
-      "game": {
-        "label": "Game",
-        "placeholder": "Select a game",
-        "empty": "No games found."
+      "map": {
+        "label": "Map",
+        "placeholder": "Select a map",
+        "empty": "No maps found."
       },
       "success": "Guide created successfully",
       "submit": "Create Guide"
@@ -63,6 +63,11 @@
       "image": {
         "label": "Upload an image",
         "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
+      "game": {
+        "label": "Game",
+        "placeholder": "Select a game",
+        "empty": "No games found."
       },
       "success": "Map created successfully",
       "submit": "Create Map"
@@ -90,6 +95,9 @@
     },
     "gameId": {
       "required": "Game is required"
+    },
+    "mapId": {
+      "required": "Map is required"
     },
     "content": {
       "required": "Step content cannot be empty"

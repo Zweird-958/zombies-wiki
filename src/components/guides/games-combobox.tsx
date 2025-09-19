@@ -22,7 +22,7 @@ type Props = {
 }
 
 const GamesCombobox = (props: Props) => {
-  const t = useTranslations("forms.createGuide")
+  const t = useTranslations("forms.createMap")
 
   const { data, isPending } = useQuery(client.games.$get, {
     queryKey: ["games-combobox"],

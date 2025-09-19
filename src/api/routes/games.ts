@@ -7,7 +7,6 @@ import { formatGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
-import { images } from "@/db/schemas"
 import { games } from "@/db/schemas/games"
 import { CreateGameSchema } from "@/schemas/games"
 
@@ -42,18 +41,30 @@ export const gamesApp = new Hono()
     },
   )
   .get("/", async ({ var: { db, send } }) => {
-    const allGames = await db
-      .select({
-        id: games.id,
-        name: games.name,
-        normalizedName: games.normalizedName,
-        image: images.url,
-      })
-      .from(games)
-      .innerJoin(images, eq(games.imageId, images.id))
-      .orderBy(desc(games.releaseYear))
+    const allGames = await db.query.games.findMany({
+      columns: {
+        id: true,
+        name: true,
+        normalizedName: true,
+        imageId: true,
+      },
+      with: {
+        image: {
+          columns: {
+            url: true,
+          },
+        },
+        maps: {
+          columns: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: [desc(games.releaseYear)],
+    })
 
-    return send(allGames.map(formatGame))
+    return send(allGames.filter((game) => game.maps.length > 0).map(formatGame))
   })
   .get(
     "/:name",
