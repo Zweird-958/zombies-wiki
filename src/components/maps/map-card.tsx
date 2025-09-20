@@ -12,12 +12,15 @@ type Props = {
 }
 
 const MapCard = ({ name, image, game, id }: Props) => (
-  <Card className="group size-64 w-fit items-center justify-center p-0" asChild>
+  <Card
+    className="group h-64 w-full max-w-64 items-center justify-center p-0"
+    asChild
+  >
     <Link href={routes.guide(game, id)}>
       <CardHeader className="absolute z-10 text-lg">
         <CardTitle>{name}</CardTitle>
       </CardHeader>
-      <CardContent className="relative size-64 overflow-hidden p-0 blur-xs">
+      <CardContent className="relative size-full overflow-hidden p-0 blur-xs">
         <Image
           src={image}
           alt={name}
