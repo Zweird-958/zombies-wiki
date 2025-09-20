@@ -13,7 +13,9 @@ const game = {
   name,
   normalizedName,
   image: { url: normalizedName },
-  maps: [{ id: faker.string.uuid(), name: faker.lorem.words(2) }],
+  maps: [
+    { id: faker.string.uuid(), name: faker.lorem.words(2), normalizedName },
+  ],
 }
 
 describe("formatGame", () => {
