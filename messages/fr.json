@@ -40,6 +40,10 @@
         "placeholder": "Sélectionnez une carte",
         "empty": "Aucune carte trouvée."
       },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
       "success": "Guide créé avec succès",
       "submit": "Créer un guide"
     },
@@ -120,5 +124,8 @@
     "title": "Zombies Wiki",
     "home": "Accueil",
     "createGame": "Créer un jeu"
+  },
+  "maps": {
+    "title": "{game} : {map}"
   }
 }

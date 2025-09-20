@@ -3,22 +3,31 @@ import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
+import { normalizeName } from "@/api/utils/normalize-name"
+import { uploadImage } from "@/api/utils/upload-image"
 import { guides, steps as stepsTable } from "@/db/schemas"
-import { CreateGuideSchema, GetGuideSchema } from "@/schemas/guides"
+import { CreateGuideFormDataSchema, GetGuideSchema } from "@/schemas/guides"
 
 export const guidesApp = new Hono()
   .basePath("/guides")
   .post(
     "/",
-    zValidator("json", CreateGuideSchema),
+    zValidator("form", CreateGuideFormDataSchema),
     ...isAuthorized({ guides: ["create"] }),
     async ({ req, var: { send, db } }) => {
-      const { name, mapId, steps } = req.valid("json")
+      const { name, mapId, steps, image } = req.valid("form")
 
       const result = await db.transaction(async (tx) => {
+        const imageId = await uploadImage({
+          image,
+          name: normalizeName(name),
+          folder: `guides/${mapId}`,
+          db,
+        })
+
         const [guide] = await tx
           .insert(guides)
-          .values({ name, mapId })
+          .values({ name, mapId, imageId })
           .returning()
 
         const stepsResult = await tx

@@ -47,7 +47,7 @@ const CreateGuideBuilderForm = () => {
   })
 
   const onSubmit = (data: CreateGuide) => {
-    createGuide({ json: data })
+    createGuide({ form: { ...data, steps: JSON.stringify(data.steps) } })
   }
 
   useEffect(() => {

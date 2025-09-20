@@ -40,6 +40,10 @@
         "placeholder": "Select a map",
         "empty": "No maps found."
       },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
       "success": "Guide created successfully",
       "submit": "Create Guide"
     },
@@ -120,5 +124,8 @@
     "title": "Zombies Wiki",
     "home": "Home",
     "createGame": "Create Game"
+  },
+  "maps": {
+    "title": "{game}: {map}"
   }
 }
