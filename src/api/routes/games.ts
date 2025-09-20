@@ -111,7 +111,7 @@ export const gamesApp = new Hono()
         where: eq(games.normalizedName, normalizeName(name)),
         with: {
           maps: {
-            columns: { id: true, name: true },
+            columns: { id: true, name: true, normalizedName: true },
             with: {
               image: { columns: { url: true } },
             },

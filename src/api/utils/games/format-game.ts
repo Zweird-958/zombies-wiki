@@ -20,7 +20,12 @@ export const formatGame = (game: Game) => ({
 })
 
 type SingleGame = Pick<Game, "name"> & {
-  maps: { id: string; name: string; image: { url: string } }[]
+  maps: {
+    id: string
+    name: string
+    normalizedName: string
+    image: { url: string }
+  }[]
 }
 
 export const formatSingleGame = (game: SingleGame) => ({

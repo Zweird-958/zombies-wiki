@@ -5,18 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { routes } from "@/utils/routes"
 
 type Props = {
-  id: string
+  normalizedName: string
   name: string
   image: string
   game: string
 }
 
-const MapCard = ({ name, image, game, id }: Props) => (
+const MapCard = ({ name, image, game, normalizedName }: Props) => (
   <Card
     className="group h-64 w-full max-w-64 items-center justify-center p-0"
     asChild
   >
-    <Link href={routes.guide(game, id)}>
+    <Link href={routes.map(game, normalizedName)}>
       <CardHeader className="absolute z-10 text-lg">
         <CardTitle>{name}</CardTitle>
       </CardHeader>
