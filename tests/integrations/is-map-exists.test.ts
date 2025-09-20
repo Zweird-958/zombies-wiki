@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker"
 import { beforeAll, describe, expect, it } from "vitest"
 
-import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { isMapExists } from "@/api/utils/maps/is-map-exists"
 import { normalizeName } from "@/api/utils/normalize-name"
 import { db } from "@/db"
