@@ -1,35 +1,15 @@
-import Image from "next/image"
-import Link from "next/link"
+import type { ComponentProps } from "react"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import ItemCard from "@/components/ui/item-card"
 import { routes } from "@/utils/routes"
 
 type Props = {
   normalizedName: string
-  name: string
-  image: string
   game: string
-}
+} & Omit<ComponentProps<typeof ItemCard>, "href">
 
-const MapCard = ({ name, image, game, normalizedName }: Props) => (
-  <Card
-    className="group h-64 w-full max-w-64 items-center justify-center p-0"
-    asChild
-  >
-    <Link href={routes.map(game, normalizedName)}>
-      <CardHeader className="absolute z-10 text-lg">
-        <CardTitle>{name}</CardTitle>
-      </CardHeader>
-      <CardContent className="relative size-full overflow-hidden p-0 blur-xs">
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </CardContent>
-    </Link>
-  </Card>
+const MapCard = ({ game, normalizedName, ...props }: Props) => (
+  <ItemCard href={routes.map(game, normalizedName)} {...props} />
 )
 
 export default MapCard
