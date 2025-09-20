@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 
 import { client } from "@/api/client"
+import ItemsLayout from "@/components/items/items-layout"
 import MapCard from "@/components/maps/map-card"
 
 type Props = {
@@ -17,16 +18,11 @@ const GamePage = async ({ params }: Props) => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-8">
-      <h1 className="pb-8 text-center text-xl font-semibold">
-        {data.result.name}
-      </h1>
-      <div className="flex w-full flex-wrap justify-center gap-8">
-        {data.result.maps.map((map) => (
-          <MapCard key={map.id} game={game} {...map} />
-        ))}
-      </div>
-    </div>
+    <ItemsLayout name={data.result.name}>
+      {data.result.maps.map((map) => (
+        <MapCard key={map.id} game={game} {...map} />
+      ))}
+    </ItemsLayout>
   )
 }
 

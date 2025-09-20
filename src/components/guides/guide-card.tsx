@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react"
 
-import ItemCard from "@/components/ui/item-card"
+import ItemCard from "@/components/items/item-card"
 import { routes } from "@/utils/routes"
 
 type Props = {

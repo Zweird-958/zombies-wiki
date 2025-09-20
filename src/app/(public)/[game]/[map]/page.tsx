@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { client } from "@/api/client"
 import GuideCard from "@/components/guides/guide-card"
+import ItemsLayout from "@/components/items/items-layout"
 
 type Props = {
   params: Promise<{ game: string; map: string }>
@@ -20,16 +21,13 @@ const Page = async ({ params }: Props) => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-8">
-      <h1 className="pb-8 text-center text-xl font-semibold">
-        {t("title", { game: data.result.game, map: data.result.name })}
-      </h1>
-      <div className="flex w-full flex-wrap justify-center gap-8">
-        {data.result.guides.map((guide) => (
-          <GuideCard key={guide.id} game={game} map={mapName} {...guide} />
-        ))}
-      </div>
-    </div>
+    <ItemsLayout
+      name={t("title", { game: data.result.game, map: data.result.name })}
+    >
+      {data.result.guides.map((guide) => (
+        <GuideCard key={guide.id} game={game} map={mapName} {...guide} />
+      ))}
+    </ItemsLayout>
   )
 }
 
