@@ -35,10 +35,14 @@
         "label": "Name",
         "placeholder": "Enter guide name"
       },
-      "game": {
-        "label": "Game",
-        "placeholder": "Select a game",
-        "empty": "No games found."
+      "map": {
+        "label": "Map",
+        "placeholder": "Select a map",
+        "empty": "No maps found."
+      },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
       },
       "success": "Guide created successfully",
       "submit": "Create Guide"
@@ -53,6 +57,24 @@
         "label": "Step content"
       },
       "submit": "Add Step"
+    },
+    "createMap": {
+      "title": "Create Map",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter map name"
+      },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
+      "game": {
+        "label": "Game",
+        "placeholder": "Select a game",
+        "empty": "No games found."
+      },
+      "success": "Map created successfully",
+      "submit": "Create Map"
     }
   },
   "errors": {
@@ -64,7 +86,7 @@
     },
     "image": {
       "file-invalid-type": "Invalid file type. Please upload an image (PNG, JPG).",
-      "tooLarge": "File is too large. Maximum size is 5MB."
+      "file-too-large": "File is too large. Maximum size is 5MB."
     },
     "email": {
       "invalid": "Invalid email address"
@@ -78,6 +100,9 @@
     "gameId": {
       "required": "Game is required"
     },
+    "mapId": {
+      "required": "Map is required"
+    },
     "content": {
       "required": "Step content cannot be empty"
     },
@@ -90,11 +115,17 @@
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
     },
-    "createGuide": {}
+    "createGuide": {},
+    "createMap": {
+      "CONFLICT": "A map with this name already exists"
+    }
   },
   "header": {
     "title": "Zombies Wiki",
     "home": "Home",
     "createGame": "Create Game"
+  },
+  "maps": {
+    "title": "{game}: {map}"
   }
 }

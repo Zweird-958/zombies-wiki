@@ -1,8 +1,8 @@
 import { relations } from "drizzle-orm"
 import { integer, pgTable, text, uuid } from "drizzle-orm/pg-core"
 
-import { guides } from "@/db/schemas/guides"
 import { images } from "@/db/schemas/images"
+import { maps } from "@/db/schemas/maps"
 import { commonColumns } from "@/db/utils"
 
 export const games = pgTable("games", {
@@ -15,6 +15,10 @@ export const games = pgTable("games", {
   releaseYear: integer("release_year").notNull(),
 })
 
-export const gameRelations = relations(games, ({ many }) => ({
-  guides: many(guides),
+export const gameRelations = relations(games, ({ many, one }) => ({
+  maps: many(maps),
+  image: one(images, {
+    fields: [games.imageId],
+    references: [images.id],
+  }),
 }))

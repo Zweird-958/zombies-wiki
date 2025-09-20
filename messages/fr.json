@@ -35,10 +35,14 @@
         "label": "Nom",
         "placeholder": "Entrez le nom du guide"
       },
-      "game": {
-        "label": "Jeu",
-        "placeholder": "Sélectionnez un jeu",
-        "empty": "Aucun jeu trouvé."
+      "map": {
+        "label": "Carte",
+        "placeholder": "Sélectionnez une carte",
+        "empty": "Aucune carte trouvée."
+      },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
       },
       "success": "Guide créé avec succès",
       "submit": "Créer un guide"
@@ -53,6 +57,24 @@
         "label": "Contenu de l'étape"
       },
       "submit": "Ajouter une étape"
+    },
+    "createMap": {
+      "title": "Créer une carte",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom de la carte"
+      },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
+      "game": {
+        "label": "Jeu",
+        "placeholder": "Sélectionnez un jeu",
+        "empty": "Aucun jeu trouvé."
+      },
+      "success": "Carte créée avec succès",
+      "submit": "Créer une carte"
     }
   },
   "errors": {
@@ -64,7 +86,7 @@
     },
     "image": {
       "file-invalid-type": "Type de fichier invalide. Veuillez télécharger une image (PNG, JPG).",
-      "tooLarge": "Le fichier est trop volumineux. La taille maximale est de 5 Mo."
+      "file-too-large": "Le fichier est trop volumineux. La taille maximale est de 5 Mo."
     },
     "email": {
       "invalid": "Adresse email invalide"
@@ -78,6 +100,9 @@
     "gameId": {
       "required": "Le jeu est requis"
     },
+    "mapId": {
+      "required": "La carte est requise"
+    },
     "content": {
       "required": "Le contenu de l'étape ne peut pas être vide"
     },
@@ -90,11 +115,17 @@
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
     },
-    "createGuide": {}
+    "createGuide": {},
+    "createMap": {
+      "CONFLICT": "Une carte avec ce nom existe déjà"
+    }
   },
   "header": {
     "title": "Zombies Wiki",
     "home": "Accueil",
     "createGame": "Créer un jeu"
+  },
+  "maps": {
+    "title": "{game} : {map}"
   }
 }

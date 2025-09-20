@@ -4,19 +4,13 @@ import { Combobox as BaseCombobox } from "@base-ui-components/react/combobox"
 import { Check, ChevronDown } from "lucide-react"
 import type { ComponentProps } from "react"
 
+import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
 
 export const Combobox = BaseCombobox.Root
 
-export type ComboboxContainerProps = ComponentProps<"div">
-
-export const ComboboxContainer = (props: ComboboxContainerProps) => (
-  <div {...props} />
-)
-
-export type ComboboxTriggerProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.Trigger>,
-  "className"
+export type ComboboxTriggerProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.Trigger>
 >
 
 export const ComboboxTrigger = ({
@@ -37,9 +31,8 @@ export const ComboboxTrigger = ({
   </BaseCombobox.Trigger>
 )
 
-export type ComboboxInputProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.Input>,
-  "className"
+export type ComboboxInputProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.Input>
 >
 
 export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => (
@@ -52,9 +45,8 @@ export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => (
   />
 )
 
-export type ComboboxSeparatorProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.Separator>,
-  "className"
+export type ComboboxSeparatorProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.Separator>
 >
 
 export const ComboboxSeparator = ({
@@ -70,9 +62,8 @@ export const ComboboxSeparator = ({
   />
 )
 
-export type ComboboxPopupProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.Popup>,
-  "className"
+export type ComboboxPopupProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.Popup>
 >
 
 export const ComboboxPopup = ({
@@ -95,18 +86,16 @@ export const ComboboxPopup = ({
   </BaseCombobox.Portal>
 )
 
-export type ComboboxListProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.List>,
-  "className"
+export type ComboboxListProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.List>
 >
 
 export const ComboboxList = (props: ComboboxListProps) => (
   <BaseCombobox.List {...props} />
 )
 
-export type ComboboxItemProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.Item>,
-  "className"
+export type ComboboxItemProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.Item>
 >
 
 export const ComboboxItem = ({
@@ -128,15 +117,32 @@ export const ComboboxItem = ({
   </BaseCombobox.Item>
 )
 
-export type ComboboxEmptyProps = { className?: string } & Omit<
-  ComponentProps<typeof BaseCombobox.Empty>,
-  "className"
+export type ComboboxEmptyProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.Empty>
 >
 
 export const ComboboxEmpty = ({ className, ...props }: ComboboxEmptyProps) => (
   <BaseCombobox.Empty
     className={cn("cursor-not-allowed px-2 select-none", className)}
     data-slot="empty"
+    {...props}
+  />
+)
+
+export type ComboboxGroupProps = ComponentProps<typeof BaseCombobox.Group>
+
+export const ComboboxGroup = BaseCombobox.Group
+
+export type ComboboxGroupLabelProps = OmitClassName<
+  ComponentProps<typeof BaseCombobox.GroupLabel>
+>
+
+export const ComboboxGroupLabel = ({
+  className,
+  ...props
+}: ComboboxGroupLabelProps) => (
+  <BaseCombobox.GroupLabel
+    className={cn("px-0.5 py-2", className)}
     {...props}
   />
 )

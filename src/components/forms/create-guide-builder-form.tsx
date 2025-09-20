@@ -22,12 +22,12 @@ const CreateGuideBuilderForm = () => {
   const t = useTranslations("forms.createGuide")
   const errorsT = useTranslations("errors")
   const { onError } = useError("createGuide")
-  const defaultGame = useSearchParams().get("game")
+  const defaultMap = useSearchParams().get("map")
 
   const form = useForm({
     defaultValues: {
       name: "",
-      gameId: defaultGame ?? "",
+      mapId: defaultMap ?? "",
       steps: [],
     },
     resolver: zodResolver(CreateGuideSchema),
@@ -47,7 +47,7 @@ const CreateGuideBuilderForm = () => {
   })
 
   const onSubmit = (data: CreateGuide) => {
-    createGuide({ json: data })
+    createGuide({ form: { ...data, steps: JSON.stringify(data.steps) } })
   }
 
   useEffect(() => {

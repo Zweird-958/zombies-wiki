@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker"
 import { beforeAll, describe, expect, it } from "vitest"
 
 import { isGameExists } from "@/api/utils/games/is-game-exists"
-import { normalizeGameName } from "@/api/utils/games/normalize-game-name"
+import { normalizeName } from "@/api/utils/normalize-name"
 import { db } from "@/db"
 import { games, images } from "@/db/schemas"
 
@@ -10,7 +10,7 @@ const name = faker.word.words({ count: { min: 1, max: 5 } })
 
 const data: Omit<typeof games.$inferInsert, "imageId"> = {
   name,
-  normalizedName: normalizeGameName(name),
+  normalizedName: normalizeName(name),
   releaseYear: faker.number.int({ min: 1970, max: 2050 }),
 }
 

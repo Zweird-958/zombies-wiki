@@ -2,10 +2,14 @@
 
 import { useTranslations } from "next-intl"
 
-import GamesCombobox from "@/components/guides/games-combobox"
+import MapsCombobox from "@/components/guides/maps-combobox"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FormField, FormFieldInput } from "@/components/ui/form"
+import {
+  FormField,
+  FormFieldInput,
+  ImageInputField,
+} from "@/components/ui/form"
 
 type Props = {
   isPending: boolean
@@ -27,10 +31,16 @@ const CreateGuideForm = ({ isPending }: Props) => {
         />
 
         <FormField
-          name="gameId"
+          name="mapId"
           render={({ field: { value, onChange } }) => (
-            <GamesCombobox value={value as string} onValueChange={onChange} />
+            <MapsCombobox value={value as string} onValueChange={onChange} />
           )}
+        />
+
+        <ImageInputField
+          label={t("image.label")}
+          description={t("image.description")}
+          name="image"
         />
 
         <Button type="submit" className="w-full" isPending={isPending}>

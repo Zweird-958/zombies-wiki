@@ -1,14 +1,17 @@
 import { client } from "@/api/client"
-import GamesList from "@/components/games/games-list"
+import GameCard from "@/components/games/game-card"
+import ItemsLayout from "@/components/items/items-layout"
 
 const Home = async () => {
-  const result = await client.games.$get()
+  const result = await client.games.$get({ query: {} })
   const games = (await result.json()).result
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-8">
-      <GamesList games={games} />
-    </div>
+    <ItemsLayout>
+      {games.map((game) => (
+        <GameCard key={game.id} {...game} />
+      ))}
+    </ItemsLayout>
   )
 }
 

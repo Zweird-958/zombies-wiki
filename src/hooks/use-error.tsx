@@ -21,7 +21,7 @@ export const useError = (key: string) => {
       return
     }
 
-    toast(t(code))
+    toast.error(t(code))
   }
 
   return { onError }

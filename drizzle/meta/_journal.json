@@ -50,6 +50,27 @@
       "when": 1758191129556,
       "tag": "0006_real_iceman",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1758283897936,
+      "tag": "0007_fantastic_giant_girl",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1758290917720,
+      "tag": "0008_confused_enchantress",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1758360069934,
+      "tag": "0009_hard_anthem",
+      "breakpoints": true
     }
   ]
 }
