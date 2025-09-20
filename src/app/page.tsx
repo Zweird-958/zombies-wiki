@@ -2,7 +2,7 @@ import { client } from "@/api/client"
 import GamesList from "@/components/games/games-list"
 
 const Home = async () => {
-  const result = await client.games.$get()
+  const result = await client.games.$get({ query: {} })
   const games = (await result.json()).result
 
   return (
