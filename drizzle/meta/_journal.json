@@ -71,6 +71,13 @@
       "when": 1758360069934,
       "tag": "0009_hard_anthem",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1758552290832,
+      "tag": "0010_good_diamondback",
+      "breakpoints": true
     }
   ]
 }

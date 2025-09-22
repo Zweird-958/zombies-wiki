@@ -10,17 +10,17 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormField, FormFieldInput } from "@/components/ui/form"
 import { CreateStepSchema } from "@/schemas/steps"
-import type { CreateStep } from "@/types/steps"
+import type { CreateStep, StepParagraph } from "@/types/steps"
 
 type Props = {
-  addStep: (data: { content: string; name: string }) => void
+  addStep: (data: { name: string; content: StepParagraph[] }) => void
 }
 
 const CreateStepForm = ({ addStep }: Props) => {
   const t = useTranslations("forms.createStep")
   const { editor } = useEditor()
   const stepForm = useForm({
-    defaultValues: { name: "", content: "" },
+    defaultValues: { name: "", content: [] },
     resolver: zodResolver(CreateStepSchema),
   })
 
@@ -44,7 +44,9 @@ const CreateStepForm = ({ addStep }: Props) => {
           />
           <FormField
             name="content"
-            render={({ field }) => <StepEditorInput field={field} />}
+            render={({ field }) => (
+              <StepEditorInput onChange={field.onChange} />
+            )}
           />
           <Button className="w-full" onClick={stepForm.handleSubmit(onSubmit)}>
             {t("submit")}
