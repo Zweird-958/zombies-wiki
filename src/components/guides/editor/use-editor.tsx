@@ -8,12 +8,14 @@ import {
 import StarterKit from "@tiptap/starter-kit"
 import { type PropsWithChildren, createContext, useContext } from "react"
 
+import type { StepParagraph } from "@/types/steps"
+
 type EditorContextValue = {
   editor: Editor
   editorState: {
     bold: boolean
     underline: boolean
-    content: string
+    content: StepParagraph[]
   }
 }
 
@@ -31,7 +33,7 @@ export const EditorProvider = ({ children }: PropsWithChildren) => {
     selector: (ctx) => ({
       bold: ctx.editor?.isActive("bold") ?? false,
       underline: ctx.editor?.isActive("underline") ?? false,
-      content: ctx.editor?.getHTML() ?? "",
+      content: (ctx.editor?.getJSON().content ?? []) as StepParagraph[],
     }),
   })
 

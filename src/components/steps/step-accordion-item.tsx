@@ -4,11 +4,13 @@ import {
   AccordionPanel,
   AccordionTrigger,
 } from "@/components/ui/accordion/accordion"
+import type { StepParagraph } from "@/types/steps"
+import { renderStep } from "@/utils/render-step"
 
 type Props = {
   id: string
   name: string
-  content: string
+  content: StepParagraph[]
 }
 
 const StepAccordionItem = ({ id, name, content }: Props) => (
@@ -17,7 +19,7 @@ const StepAccordionItem = ({ id, name, content }: Props) => (
       <AccordionTrigger>{name}</AccordionTrigger>
     </AccordionHeader>
     <AccordionPanel>
-      <div className="p-2" dangerouslySetInnerHTML={{ __html: content }} />
+      <div className="p-2">{renderStep(content, id)}</div>
     </AccordionPanel>
   </AccordionItem>
 )

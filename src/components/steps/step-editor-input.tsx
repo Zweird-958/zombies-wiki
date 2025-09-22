@@ -3,24 +3,24 @@
 import { EditorContent } from "@tiptap/react"
 import { useTranslations } from "next-intl"
 import { useEffect } from "react"
-import type { ControllerRenderProps, FieldValues } from "react-hook-form"
 
 import EditorToolbar from "@/components/guides/editor/editor-toolbar"
 import { useEditor } from "@/components/guides/editor/use-editor"
 import { FormError, FormItem, FormLabel } from "@/components/ui/form"
 import { ScrollArea } from "@/components/ui/scrollbar"
+import type { StepParagraph } from "@/types/steps"
 
 type Props = {
-  field: ControllerRenderProps<FieldValues, "content">
+  onChange: (value: StepParagraph[]) => void
 }
 
-const StepEditorInput = ({ field }: Props) => {
+const StepEditorInput = ({ onChange }: Props) => {
   const { editor, editorState } = useEditor()
   const t = useTranslations("forms.createStep")
 
   useEffect(() => {
-    field.onChange(editorState.content)
-  }, [editorState.content, field])
+    onChange(editorState.content)
+  }, [editorState.content, onChange])
 
   return (
     <FormItem>
