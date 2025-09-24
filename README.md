@@ -29,6 +29,14 @@ After creating the bucket, you can access the MinIO dashboard at [http://localho
 
 The username and password are the same as the ones in the `.env` file (`MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD`).
 
+### Initialize the database
+
+```bash
+pnpm db:migrate
+
+pnpm db:seed
+```
+
 ### Start project
 
 ```bash
