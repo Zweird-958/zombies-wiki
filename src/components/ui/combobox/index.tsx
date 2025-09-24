@@ -105,7 +105,7 @@ export const ComboboxItem = ({
 }: ComboboxItemProps) => (
   <BaseCombobox.Item
     className={cn(
-      "data-[highlighted]:bg-accent data-[highlighted]:text-popover-foreground text-muted-foreground box-border flex cursor-default items-center gap-2 rounded-md p-2 outline-none select-none [&_svg]:size-4",
+      "highlighted:bg-accent highlighted:text-popover-foreground text-muted-foreground box-border flex cursor-default items-center gap-2 rounded-md p-2 outline-none select-none [&_svg]:size-4",
       className,
     )}
     {...props}

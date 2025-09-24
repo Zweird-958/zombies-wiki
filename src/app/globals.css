@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant pressed (&:is([data-pressed]));
+@custom-variant highlighted (&:is([data-highlighted]));
 
 :root {
   --background: oklch(1 0 0);
