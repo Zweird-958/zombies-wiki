@@ -31,6 +31,8 @@ export const button = tv({
     variant: {
       outline: "border",
       solid: "",
+      ghost:
+        "bg-transparent hover:bg-accent hover:text-accent-foreground focus:ring-0 focus:ring-offset-0",
     },
   },
   compoundVariants: [
