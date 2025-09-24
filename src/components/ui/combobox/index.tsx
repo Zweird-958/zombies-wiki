@@ -75,7 +75,7 @@ export const ComboboxPopup = ({
     <BaseCombobox.Positioner className="outline-0" sideOffset={4}>
       <BaseCombobox.Popup
         className={cn(
-          "bg-popover text-popover-foreground box-border max-h-[min(var(--available-height),23rem)] w-[var(--anchor-width)] max-w-[var(--available-width)] origin-[var(--transform-origin)] scroll-py-2 overflow-y-auto overscroll-contain rounded-md px-2 py-2 transition duration-100 ease-in-out data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 [&[data-empty]_[data-slot=empty]]:py-2",
+          "bg-popover text-popover-foreground border-border box-border max-h-[min(var(--available-height),23rem)] w-[var(--anchor-width)] max-w-[var(--available-width)] origin-[var(--transform-origin)] scroll-py-2 overflow-y-auto overscroll-contain rounded-md border px-2 py-2 transition duration-100 ease-in-out data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 [&[data-empty]_[data-slot=empty]]:py-2",
           className,
         )}
         {...props}
@@ -105,7 +105,7 @@ export const ComboboxItem = ({
 }: ComboboxItemProps) => (
   <BaseCombobox.Item
     className={cn(
-      "data-[highlighted]:bg-popover-highlighted data-[highlighted]:text-popover-foreground text-muted-foreground box-border flex cursor-default items-center gap-2 rounded-md p-2 outline-none select-none [&_svg]:size-4",
+      "data-[highlighted]:bg-accent data-[highlighted]:text-popover-foreground text-muted-foreground box-border flex cursor-default items-center gap-2 rounded-md p-2 outline-none select-none [&_svg]:size-4",
       className,
     )}
     {...props}
