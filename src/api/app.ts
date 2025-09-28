@@ -4,6 +4,7 @@ import { handle } from "hono/vercel"
 
 import { gamesApp } from "@/api/routes/games"
 import { guidesApp } from "@/api/routes/guides"
+import { imagesApp } from "@/api/routes/images"
 import { mapsApp } from "@/api/routes/maps"
 import { contextVariables, fail, send } from "@/api/utils/context"
 import { auth } from "@/utils/auth/auth"
@@ -27,6 +28,7 @@ const routes = app
   .route("/", gamesApp)
   .route("/", guidesApp)
   .route("/", mapsApp)
+  .route("/", imagesApp)
 
 app.onError((error, { var: { fail: ctxFail } }) => {
   // eslint-disable-next-line no-console

@@ -2,14 +2,20 @@ import { Bold, Underline } from "lucide-react"
 
 import { useEditor } from "@/components/guides/editor/use-editor"
 import { Toggle } from "@/components/ui/toggle"
+import type { MarkType } from "@/types/steps"
 
 type Props = {
-  option: "bold" | "underline"
+  option: Exclude<MarkType, "image">
+}
+
+const icons: Record<Exclude<MarkType, "image">, React.ElementType> = {
+  bold: Bold,
+  underline: Underline,
 }
 
 const OptionButton = ({ option }: Props) => {
   const { editor } = useEditor()
-  const Icon = option === "bold" ? Bold : Underline
+  const Icon = icons[option]
 
   const onClick = () => {
     if (option === "bold") {
@@ -22,7 +28,7 @@ const OptionButton = ({ option }: Props) => {
   }
 
   return (
-    <Toggle onClick={onClick}>
+    <Toggle onClick={onClick} pressed={editor.isActive(option)}>
       <Icon />
     </Toggle>
   )

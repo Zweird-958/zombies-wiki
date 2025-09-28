@@ -56,6 +56,10 @@
       "content": {
         "label": "Step content"
       },
+      "image": {
+        "title": "Select an image",
+        "empty": "No images available"
+      },
       "submit": "Add Step"
     },
     "createMap": {

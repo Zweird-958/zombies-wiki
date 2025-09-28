@@ -29,7 +29,7 @@ const StepEditorInput = ({ onChange }: Props) => {
       <ScrollArea className="[&_[data-slot=scroll-area-content]]:h-full [&_[data-slot=scroll-area-content]]:p-0">
         <EditorContent
           editor={editor}
-          className="h-full *:h-full *:px-4 *:py-3 *:**:last:pb-3 *:focus:outline-none"
+          className="image:text-image h-full *:h-full *:px-4 *:py-3 *:focus:outline-none *:[&>p]:last:pb-3"
         />
       </ScrollArea>
       <FormError />
