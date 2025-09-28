@@ -4,14 +4,14 @@ import { name } from "@/schemas/common"
 
 export const markType = z.enum(["bold", "underline", "image"])
 
-export const imageMark = z.object({
+const imageMark = z.object({
   type: z.literal("image"),
   attrs: z.object({
     imageUrl: z.string(),
   }),
 })
 
-export const commonMark = z.object({
+const commonMark = z.object({
   type: z.enum(markType.options.filter((o) => o !== "image")),
 })
 

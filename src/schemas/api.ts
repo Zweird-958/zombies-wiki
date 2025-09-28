@@ -4,7 +4,7 @@ import { normalizeStep } from "@/api/utils/steps/normalize-step"
 import { CreateGuideSchema } from "@/schemas/guides"
 import { CreateStepSchema } from "@/schemas/steps"
 
-export const stepsStringify = z.preprocess((val) => {
+const stepsStringify = z.preprocess((val) => {
   if (typeof val === "string") {
     const steps = JSON.parse(val) as z.infer<typeof CreateStepSchema>[]
 
