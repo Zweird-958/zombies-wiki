@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 @custom-variant pressed (&:is([data-pressed]));
+@custom-variant image (& [data-slot="image"]);
+@custom-variant starting-style (&:is([data-starting-style]));
+@custom-variant ending-style (&:is([data-ending-style]));
+@custom-variant svg-not-size (& svg:not([class*="size-"]));
+@custom-variant svg (& svg);
 
 :root {
   --background: oklch(1 0 0);
@@ -36,6 +41,8 @@
 
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+
+  --image: oklch(0.7 0.1973 61.41);
 
   isolation: isolate;
 }
@@ -74,6 +81,8 @@
 
   --color-accent: var(--accent);
 
+  --color-image: var(--image);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -108,4 +117,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.react-renderer {
+  @apply w-fit;
 }

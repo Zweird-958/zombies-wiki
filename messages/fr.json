@@ -56,6 +56,10 @@
       "content": {
         "label": "Contenu de l'étape"
       },
+      "image": {
+        "title": "Sélectionner une image",
+        "empty": "Aucune image disponible"
+      },
       "submit": "Ajouter une étape"
     },
     "createMap": {

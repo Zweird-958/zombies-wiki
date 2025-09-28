@@ -3,10 +3,12 @@ import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
+import { formatGuide } from "@/api/utils/guides/format-guide"
 import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
 import { guides, steps as stepsTable } from "@/db/schemas"
-import { CreateGuideFormDataSchema, GetGuideSchema } from "@/schemas/guides"
+import { CreateGuideFormDataSchema } from "@/schemas/api"
+import { GetGuideSchema } from "@/schemas/guides"
 
 export const guidesApp = new Hono()
   .basePath("/guides")
@@ -74,6 +76,6 @@ export const guidesApp = new Hono()
         return fail("NOT_FOUND")
       }
 
-      return send(guide)
+      return send(formatGuide(guide))
     },
   )

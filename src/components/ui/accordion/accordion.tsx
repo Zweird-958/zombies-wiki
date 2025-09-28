@@ -72,7 +72,7 @@ export const AccordionPanel = ({
 }: AccordionPanelProps) => (
   <BaseAccordion.Panel
     className={cn(
-      "box-border h-[var(--accordion-panel-height)] overflow-hidden text-base leading-6 transition-[height] duration-500 ease-out data-[ending-style]:h-0 data-[starting-style]:h-0",
+      "ending-style:h-0 starting-style:h-0 box-border h-[var(--accordion-panel-height)] overflow-hidden text-base leading-6 transition-[height] duration-500 ease-out",
       className,
     )}
     {...props}

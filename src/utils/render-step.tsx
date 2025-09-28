@@ -1,5 +1,6 @@
 import type { JSX } from "react"
 
+import ImageDialog from "@/components/steps/image-dialog"
 import type { StepContent, StepParagraph } from "@/types/steps"
 
 type Options = {
@@ -27,7 +28,17 @@ const getContent = (
       continue
     }
 
-    result = <u key={`${commonKey}-underline`}>{result}</u>
+    if (mark.type === "underline") {
+      result = <u key={`${commonKey}-underline`}>{result}</u>
+    }
+
+    if (mark.type === "image") {
+      result = (
+        <ImageDialog key={`${commonKey}-image`} imageUrl={mark.attrs.imageUrl}>
+          {result}
+        </ImageDialog>
+      )
+    }
   }
 
   return result
