@@ -28,7 +28,7 @@ type Props = {
   onValueChange: (value: string) => void
 }
 
-const MapsCombobox = (props: Props) => {
+const MapsCombobox = ({ value, ...props }: Props) => {
   const t = useTranslations("forms.createGuide")
 
   const { data, isPending } = useQuery(
@@ -61,6 +61,7 @@ const MapsCombobox = (props: Props) => {
         itemToStringLabel={(item?: Item) =>
           item ? item.label : t("map.placeholder")
         }
+        value={isPending ? "" : value}
         {...props}
       >
         <FormLabel>{t("map.label")}</FormLabel>
