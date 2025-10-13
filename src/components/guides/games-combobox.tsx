@@ -21,7 +21,7 @@ type Props = {
   onValueChange: (value: string) => void
 }
 
-const GamesCombobox = (props: Props) => {
+const GamesCombobox = ({ value, ...props }: Props) => {
   const t = useTranslations("forms.createMap")
 
   const { data, isPending } = useQuery(client.games.$get, {
@@ -46,7 +46,13 @@ const GamesCombobox = (props: Props) => {
 
   return (
     <FormItem>
-      <Combobox items={items} defaultValue="" disabled={isPending} {...props}>
+      <Combobox
+        items={items}
+        defaultValue=""
+        disabled={isPending}
+        value={isPending ? "" : value}
+        {...props}
+      >
         <FormLabel>{t("game.label")}</FormLabel>
         <ComboboxTrigger />
         <FormError />
