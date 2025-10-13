@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq, sql } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
@@ -7,10 +7,9 @@ import { formatGame, formatSingleGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { normalizeName } from "@/api/utils/normalize-name"
 import { uploadImage } from "@/api/utils/upload-image"
-import { images, maps } from "@/db/schemas"
 import { games } from "@/db/schemas/games"
+import { gamesWithMaps } from "@/db/views"
 import { CreateGameSchema, GetGamesQueryParamsSchema } from "@/schemas/games"
-import type { UnformattedMap } from "@/types/maps"
 
 export const gamesApp = new Hono()
   .basePath("/games")
@@ -49,37 +48,9 @@ export const gamesApp = new Hono()
       const { maps: withMaps } = req.valid("query")
 
       if (withMaps) {
-        const allGames = await db
-          .select({
-            id: games.id,
-            name: games.name,
-            normalizedName: games.normalizedName,
-            image: {
-              url: images.url,
-            },
-            maps: sql`
-          json_agg(
-            json_build_object(
-              'id', ${maps.id},
-              'name', ${maps.name},
-              'normalizedName', ${maps.normalizedName}
-            )
-          )
-        `.as("maps"),
-          })
-          .from(games)
-          .innerJoin(maps, eq(maps.gameId, games.id))
-          .innerJoin(images, eq(images.id, games.imageId))
-          .groupBy(games.id, games.name, images.url)
+        const allGames = await db.select().from(gamesWithMaps)
 
-        const typedGames = allGames as unknown as (Omit<
-          (typeof allGames)[number],
-          "maps"
-        > & {
-          maps: UnformattedMap[]
-        })[]
-
-        return send(typedGames.map(formatGame))
+        return send(allGames.map(formatGame))
       }
 
       const gamesResult = await db.query.games.findMany({
