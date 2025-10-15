@@ -20,7 +20,8 @@ export const Button = ({
 }: ButtonProps) => (
   <button
     className={cn(button({ color, size, radius, variant, className }))}
-    disabled={isPending ?? disabled}
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    disabled={isPending || disabled}
     {...props}
   >
     {isPending && <LoaderCircleIcon className="animate-spin" />}
