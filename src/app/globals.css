@@ -4,6 +4,7 @@
 @custom-variant image (& [data-slot="image"]);
 @custom-variant starting-style (&:is([data-starting-style]));
 @custom-variant ending-style (&:is([data-ending-style]));
+@custom-variant focused (&:is([data-focused]));
 
 @custom-variant svg-not-size (& svg:not([class*="size-"]));
 @custom-variant svg (& svg);
@@ -82,6 +83,7 @@
   --color-popover-foreground: var(--popover-foreground);
 
   --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
   --color-image: var(--image);
 
