@@ -1,33 +1,84 @@
 import { NumberField as BaseNumberField } from "@base-ui-components/react/number-field"
-import type { ComponentProps } from "react"
+import { Minus, MoveHorizontal, MoveVertical, Plus } from "lucide-react"
 
-import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
 
-export type NumberFieldProps = OmitClassName<
-  ComponentProps<typeof BaseNumberField.Root>
->
+export type NumberFieldProps = BaseNumberField.Root.Props
 
 export const NumberField = ({ className, ...props }: NumberFieldProps) => (
   <BaseNumberField.Root
     className={cn("flex flex-col gap-2", className)}
+    data-slot="number-field"
     {...props}
   />
 )
 
-export type NumberFieldInputProps = OmitClassName<
-  ComponentProps<typeof BaseNumberField.Input>
->
+export type NumberFieldInputProps = {
+  hideActions?: boolean
+  onDecrement?: () => void
+  onIncrement?: () => void
+} & BaseNumberField.Input.Props
 
 export const NumberFieldInput = ({
   className,
+  hideActions,
+  onDecrement,
+  onIncrement,
   ...props
-}: NumberFieldInputProps) => (
-  <BaseNumberField.Input
-    className={cn(
-      "border-input rounded-md border px-2 py-1 focus:ring focus:outline-none",
-      className,
-    )}
+}: NumberFieldInputProps) => {
+  if (hideActions) {
+    return (
+      <BaseNumberField.Input
+        className={cn(
+          "border-input rounded-md border px-2 py-1 focus:ring focus:outline-none",
+          className,
+        )}
+        data-slot="number-field-input"
+        {...props}
+      />
+    )
+  }
+
+  return (
+    <BaseNumberField.Group className="button:bg-accent button:border-input button:size-12 svg-not-size:size-4 button:border button:p2 button:flex button:items-center button:justify-center button:text-accent-foreground flex">
+      <BaseNumberField.Decrement className="rounded-l-md" onClick={onDecrement}>
+        <Minus />
+      </BaseNumberField.Decrement>
+      <BaseNumberField.Input
+        className={cn(
+          "border-input flex-1 border-t border-b px-2 py-1 text-center tabular-nums focus:outline-none",
+          className,
+        )}
+        data-slot="number-field-input"
+        {...props}
+      />
+      <BaseNumberField.Increment className="rounded-r-md" onClick={onIncrement}>
+        <Plus />
+      </BaseNumberField.Increment>
+    </BaseNumberField.Group>
+  )
+}
+
+export type NumberFieldScrubAreaProps = BaseNumberField.ScrubArea.Props
+
+export const NumberFieldScrubArea = ({
+  children,
+  className,
+  direction = "horizontal",
+  ...props
+}: NumberFieldScrubAreaProps) => (
+  <BaseNumberField.ScrubArea
+    className={cn("cursor-ew-resize", className)}
+    direction={direction}
+    data-slot="number-field-scrub-area"
     {...props}
-  />
+  >
+    {children}
+    <BaseNumberField.ScrubAreaCursor
+      data-slot="number-field-scrub-area-cursor"
+      className="text-input size-4"
+    >
+      {direction === "horizontal" ? <MoveHorizontal /> : <MoveVertical />}
+    </BaseNumberField.ScrubAreaCursor>
+  </BaseNumberField.ScrubArea>
 )
