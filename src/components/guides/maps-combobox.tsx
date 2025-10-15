@@ -39,8 +39,17 @@ const MapsCombobox = ({ value, ...props }: Props) => {
   )
 
   const items = useMemo<GroupItems[]>(() => {
+    const commonItems = [
+      {
+        label: "",
+        value: "",
+        items: [{ label: t("map.placeholder"), value: "" }],
+      },
+    ]
+
     if (data) {
       return [
+        ...commonItems,
         ...data.result.map((game) => ({
           label: game.name,
           value: game.id,
@@ -50,17 +59,14 @@ const MapsCombobox = ({ value, ...props }: Props) => {
       ]
     }
 
-    return []
-  }, [data])
+    return commonItems
+  }, [data, t])
 
   return (
     <FormItem>
       <Combobox
         items={items}
         disabled={isPending}
-        itemToStringLabel={(item?: Item) =>
-          item ? item.label : t("map.placeholder")
-        }
         value={isPending ? "" : value}
         {...props}
       >
@@ -76,18 +82,20 @@ const MapsCombobox = ({ value, ...props }: Props) => {
           <ComboboxSeparator />
           <ComboboxEmpty>{t("map.empty")}</ComboboxEmpty>
           <ComboboxList>
-            {(item: GroupItems) => (
-              <ComboboxGroup key={item.value} items={item.items}>
-                <ComboboxGroupLabel className="px-0.5 py-2">
-                  {item.label}
-                </ComboboxGroupLabel>
-                {item.items.map((map) => (
-                  <ComboboxItem key={map.value} value={map.value}>
-                    {map.label}
-                  </ComboboxItem>
-                ))}
-              </ComboboxGroup>
-            )}
+            {(item: GroupItems) =>
+              item.value && (
+                <ComboboxGroup key={item.value} items={item.items}>
+                  <ComboboxGroupLabel className="px-0.5 py-2">
+                    {item.label}
+                  </ComboboxGroupLabel>
+                  {item.items.map((map) => (
+                    <ComboboxItem key={map.value} value={map.value}>
+                      {map.label}
+                    </ComboboxItem>
+                  ))}
+                </ComboboxGroup>
+              )
+            }
           </ComboboxList>
         </ComboboxPopup>
       </Combobox>
