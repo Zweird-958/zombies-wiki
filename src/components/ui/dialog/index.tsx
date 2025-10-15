@@ -4,23 +4,24 @@ import type { ComponentProps } from "react"
 
 import { cn } from "@/utils/cn"
 
-export type DialogProps = ComponentProps<typeof BaseDialog.Root>
+export type DialogProps = BaseDialog.Root.Props
 
 export const Dialog = BaseDialog.Root
 
-export type DialogTriggerProps = ComponentProps<typeof BaseDialog.Trigger>
+export type DialogTriggerProps = BaseDialog.Trigger.Props
 
 export const DialogTrigger = BaseDialog.Trigger
 
-export type DialogPopupProps = ComponentProps<typeof BaseDialog.Popup>
-
-export type DialogCloseProps = ComponentProps<typeof BaseDialog.Close>
+export type DialogCloseProps = BaseDialog.Close.Props
 
 export const DialogClose = BaseDialog.Close
+
+export type DialogPopupProps = { closeText?: string } & BaseDialog.Popup.Props
 
 export const DialogPopup = ({
   className,
   children,
+  closeText = "Close",
   ...props
 }: DialogPopupProps) => (
   <BaseDialog.Portal>
@@ -43,7 +44,7 @@ export const DialogPopup = ({
         className="svg-not-size:size-4 svg:pointer-events-none svg:shrink-0 absolute top-4 right-4 rounded-full opacity-70 outline-0 transition-opacity hover:opacity-100 disabled:pointer-events-none"
       >
         <X />
-        <span className="sr-only">Close</span>
+        <span className="sr-only">{closeText}</span>
       </BaseDialog.Close>
     </BaseDialog.Popup>
   </BaseDialog.Portal>
@@ -59,7 +60,7 @@ export const DialogContent = ({ className, ...props }: DialogContentProps) => (
   />
 )
 
-export type DialogTitleProps = ComponentProps<typeof BaseDialog.Title>
+export type DialogTitleProps = BaseDialog.Title.Props
 
 export const DialogTitle = ({ className, ...props }: DialogTitleProps) => (
   <BaseDialog.Title
@@ -69,9 +70,7 @@ export const DialogTitle = ({ className, ...props }: DialogTitleProps) => (
   />
 )
 
-export type DialogDescriptionProps = ComponentProps<
-  typeof BaseDialog.Description
->
+export type DialogDescriptionProps = BaseDialog.Description.Props
 
 export const DialogDescription = ({
   className,

@@ -1,13 +1,9 @@
 import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion"
 import { ChevronDown } from "lucide-react"
-import type { ComponentProps } from "react"
 
-import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
 
-export type AccordionProps = OmitClassName<
-  ComponentProps<typeof BaseAccordion.Root>
->
+export type AccordionProps = BaseAccordion.Root.Props
 
 export const Accordion = ({ className, ...props }: AccordionProps) => (
   <BaseAccordion.Root
@@ -19,9 +15,7 @@ export const Accordion = ({ className, ...props }: AccordionProps) => (
   />
 )
 
-export type AccordionItemProps = OmitClassName<
-  ComponentProps<typeof BaseAccordion.Item>
->
+export type AccordionItemProps = BaseAccordion.Item.Props
 
 export const AccordionItem = ({ className, ...props }: AccordionItemProps) => (
   <BaseAccordion.Item
@@ -30,9 +24,7 @@ export const AccordionItem = ({ className, ...props }: AccordionItemProps) => (
   />
 )
 
-export type AccordionHeaderProps = OmitClassName<
-  ComponentProps<typeof BaseAccordion.Header>
->
+export type AccordionHeaderProps = BaseAccordion.Header.Props
 
 export const AccordionHeader = ({
   className,
@@ -41,9 +33,7 @@ export const AccordionHeader = ({
   <BaseAccordion.Header className={cn("m-0", className)} {...props} />
 )
 
-export type AccordionTriggerProps = OmitClassName<
-  ComponentProps<typeof BaseAccordion.Trigger>
->
+export type AccordionTriggerProps = BaseAccordion.Trigger.Props
 
 export const AccordionTrigger = ({
   className,
@@ -62,9 +52,7 @@ export const AccordionTrigger = ({
   </BaseAccordion.Trigger>
 )
 
-export type AccordionPanelProps = OmitClassName<
-  ComponentProps<typeof BaseAccordion.Panel>
->
+export type AccordionPanelProps = BaseAccordion.Panel.Props
 
 export const AccordionPanel = ({
   className,

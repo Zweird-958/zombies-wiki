@@ -2,10 +2,11 @@ import { type VariantProps, tv } from "tailwind-variants"
 
 export const button = tv({
   base: [
-    "h-fit w-fit px-4 py-2 transition-all active:scale-95 flex items-center justify-center gap-2 text-sm",
+    "h-fit w-fit px-4 py-2 transition-all flex items-center justify-center gap-2 text-sm",
     "disabled:pointer-events-none disabled:opacity-50",
     "focus:outline-none focus:ring-2 focus:ring-offset-2",
-    "[&_svg]:size-4",
+    "active:scale-95",
+    "svg-not-size:size-4",
   ],
   variants: {
     color: {

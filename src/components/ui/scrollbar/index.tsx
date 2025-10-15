@@ -1,12 +1,8 @@
 import { ScrollArea as BaseScrollArea } from "@base-ui-components/react/scroll-area"
-import type { ComponentProps } from "react"
 
-import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
 
-export type ScrollAreaProps = OmitClassName<
-  ComponentProps<typeof BaseScrollArea.Root>
->
+export type ScrollAreaProps = BaseScrollArea.Root.Props
 
 export const ScrollArea = ({
   className,

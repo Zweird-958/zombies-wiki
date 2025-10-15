@@ -15,15 +15,11 @@ export const NumberField = ({ className, ...props }: NumberFieldProps) => (
 
 export type NumberFieldInputProps = {
   hideActions?: boolean
-  onDecrement?: () => void
-  onIncrement?: () => void
 } & BaseNumberField.Input.Props
 
 export const NumberFieldInput = ({
   className,
   hideActions,
-  onDecrement,
-  onIncrement,
   ...props
 }: NumberFieldInputProps) => {
   if (hideActions) {
@@ -41,7 +37,7 @@ export const NumberFieldInput = ({
 
   return (
     <BaseNumberField.Group className="button:border-input button:size-10 svg-not-size:size-4 button:border button:p-2 button:flex button:items-center button:justify-center button:text-accent-foreground button:bg-accent focused:button:ring flex">
-      <BaseNumberField.Decrement className="rounded-l-md" onClick={onDecrement}>
+      <BaseNumberField.Decrement className="rounded-l-md">
         <Minus />
       </BaseNumberField.Decrement>
       <BaseNumberField.Input
@@ -52,7 +48,7 @@ export const NumberFieldInput = ({
         data-slot="number-field-input"
         {...props}
       />
-      <BaseNumberField.Increment className="rounded-r-md" onClick={onIncrement}>
+      <BaseNumberField.Increment className="rounded-r-md">
         <Plus />
       </BaseNumberField.Increment>
     </BaseNumberField.Group>
