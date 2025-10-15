@@ -2,16 +2,18 @@
 
 import { Combobox as BaseCombobox } from "@base-ui-components/react/combobox"
 import { Check, ChevronDown } from "lucide-react"
-import type { ComponentProps } from "react"
 
-import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
+
+export type ComboboxProps<
+  ItemValue,
+  SelectedValue = ItemValue,
+  Multiple extends boolean | undefined = false,
+> = BaseCombobox.Root.Props<ItemValue, SelectedValue, Multiple>
 
 export const Combobox = BaseCombobox.Root
 
-export type ComboboxTriggerProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.Trigger>
->
+export type ComboboxTriggerProps = BaseCombobox.Trigger.Props
 
 export const ComboboxTrigger = ({
   className,
@@ -31,9 +33,7 @@ export const ComboboxTrigger = ({
   </BaseCombobox.Trigger>
 )
 
-export type ComboboxInputProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.Input>
->
+export type ComboboxInputProps = BaseCombobox.Input.Props
 
 export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => (
   <BaseCombobox.Input
@@ -45,9 +45,7 @@ export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => (
   />
 )
 
-export type ComboboxSeparatorProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.Separator>
->
+export type ComboboxSeparatorProps = BaseCombobox.Separator.Props
 
 export const ComboboxSeparator = ({
   className,
@@ -62,9 +60,7 @@ export const ComboboxSeparator = ({
   />
 )
 
-export type ComboboxPopupProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.Popup>
->
+export type ComboboxPopupProps = BaseCombobox.Popup.Props
 
 export const ComboboxPopup = ({
   className,
@@ -86,17 +82,13 @@ export const ComboboxPopup = ({
   </BaseCombobox.Portal>
 )
 
-export type ComboboxListProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.List>
->
+export type ComboboxListProps = BaseCombobox.List.Props
 
 export const ComboboxList = (props: ComboboxListProps) => (
   <BaseCombobox.List {...props} />
 )
 
-export type ComboboxItemProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.Item>
->
+export type ComboboxItemProps = BaseCombobox.Item.Props
 
 export const ComboboxItem = ({
   className,
@@ -117,9 +109,7 @@ export const ComboboxItem = ({
   </BaseCombobox.Item>
 )
 
-export type ComboboxEmptyProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.Empty>
->
+export type ComboboxEmptyProps = BaseCombobox.Empty.Props
 
 export const ComboboxEmpty = ({ className, ...props }: ComboboxEmptyProps) => (
   <BaseCombobox.Empty
@@ -129,13 +119,11 @@ export const ComboboxEmpty = ({ className, ...props }: ComboboxEmptyProps) => (
   />
 )
 
-export type ComboboxGroupProps = ComponentProps<typeof BaseCombobox.Group>
+export type ComboboxGroupProps = BaseCombobox.Group.Props
 
 export const ComboboxGroup = BaseCombobox.Group
 
-export type ComboboxGroupLabelProps = OmitClassName<
-  ComponentProps<typeof BaseCombobox.GroupLabel>
->
+export type ComboboxGroupLabelProps = BaseCombobox.GroupLabel.Props
 
 export const ComboboxGroupLabel = ({
   className,

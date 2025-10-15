@@ -1,12 +1,8 @@
 import { Toolbar as BaseToolBar } from "@base-ui-components/react/toolbar"
-import type { ComponentProps } from "react"
 
-import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
 
-export type ToolbarProps = OmitClassName<
-  ComponentProps<typeof BaseToolBar.Root>
->
+export type ToolbarProps = BaseToolBar.Root.Props
 
 export const Toolbar = ({ className, ...props }: ToolbarProps) => (
   <BaseToolBar.Root
@@ -18,25 +14,19 @@ export const Toolbar = ({ className, ...props }: ToolbarProps) => (
   />
 )
 
-export type ToolbarGroupProps = OmitClassName<
-  ComponentProps<typeof BaseToolBar.Group>
->
+export type ToolbarGroupProps = BaseToolBar.Group.Props
 
 export const ToolbarGroup = ({ className, ...props }: ToolbarGroupProps) => (
   <BaseToolBar.Group className={cn("flex gap-0.5", className)} {...props} />
 )
 
-export type ToolbarButtonProps = OmitClassName<
-  ComponentProps<typeof BaseToolBar.Button>
->
+export type ToolbarButtonProps = BaseToolBar.Button.Props
 
 export const ToolbarButton = ({ className, ...props }: ToolbarButtonProps) => (
   <BaseToolBar.Button className={cn("", className)} {...props} />
 )
 
-export type ToolbarSeparatorProps = OmitClassName<
-  ComponentProps<typeof BaseToolBar.Separator>
->
+export type ToolbarSeparatorProps = BaseToolBar.Separator.Props
 
 export const ToolbarSeparator = ({
   className,

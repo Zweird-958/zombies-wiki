@@ -1,10 +1,8 @@
 import { Input as BaseInput } from "@base-ui-components/react/input"
-import type { ComponentProps } from "react"
 
-import type { OmitClassName } from "@/types/ui"
 import { cn } from "@/utils/cn"
 
-export type InputProps = OmitClassName<ComponentProps<typeof BaseInput>>
+export type InputProps = BaseInput.Props
 
 export const Input = ({ className, ...props }: InputProps) => (
   <BaseInput

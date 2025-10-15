@@ -1,5 +1,6 @@
 import type { Field } from "@base-ui-components/react/field"
 import type { NumberField } from "@base-ui-components/react/number-field"
+import type { ComponentProps } from "react"
 
 import type { ComboboxInputProps } from "@/components/ui/combobox"
 import type { FormField } from "@/components/ui/form/form"
@@ -26,10 +27,9 @@ export type FormInputProps =
       inputType: "number"
     } & NumberFieldInputProps)
 
-export type FormNumberInputProps = { className?: string } & Omit<
-  React.ComponentProps<typeof NumberField.Input>,
-  "className"
->
+export type FormNumberInputProps = {
+  className?: string
+} & NumberField.Input.Props
 
 export type FormFieldInputProps = {
   name: string
@@ -47,6 +47,6 @@ export type ImageInputFieldProps = { name: string } & Pick<
   InputImageControllerProps,
   "label" | "description"
 > &
-  Omit<React.ComponentProps<typeof FormField>, "render" | "defaultValue">
+  Omit<ComponentProps<typeof FormField>, "render" | "defaultValue">
 
-export type FormWrapperProps = React.ComponentProps<"form">
+export type FormWrapperProps = ComponentProps<"form">
