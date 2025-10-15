@@ -18,9 +18,7 @@ const StepAccordionItem = ({ id, name, content }: Props) => (
     <AccordionHeader>
       <AccordionTrigger>{name}</AccordionTrigger>
     </AccordionHeader>
-    <AccordionPanel>
-      <div className="p-2">{renderStep(content, id)}</div>
-    </AccordionPanel>
+    <AccordionPanel>{renderStep(content, id)}</AccordionPanel>
   </AccordionItem>
 )
 
