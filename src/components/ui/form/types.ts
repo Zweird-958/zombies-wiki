@@ -1,22 +1,19 @@
+import type { Field } from "@base-ui-components/react/field"
 import type { NumberField } from "@base-ui-components/react/number-field"
-import type { ComponentProps } from "react"
 
 import type { ComboboxInputProps } from "@/components/ui/combobox"
 import type { FormField } from "@/components/ui/form/form"
 import type { InputImageControllerProps } from "@/components/ui/form/image"
 import type { InputProps } from "@/components/ui/input"
-import type { LabelProps } from "@/components/ui/label"
 import type { NumberFieldInputProps } from "@/components/ui/number-field"
 
-export type FormItemProps = {
-  asChild?: boolean
-} & ComponentProps<"div">
+export type FormItemProps = Field.Root.Props
 
-export type FormLabelProps = LabelProps
+export type FormLabelProps = Field.Label.Props
 
-export type FormDescriptionProps = ComponentProps<"p">
+export type FormDescriptionProps = Field.Description.Props
 
-export type FormErrorProps = ComponentProps<"p">
+export type FormErrorProps = Field.Error.Props
 
 export type FormInputProps =
   | ({

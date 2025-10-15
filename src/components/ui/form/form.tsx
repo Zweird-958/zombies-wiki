@@ -1,6 +1,6 @@
 "use client"
 
-import { Slot } from "@radix-ui/react-slot"
+import { Field } from "@base-ui-components/react/field"
 import * as React from "react"
 import {
   Controller,
@@ -8,7 +8,6 @@ import {
   type FieldPath,
   type FieldValues,
   FormProvider,
-  useFormContext,
 } from "react-hook-form"
 
 import {
@@ -55,13 +54,12 @@ export const FormField = <
   </FormFieldContext>
 )
 
-export const FormItem = ({ asChild, className, ...props }: FormItemProps) => {
+export const FormItem = ({ className, ...props }: FormItemProps) => {
   const id = React.useId()
-  const Comp = asChild ? Slot : "div"
 
   return (
     <FormItemContext value={{ id }}>
-      <Comp
+      <Field.Root
         data-slot="form-item"
         className={cn("flex flex-col gap-2", className)}
         {...props}
@@ -74,7 +72,7 @@ export const FormLabel = ({ className, ...props }: FormLabelProps) => {
   const { error, formItemId } = useFormField()
 
   return (
-    <Label
+    <Field.Label
       data-slot="form-label"
       data-error={Boolean(error)}
       className={cn(
@@ -82,6 +80,7 @@ export const FormLabel = ({ className, ...props }: FormLabelProps) => {
         className,
       )}
       htmlFor={formItemId}
+      render={<Label />}
       {...props}
     />
   )
@@ -94,7 +93,7 @@ export const FormDescription = ({
   const { formDescriptionId } = useFormField()
 
   return (
-    <p
+    <Field.Description
       data-slot="form-description"
       id={formDescriptionId}
       className={cn("text-muted-foreground text-sm", className)}
@@ -107,9 +106,7 @@ export const FormInput = ({
   inputType = "input",
   ...props
 }: FormInputProps) => {
-  const { formItemId, formDescriptionId, formMessageId, error, name } =
-    useFormField()
-  const form = useFormContext()
+  const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
 
   const commonProps = {
     "data-slot": "form-control",
@@ -121,30 +118,31 @@ export const FormInput = ({
   }
 
   if (inputType === "input") {
-    return <Input {...commonProps} {...(props as InputProps)} />
-  }
-
-  if (inputType === "number") {
-    const handleClick = (isIncrement: boolean) => () => {
-      const value = form.getValues(name) as string
-
-      form.setValue(
-        name,
-        value === "" ? 0 : Number(value) + (isIncrement ? 1 : -1),
-      )
-    }
-
     return (
-      <NumberFieldInput
-        onDecrement={handleClick(false)}
-        onIncrement={handleClick(true)}
+      <Field.Control
         {...commonProps}
-        {...(props as NumberFieldInputProps)}
+        {...(props as InputProps)}
+        render={<Input />}
       />
     )
   }
 
-  return <ComboboxInput {...commonProps} {...(props as ComboboxInputProps)} />
+  if (inputType === "number") {
+    return (
+      <Field.Control
+        {...commonProps}
+        render={<NumberFieldInput {...(props as NumberFieldInputProps)} />}
+      />
+    )
+  }
+
+  return (
+    <Field.Control
+      render={
+        <ComboboxInput {...commonProps} {...(props as ComboboxInputProps)} />
+      }
+    />
+  )
 }
 
 export const FormFieldInput = ({
@@ -197,17 +195,15 @@ export const FormFieldNumberInput = ({
   <FormField
     name={name}
     render={({ field: { value: _, ...field } }) => (
-      <FormItem asChild>
-        <NumberField>
-          {label && (
-            <NumberFieldScrubArea>
-              <FormLabel>{label}</FormLabel>
-            </NumberFieldScrubArea>
-          )}
-          <FormInput inputType="number" {...field} {...props} />
-          {description && <FormDescription>{description}</FormDescription>}
-          <FormError />
-        </NumberField>
+      <FormItem render={<NumberField onValueChange={field.onChange} />}>
+        {label && (
+          <NumberFieldScrubArea>
+            <FormLabel>{label}</FormLabel>
+          </NumberFieldScrubArea>
+        )}
+        <FormInput inputType="number" {...field} {...props} />
+        {description && <FormDescription>{description}</FormDescription>}
+        <FormError />
       </FormItem>
     )}
   />
