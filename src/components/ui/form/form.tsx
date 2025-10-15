@@ -8,6 +8,7 @@ import {
   type FieldPath,
   type FieldValues,
   FormProvider,
+  useFormContext,
 } from "react-hook-form"
 
 import {
@@ -37,6 +38,7 @@ import {
   NumberField,
   NumberFieldInput,
   type NumberFieldInputProps,
+  NumberFieldScrubArea,
 } from "@/components/ui/number-field"
 import { cn } from "@/utils/cn"
 
@@ -105,7 +107,9 @@ export const FormInput = ({
   inputType = "input",
   ...props
 }: FormInputProps) => {
-  const { formItemId, formDescriptionId, formMessageId, error } = useFormField()
+  const { formItemId, formDescriptionId, formMessageId, error, name } =
+    useFormField()
+  const form = useFormContext()
 
   const commonProps = {
     "data-slot": "form-control",
@@ -121,8 +125,19 @@ export const FormInput = ({
   }
 
   if (inputType === "number") {
+    const handleClick = (isIncrement: boolean) => () => {
+      const value = form.getValues(name) as string
+
+      form.setValue(
+        name,
+        value === "" ? 0 : Number(value) + (isIncrement ? 1 : -1),
+      )
+    }
+
     return (
       <NumberFieldInput
+        onDecrement={handleClick(false)}
+        onIncrement={handleClick(true)}
         {...commonProps}
         {...(props as NumberFieldInputProps)}
       />
@@ -181,10 +196,14 @@ export const FormFieldNumberInput = ({
 }: FormFieldNumberInputProps) => (
   <FormField
     name={name}
-    render={({ field }) => (
+    render={({ field: { value: _, ...field } }) => (
       <FormItem asChild>
         <NumberField>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && (
+            <NumberFieldScrubArea>
+              <FormLabel>{label}</FormLabel>
+            </NumberFieldScrubArea>
+          )}
           <FormInput inputType="number" {...field} {...props} />
           {description && <FormDescription>{description}</FormDescription>}
           <FormError />

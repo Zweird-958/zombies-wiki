@@ -4,8 +4,10 @@
 @custom-variant image (& [data-slot="image"]);
 @custom-variant starting-style (&:is([data-starting-style]));
 @custom-variant ending-style (&:is([data-ending-style]));
+
 @custom-variant svg-not-size (& svg:not([class*="size-"]));
 @custom-variant svg (& svg);
+@custom-variant button (& button);
 
 :root {
   --background: oklch(1 0 0);
