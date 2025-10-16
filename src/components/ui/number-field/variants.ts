@@ -2,7 +2,10 @@ import { tv } from "tailwind-variants"
 
 export const numberField = tv({
   slots: {
-    base: "flex flex-col gap-2",
+    base: [
+      "flex flex-col gap-2",
+      "disabled:opacity-disabled [&_:disabled]:cursor-not-allowed disabled:*:cursor-not-allowed",
+    ],
     group: [
       "svg-not-size:size-4 flex",
       "rounded-md has-[&[data-slot=number-field-input]:focus]:ring focused:ring",
