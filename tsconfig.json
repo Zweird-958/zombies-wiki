@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "**.config.mts",
-    "**.config.mjs"
+    "**.config.mjs",
+    ".storybook/**/*"
   ],
   "exclude": ["node_modules"]
 }

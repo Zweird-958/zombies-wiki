@@ -5,6 +5,10 @@
     "binaries": "warn"
   },
   "entry": ["src/components/ui/**/*.{ts,tsx}", "src/i18n/request.ts"],
-  "ignoreDependencies": ["@testing-library/dom", "@testing-library/react"],
+  "ignoreDependencies": [
+    "@testing-library/dom",
+    "@testing-library/react",
+    "@vitest/coverage-v8"
+  ],
   "ignore": ["postcss.config.mjs", "src/utils/auth/auth-client.ts"]
 }

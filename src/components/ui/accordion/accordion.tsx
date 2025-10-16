@@ -56,6 +56,7 @@ export type AccordionPanelProps = BaseAccordion.Panel.Props
 
 export const AccordionPanel = ({
   className,
+  children,
   ...props
 }: AccordionPanelProps) => (
   <BaseAccordion.Panel
@@ -64,5 +65,7 @@ export const AccordionPanel = ({
       className,
     )}
     {...props}
-  />
+  >
+    <div className="px-3 py-2">{children}</div>
+  </BaseAccordion.Panel>
 )
