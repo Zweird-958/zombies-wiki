@@ -19,7 +19,7 @@ import { useFormField } from "@/components/ui/form/hooks"
 import { FileDropzone, PreviewImage } from "@/components/ui/form/image"
 import { cn } from "@/utils/cn"
 
-export type InputImageControllerProps = {
+type InputImageControllerProps = {
   value: File | null
   onChange: (file: File | null) => void
 } & Pick<ComponentProps<typeof FileDropzone>, "label" | "description">
