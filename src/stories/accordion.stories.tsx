@@ -96,3 +96,19 @@ export const DefaultExpanded: Story = {
     },
   },
 }
+
+export const Disabled: Story = {
+  render: (args) => (
+    <Accordion {...args}>
+      <AccordionItem>
+        <AccordionHeader>
+          <AccordionTrigger>Accordion</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>Content</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  ),
+  args: {
+    disabled: true,
+  },
+}

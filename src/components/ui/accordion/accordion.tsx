@@ -1,27 +1,21 @@
 import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion"
 import { ChevronDown } from "lucide-react"
 
+import { accordion } from "@/components/ui/accordion/variants"
 import { cn } from "@/utils/cn"
 
 export type AccordionProps = BaseAccordion.Root.Props
 
+const styles = accordion()
+
 export const Accordion = ({ className, ...props }: AccordionProps) => (
-  <BaseAccordion.Root
-    className={cn(
-      "flex max-w-[calc(100vw-8rem)] min-w-96 flex-col justify-center",
-      className,
-    )}
-    {...props}
-  />
+  <BaseAccordion.Root className={cn(styles.base(), className)} {...props} />
 )
 
 export type AccordionItemProps = BaseAccordion.Item.Props
 
 export const AccordionItem = ({ className, ...props }: AccordionItemProps) => (
-  <BaseAccordion.Item
-    className={cn("border-border border-b", className)}
-    {...props}
-  />
+  <BaseAccordion.Item className={cn(styles.item(), className)} {...props} />
 )
 
 export type AccordionHeaderProps = BaseAccordion.Header.Props
@@ -30,7 +24,7 @@ export const AccordionHeader = ({
   className,
   ...props
 }: AccordionHeaderProps) => (
-  <BaseAccordion.Header className={cn("m-0", className)} {...props} />
+  <BaseAccordion.Header className={cn(styles.header(), className)} {...props} />
 )
 
 export type AccordionTriggerProps = BaseAccordion.Trigger.Props
@@ -40,15 +34,9 @@ export const AccordionTrigger = ({
   children,
   ...props
 }: AccordionTriggerProps) => (
-  <BaseAccordion.Trigger
-    className={cn(
-      "relative z-10 flex w-full items-baseline justify-between gap-4 px-3 py-2 pr-1 text-left text-base leading-6 font-medium outline-none [&[data-panel-open]>svg]:rotate-180",
-      className,
-    )}
-    {...props}
-  >
+  <BaseAccordion.Trigger className={cn(styles.trigger(), className)} {...props}>
     {children}
-    <ChevronDown className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-500" />
+    <ChevronDown className={styles.triggerIcon()} />
   </BaseAccordion.Trigger>
 )
 
@@ -59,13 +47,7 @@ export const AccordionPanel = ({
   children,
   ...props
 }: AccordionPanelProps) => (
-  <BaseAccordion.Panel
-    className={cn(
-      "ending-style:h-0 starting-style:h-0 box-border h-[var(--accordion-panel-height)] overflow-hidden text-base leading-6 transition-[height] duration-500 ease-out",
-      className,
-    )}
-    {...props}
-  >
+  <BaseAccordion.Panel className={cn(styles.panel(), className)} {...props}>
     <div className="px-3 py-2">{children}</div>
   </BaseAccordion.Panel>
 )
