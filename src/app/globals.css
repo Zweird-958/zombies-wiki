@@ -4,7 +4,7 @@
 @custom-variant image (& [data-slot="image"]);
 @custom-variant starting-style (&:is([data-starting-style]));
 @custom-variant ending-style (&:is([data-ending-style]));
-@custom-variant focused (&:is([data-focused]));
+@custom-variant focused (&:is([data-focused], :focus));
 @custom-variant disabled (&:is([data-disabled], :disabled)) *;
 @custom-variant highlighted (&:is([data-highlighted]));
 
