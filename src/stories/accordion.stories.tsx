@@ -58,7 +58,7 @@ export const Multiple: Story = {
   ),
 
   args: {
-    openMultiple: true,
+    multiple: true,
   },
 }
 
