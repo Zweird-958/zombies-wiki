@@ -20,7 +20,7 @@ type FileDropzoneProps = {
   "getRootProps" | "getInputProps" | "isDragActive"
 >
 
-const FileDropzone = ({
+export const FileDropzone = ({
   name,
   label,
   description,
@@ -44,7 +44,7 @@ type PreviewImageProps = {
   value: File
 }
 
-const PreviewImage = ({ handleRemove, value }: PreviewImageProps) => (
+export const PreviewImage = ({ handleRemove, value }: PreviewImageProps) => (
   <div className="relative mx-auto size-48">
     <Button
       className="absolute -top-2 -right-2 z-10 size-4 p-1"
