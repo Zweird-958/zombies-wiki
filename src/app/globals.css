@@ -6,6 +6,7 @@
 @custom-variant ending-style (&:is([data-ending-style]));
 @custom-variant focused (&:is([data-focused]));
 @custom-variant disabled (&:is([data-disabled], :disabled)) *;
+@custom-variant highlighted (&:is([data-highlighted]));
 
 @custom-variant svg-not-size (& svg:not([class*="size-"]));
 @custom-variant svg (& svg);
