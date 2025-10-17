@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import EditorToolbar from "@/components/guides/editor/editor-toolbar"
 import { useEditor } from "@/components/guides/editor/use-editor"
 import { FormError, FormItem, FormLabel } from "@/components/ui/form"
-import { ScrollArea } from "@/components/ui/scrollbar"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import type { StepParagraph } from "@/types/steps"
 
 type Props = {
