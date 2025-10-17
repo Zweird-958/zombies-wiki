@@ -23,7 +23,13 @@ export const ToolbarGroup = ({ className, ...props }: ToolbarGroupProps) => (
 export type ToolbarButtonProps = BaseToolBar.Button.Props
 
 export const ToolbarButton = ({ className, ...props }: ToolbarButtonProps) => (
-  <BaseToolBar.Button className={cn("", className)} {...props} />
+  <BaseToolBar.Button
+    className={cn(
+      "hover:bg-accent hover:text-accent-foreground rounded-md px-2",
+      className,
+    )}
+    {...props}
+  />
 )
 
 export type ToolbarSeparatorProps = BaseToolBar.Separator.Props

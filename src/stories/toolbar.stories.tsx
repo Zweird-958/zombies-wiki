@@ -62,6 +62,10 @@ export const Separator: Story = {
           <Link />
         </ToolbarButton>
       </ToolbarGroup>
+      <ToolbarSeparator />
+      <ToolbarGroup>
+        <ToolbarButton>Save</ToolbarButton>
+      </ToolbarGroup>
     </Toolbar>
   ),
 }
