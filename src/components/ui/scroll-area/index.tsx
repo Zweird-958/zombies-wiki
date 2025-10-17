@@ -1,6 +1,9 @@
 import { ScrollArea as BaseScrollArea } from "@base-ui-components/react/scroll-area"
 
+import { scrollArea } from "@/components/ui/scroll-area/variants"
 import { cn } from "@/utils/cn"
+
+const styles = scrollArea()
 
 export type ScrollAreaProps = BaseScrollArea.Root.Props
 
@@ -11,27 +14,27 @@ export const ScrollArea = ({
 }: ScrollAreaProps) => (
   <BaseScrollArea.Root
     data-slot="scroll-area"
-    className={cn("group box-border h-34 min-w-fit overflow-auto", className)}
+    className={cn(styles.base(), className)}
     {...props}
   >
     <BaseScrollArea.Viewport
       data-slot="scroll-area-viewport"
-      className="border-border h-full overscroll-contain rounded-md border"
+      className={styles.viewport()}
     >
       <BaseScrollArea.Content
         data-slot="scroll-area-content"
-        className="px-4 py-3"
+        className={styles.content()}
       >
         {children}
       </BaseScrollArea.Content>
     </BaseScrollArea.Viewport>
     <BaseScrollArea.Scrollbar
       data-slot="scroll-area-scrollbar"
-      className="bg-muted relative my-1 flex w-1 justify-center rounded-md opacity-0 transition-all group-hover:opacity-100"
+      className={styles.scrollbar()}
     >
       <BaseScrollArea.Thumb
         data-slot="scroll-area-thumb"
-        className="bg-muted-foreground w-full rounded-md"
+        className={styles.thumb()}
       />
     </BaseScrollArea.Scrollbar>
   </BaseScrollArea.Root>

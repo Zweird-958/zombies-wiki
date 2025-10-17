@@ -6,6 +6,7 @@ import {
   Toolbar,
   ToolbarButton,
   ToolbarGroup,
+  type ToolbarProps,
   ToolbarSeparator,
 } from "@/components/ui/toolbar"
 
@@ -39,29 +40,42 @@ export const Default: Story = {
   ),
 }
 
+const SeparatorTemplate = (props: ToolbarProps) => (
+  <Toolbar {...props}>
+    <ToolbarGroup>
+      <ToolbarButton render={<Toggle />}>
+        <Bold />
+      </ToolbarButton>
+      <ToolbarButton render={<Toggle />}>
+        <Italic />
+      </ToolbarButton>
+      <ToolbarButton render={<Toggle />}>
+        <Underline />
+      </ToolbarButton>
+    </ToolbarGroup>
+    <ToolbarSeparator />
+    <ToolbarGroup>
+      <ToolbarButton render={<Toggle />}>
+        <Image />
+      </ToolbarButton>
+      <ToolbarButton render={<Toggle />}>
+        <Link />
+      </ToolbarButton>
+    </ToolbarGroup>
+    <ToolbarSeparator />
+    <ToolbarGroup>
+      <ToolbarButton>Save</ToolbarButton>
+    </ToolbarGroup>
+  </Toolbar>
+)
+
 export const Separator: Story = {
-  render: (args) => (
-    <Toolbar {...args}>
-      <ToolbarGroup>
-        <ToolbarButton render={<Toggle />}>
-          <Bold />
-        </ToolbarButton>
-        <ToolbarButton render={<Toggle />}>
-          <Italic />
-        </ToolbarButton>
-        <ToolbarButton render={<Toggle />}>
-          <Underline />
-        </ToolbarButton>
-      </ToolbarGroup>
-      <ToolbarSeparator />
-      <ToolbarGroup>
-        <ToolbarButton render={<Toggle />}>
-          <Image />
-        </ToolbarButton>
-        <ToolbarButton render={<Toggle />}>
-          <Link />
-        </ToolbarButton>
-      </ToolbarGroup>
-    </Toolbar>
-  ),
+  render: (args) => <SeparatorTemplate {...args} />,
+}
+
+export const Disabled: Story = {
+  render: (args) => <SeparatorTemplate {...args} />,
+  args: {
+    disabled: true,
+  },
 }

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 import { User } from "lucide-react"
+import { fn } from "storybook/test"
 
 import { Button } from "@/components/ui/button"
 
@@ -27,6 +28,7 @@ const meta = {
     color: "primary",
     variant: "solid",
     radius: "md",
+    onClick: fn(),
   },
 } satisfies Meta<typeof Button>
 

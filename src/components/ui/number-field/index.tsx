@@ -1,13 +1,16 @@
 import { NumberField as BaseNumberField } from "@base-ui-components/react/number-field"
 import { Minus, MoveHorizontal, MoveVertical, Plus } from "lucide-react"
 
+import { numberField } from "@/components/ui/number-field/variants"
 import { cn } from "@/utils/cn"
+
+const styles = numberField()
 
 export type NumberFieldProps = BaseNumberField.Root.Props
 
 export const NumberField = ({ className, ...props }: NumberFieldProps) => (
   <BaseNumberField.Root
-    className={cn("flex flex-col gap-2", className)}
+    className={cn(styles.base(), className)}
     data-slot="number-field"
     {...props}
   />
@@ -25,10 +28,7 @@ export const NumberFieldInput = ({
   if (hideActions) {
     return (
       <BaseNumberField.Input
-        className={cn(
-          "border-input rounded-md border px-2 py-1 focus:ring focus:outline-none",
-          className,
-        )}
+        className={cn(styles.input({ isGroup: false }), className)}
         data-slot="number-field-input"
         {...props}
       />
@@ -36,19 +36,19 @@ export const NumberFieldInput = ({
   }
 
   return (
-    <BaseNumberField.Group className="button:border-input button:size-10 svg-not-size:size-4 button:border button:p-2 button:flex button:items-center button:justify-center button:text-accent-foreground button:bg-accent focused:button:ring flex">
-      <BaseNumberField.Decrement className="rounded-l-md">
+    <BaseNumberField.Group
+      className={styles.group()}
+      data-slot="number-field-group"
+    >
+      <BaseNumberField.Decrement data-slot="number-field-decrement">
         <Minus />
       </BaseNumberField.Decrement>
       <BaseNumberField.Input
-        className={cn(
-          "border-input peer focused:ring flex-1 border-t border-b px-2 py-1 text-center tabular-nums focus:outline-none",
-          className,
-        )}
+        className={cn(styles.input({ isGroup: true }), className)}
         data-slot="number-field-input"
         {...props}
       />
-      <BaseNumberField.Increment className="rounded-r-md">
+      <BaseNumberField.Increment data-slot="number-field-increment">
         <Plus />
       </BaseNumberField.Increment>
     </BaseNumberField.Group>
@@ -64,7 +64,7 @@ export const NumberFieldScrubArea = ({
   ...props
 }: NumberFieldScrubAreaProps) => (
   <BaseNumberField.ScrubArea
-    className={cn("*:cursor-ew-resize", className)}
+    className={cn(styles.scrubArea(), className)}
     direction={direction}
     data-slot="number-field-scrub-area"
     {...props}
@@ -72,7 +72,7 @@ export const NumberFieldScrubArea = ({
     {children}
     <BaseNumberField.ScrubAreaCursor
       data-slot="number-field-scrub-area-cursor"
-      className="text-input size-4"
+      className={styles.scrubAreaCursor()}
     >
       {direction === "horizontal" ? <MoveHorizontal /> : <MoveVertical />}
     </BaseNumberField.ScrubAreaCursor>

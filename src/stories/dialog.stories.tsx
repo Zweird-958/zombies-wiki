@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -27,7 +28,7 @@ type Story = StoryObj<typeof meta>
 
 const DefaultDialog = (props: DialogProps) => (
   <Dialog {...props}>
-    <DialogTrigger>Open</DialogTrigger>
+    <DialogTrigger render={<Button />}>Open</DialogTrigger>
 
     <DialogPopup>
       <DialogTitle>Dialog Title</DialogTitle>

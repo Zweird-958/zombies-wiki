@@ -31,7 +31,6 @@ export const Default: Story = {
       <NumberFieldInput {...args} />
     </NumberField>
   ),
-  args: {},
 }
 
 export const HideActions: Story = {
@@ -55,4 +54,16 @@ export const ScrubArea: Story = {
       <NumberFieldInput {...args} />
     </NumberField>
   ),
+}
+
+export const Disabled: Story = {
+  render: ({ disabled, ...args }) => (
+    <NumberField disabled={disabled}>
+      <Label>Number</Label>
+      <NumberFieldInput {...args} />
+    </NumberField>
+  ),
+  args: {
+    disabled: true,
+  },
 }

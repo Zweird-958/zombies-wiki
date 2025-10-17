@@ -4,7 +4,9 @@
 @custom-variant image (& [data-slot="image"]);
 @custom-variant starting-style (&:is([data-starting-style]));
 @custom-variant ending-style (&:is([data-ending-style]));
-@custom-variant focused (&:is([data-focused]));
+@custom-variant focused (&:is([data-focused], :focus));
+@custom-variant disabled (&:is([data-disabled], :disabled)) *;
+@custom-variant highlighted (&:is([data-highlighted]));
 
 @custom-variant svg-not-size (& svg:not([class*="size-"]));
 @custom-variant svg (& svg);
@@ -113,6 +115,8 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --opacity-disabled: 0.5;
 }
 
 body {
