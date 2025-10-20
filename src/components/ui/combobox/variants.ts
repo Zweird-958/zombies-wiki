@@ -10,12 +10,14 @@ export const combobox = tv({
       "svg:text-muted-foreground svg-not-size:size-5",
       "disabled:opacity-disabled disabled:cursor-not-allowed",
       "active:not-disabled:scale-[0.98]",
+      "text-muted-foreground truncate",
     ],
     icon: "justifty-center absolute top-0 right-2 flex h-full items-center",
     input: [
       "border-input border",
       "h-8 w-full rounded-md px-2 py-1 outline-none",
       "focused:ring focused:ring-ring focused:border-ring",
+      "placeholder:text-muted-foreground/70",
     ],
     separator: "border-border my-2 rounded-md border-[0.1px]",
     popup: [
