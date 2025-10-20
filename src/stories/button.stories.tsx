@@ -17,7 +17,7 @@ const meta = {
       options: ["primary", "secondary", "success", "danger", "warning"],
     },
     size: { control: "select", options: ["sm", "md", "lg", "icon"] },
-    variant: { control: "select", options: ["outline", "solid"] },
+    variant: { control: "select", options: ["outline", "solid", "ghost"] },
     radius: { control: "select", options: ["sm", "md", "lg", "none", "full"] },
     shadow: { control: "select", options: ["none", "sm", "md", "lg"] },
     isPending: { control: "boolean" },
