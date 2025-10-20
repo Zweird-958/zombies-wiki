@@ -6,7 +6,7 @@ export const input = tv({
     "border-input border",
     "focused:ring focused:outline-none not-aria-invalid:focused:ring-ring not-aria-invalid:focused:border-ring",
     "placeholder:text-muted-foreground/70",
-    "transition-colors",
+    "transition-[color,box-shadow]",
     "disabled:opacity-disabled disabled:cursor-not-allowed",
     "aria-invalid:border-danger aria-invalid:ring-danger/50",
   ],
@@ -28,7 +28,7 @@ export const input = tv({
   compoundVariants: [
     {
       shadow: ["sm", "md", "lg"],
-      className: "aria-invalid:shadow-danger/20 transition-shadow",
+      className: "aria-invalid:shadow-danger/20",
     },
   ],
   defaultVariants: {
