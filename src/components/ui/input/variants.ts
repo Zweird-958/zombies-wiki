@@ -4,10 +4,11 @@ export const input = tv({
   base: [
     "flex h-9 w-full bg-transparent px-2 py-1",
     "border-input border",
-    "focused:ring focused:outline-none focused:ring-ring focused:border-ring",
+    "focused:ring focused:outline-none not-aria-invalid:focused:ring-ring not-aria-invalid:focused:border-ring",
     "placeholder:text-muted-foreground/70",
     "transition-colors",
     "disabled:opacity-disabled disabled:cursor-not-allowed",
+    "aria-invalid:border-danger aria-invalid:ring-danger/50",
   ],
   variants: {
     radius: {
@@ -24,6 +25,12 @@ export const input = tv({
       lg: "shadow-lg",
     },
   },
+  compoundVariants: [
+    {
+      shadow: ["sm", "md", "lg"],
+      className: "aria-invalid:shadow-danger/20 transition-shadow",
+    },
+  ],
   defaultVariants: {
     radius: "md",
     shadow: "sm",
