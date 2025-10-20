@@ -73,27 +73,27 @@ export const button = tv({
     {
       color: "primary",
       variant: "solid",
-      class: "bg-primary text-primary-foreground",
+      class: "bg-primary text-primary-foreground hover:bg-primary/90",
     },
     {
       color: "secondary",
       variant: "solid",
-      class: "bg-secondary text-secondary-foreground",
+      class: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
     },
     {
       color: "success",
       variant: "solid",
-      class: "bg-success text-success-foreground",
+      class: "bg-success text-success-foreground hover:bg-success/90",
     },
     {
       color: "danger",
       variant: "solid",
-      class: "bg-danger text-danger-foreground",
+      class: "bg-danger text-danger-foreground hover:bg-danger/90",
     },
     {
       color: "warning",
       variant: "solid",
-      class: "bg-warning text-warning-foreground",
+      class: "bg-warning text-warning-foreground hover:bg-warning/90",
     },
     {
       shadow: ["sm", "md", "lg"],
