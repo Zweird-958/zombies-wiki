@@ -19,6 +19,10 @@ const meta = {
       control: "select",
       options: ["none", "sm", "md", "lg", "full"],
     },
+    shadow: {
+      control: "select",
+      options: ["none", "sm", "md", "lg"],
+    },
   },
 
   args: {

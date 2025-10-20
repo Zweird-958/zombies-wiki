@@ -27,13 +27,17 @@ export type NumberFieldInputProps = {
 export const NumberFieldInput = ({
   className,
   radius,
+  shadow,
   hideActions,
   ...props
 }: NumberFieldInputProps) => {
   if (hideActions) {
     return (
       <BaseNumberField.Input
-        className={cn(styles.input({ isGroup: false, radius }), className)}
+        className={cn(
+          styles.input({ isGroup: false, radius, shadow }),
+          className,
+        )}
         data-slot="number-field-input"
         {...props}
       />
@@ -42,7 +46,7 @@ export const NumberFieldInput = ({
 
   return (
     <BaseNumberField.Group
-      className={styles.group({ radius })}
+      className={styles.group({ radius, shadow })}
       data-slot="number-field-group"
     >
       <BaseNumberField.Decrement data-slot="number-field-decrement">
@@ -50,7 +54,7 @@ export const NumberFieldInput = ({
       </BaseNumberField.Decrement>
       <BaseNumberField.Input
         className={cn(
-          styles.input({ isGroup: true, radius: "none" }),
+          styles.input({ isGroup: true, radius: "none", shadow: "none" }),
           className,
         )}
         data-slot="number-field-input"
