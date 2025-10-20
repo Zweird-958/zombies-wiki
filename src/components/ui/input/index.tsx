@@ -5,10 +5,10 @@ import { cn } from "@/utils/cn"
 
 export type InputProps = BaseInput.Props & InputVariants
 
-export const Input = ({ className, radius, ...props }: InputProps) => (
+export const Input = ({ className, radius, shadow, ...props }: InputProps) => (
   <BaseInput
     data-slot="input"
-    className={cn(input({ radius }), className)}
+    className={cn(input({ radius, shadow }), className)}
     {...props}
   />
 )

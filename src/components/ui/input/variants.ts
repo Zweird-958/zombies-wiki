@@ -16,9 +16,16 @@ export const input = tv({
       lg: "rounded-lg",
       full: "rounded-full",
     },
+    shadow: {
+      none: "",
+      sm: "shadow-sm",
+      md: "shadow-md",
+      lg: "shadow-lg",
+    },
   },
   defaultVariants: {
     radius: "md",
+    shadow: "sm",
   },
 })
 

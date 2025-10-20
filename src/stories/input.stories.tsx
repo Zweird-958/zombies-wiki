@@ -13,6 +13,7 @@ const meta = {
     disabled: { control: "boolean" },
     placeholder: { control: "text" },
     radius: { control: "select", options: ["none", "sm", "md", "lg", "full"] },
+    shadow: { control: "select", options: ["none", "sm", "md", "lg"] },
   },
   args: {
     placeholder: "Enter a value",
