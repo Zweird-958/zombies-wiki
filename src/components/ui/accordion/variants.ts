@@ -19,7 +19,7 @@ export const accordion = tv({
     ],
     panel: [
       "box-border h-[var(--accordion-panel-height)] overflow-hidden text-base leading-6",
-      "ending-style:h-0 starting-style:h-0  transition-[height] duration-500 ease-out",
+      "ending-style:h-0 starting-style:h-0 transition-[height] duration-500 ease-out",
     ],
   },
 })

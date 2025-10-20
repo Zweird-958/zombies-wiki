@@ -5,7 +5,7 @@ export const combobox = tv({
     trigger: [
       "border-input relative w-full rounded-md border px-2 py-1 text-left transition-all",
       "svg:text-muted-foreground svg-not-size:size-5",
-      "disabled:cursor-not-allowed disabled:opacity-disabled",
+      "disabled:opacity-disabled disabled:cursor-not-allowed",
       "active:not-disabled:scale-[0.98]",
     ],
     icon: "justifty-center absolute top-0 right-2 flex h-full items-center",
@@ -20,7 +20,7 @@ export const combobox = tv({
     ],
     item: [
       "highlighted:bg-popover-highlighted highlighted:text-popover-foreground",
-      "text-muted-foreground box-border flex items-center gap-2 rounded-md p-2 outline-none select-none svg-not-size:size-4 cursor-pointer",
+      "text-muted-foreground svg-not-size:size-4 box-border flex cursor-pointer items-center gap-2 rounded-md p-2 outline-none select-none",
     ],
     empty: "cursor-not-allowed px-2 select-none",
     groupLabel: "px-0.5 py-2",

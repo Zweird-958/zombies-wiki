@@ -7,21 +7,21 @@ export const toggle = tv({
     "pressed:bg-accent pressed:text-accent-foreground",
     "svg:pointer-events-none svg-not-size:size-4 svg:shrink-0",
     "focused:ring outline-none",
-    "disabled:cursor-not-allowed disabled:opacity-disabled",
+    "disabled:opacity-disabled disabled:cursor-not-allowed",
   ],
   variants: {
     variant: {
       default:
-        "bg-transparent hover:not-disabled:bg-muted hover:not-disabled:text-muted-foreground",
+        "hover:not-disabled:bg-muted hover:not-disabled:text-muted-foreground bg-transparent",
       outline: [
-        "border border-input bg-transparent shadow-xs",
+        "border-input border bg-transparent shadow-xs",
         "hover:not-disabled:bg-accent hover:not-disabled:text-accent-foreground",
       ],
     },
     size: {
-      default: "h-9 px-2 min-w-9",
-      sm: "h-8 px-1.5 min-w-8",
-      lg: "h-10 px-2.5 min-w-10",
+      default: "h-9 min-w-9 px-2",
+      sm: "h-8 min-w-8 px-1.5",
+      lg: "h-10 min-w-10 px-2.5",
     },
   },
   defaultVariants: {

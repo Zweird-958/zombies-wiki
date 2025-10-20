@@ -9,7 +9,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-
+  argTypes: {
+    disabled: { control: "boolean" },
+    placeholder: { control: "text" },
+    radius: { control: "select", options: ["none", "sm", "md", "lg", "full"] },
+    shadow: { control: "select", options: ["none", "sm", "md", "lg"] },
+  },
   args: {
     placeholder: "Enter a value",
   },
@@ -25,5 +30,11 @@ export const Default: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+}
+
+export const Invalid: Story = {
+  args: {
+    "aria-invalid": true,
   },
 }
