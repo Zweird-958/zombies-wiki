@@ -67,3 +67,15 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
+
+export const Invalid: Story = {
+  render: ({ ...args }) => (
+    <NumberField aria-invalid={args["aria-invalid"]}>
+      <Label>Number</Label>
+      <NumberFieldInput {...args} />
+    </NumberField>
+  ),
+  args: {
+    "aria-invalid": true,
+  },
+}
