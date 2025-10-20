@@ -9,7 +9,11 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-
+  argTypes: {
+    disabled: { control: "boolean" },
+    placeholder: { control: "text" },
+    radius: { control: "select", options: ["none", "sm", "md", "lg", "full"] },
+  },
   args: {
     placeholder: "Enter a value",
   },
