@@ -20,7 +20,7 @@ export const button = tv({
       sm: "text-sm",
       md: "text-base",
       lg: "px-4 py-3 text-lg",
-      icon: "p-2",
+      icon: "aspect-square p-2",
     },
     radius: {
       none: "rounded-none",
