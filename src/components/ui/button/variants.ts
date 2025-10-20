@@ -30,7 +30,7 @@ export const button = tv({
       full: "rounded-full",
     },
     variant: {
-      outline: "border",
+      outline: "border hover:bg-current/5",
       solid: "",
     },
     shadow: {
