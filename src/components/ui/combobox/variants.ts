@@ -19,7 +19,7 @@ export const combobox = tv({
       "[&[data-empty]_[data-slot=empty]]:py-2",
     ],
     item: [
-      "highlighted:bg-popover-highlighted highlighted:text-popover-foreground",
+      "highlighted:bg-accent highlighted:text-accent-foreground",
       "text-muted-foreground svg-not-size:size-4 box-border flex cursor-pointer items-center gap-2 rounded-md p-2 outline-none select-none",
     ],
     empty: "cursor-not-allowed px-2 select-none",
