@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants"
+import { type VariantProps, tv } from "tailwind-variants"
 
 export const numberField = tv({
   slots: {
@@ -8,13 +8,12 @@ export const numberField = tv({
     ],
     group: [
       "transition-colors",
-      "svg-not-size:size-4 flex rounded-md",
+      "svg-not-size:size-4 flex",
       "not-has-aria-invalid:has-number-field-input-focused:ring-ring has-number-field-input-focused:ring not-has-aria-invalid:has-number-field-input-focused:border-ring",
       "focused:ring not-has-aria-invalid:focused:ring-ring not-has-aria-invalid:focused:border-ring",
       "button:border-input button:p-2 button:border button:h-[inherit]",
       "button:flex button:items-center button:justify-center",
       "button:not-disabled:hover:bg-accent button:not-disabled:hover:text-accent-foreground",
-      "button:data-[slot=number-field-decrement]:rounded-l-md button:data-[slot=number-field-increment]:rounded-r-md",
       "button:bg-transparent button:aspect-square",
       "has-aria-invalid:button:border-danger has-aria-invalid:ring-danger/50",
     ],
@@ -34,8 +33,62 @@ export const numberField = tv({
         group: "h-9",
       },
       false: {
-        input: "h-9 rounded-md border",
+        input: "h-9 border",
+      },
+    },
+    radius: {
+      none: "",
+      sm: {
+        group:
+          "number-field-decrement:rounded-l-sm number-field-increment:rounded-r-sm rounded-sm",
+      },
+      md: {
+        group:
+          "number-field-decrement:rounded-l-md number-field-increment:rounded-r-md rounded-md",
+      },
+      lg: {
+        group:
+          "number-field-decrement:rounded-l-lg number-field-increment:rounded-r-lg rounded-lg",
+      },
+      full: {
+        group:
+          "number-field-decrement:rounded-l-full number-field-increment:rounded-r-full rounded-full",
       },
     },
   },
+  compoundVariants: [
+    {
+      isGroup: false,
+      radius: "sm",
+      className: {
+        input: "rounded-sm",
+      },
+    },
+    {
+      isGroup: false,
+      radius: "md",
+      className: {
+        input: "rounded-md",
+      },
+    },
+    {
+      isGroup: false,
+      radius: "lg",
+      className: {
+        input: "rounded-lg",
+      },
+    },
+    {
+      isGroup: false,
+      radius: "full",
+      className: {
+        input: "rounded-full",
+      },
+    },
+  ],
+  defaultVariants: {
+    radius: "md",
+  },
 })
+
+export type NumberFieldVariants = VariantProps<typeof numberField>

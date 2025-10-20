@@ -4,6 +4,8 @@
 @custom-variant has-number-field-input-focused (
   &:has([data-slot="number-field-input"][data-focused], [data-slot="number-field-input"]:focus)
 );
+@custom-variant number-field-decrement (& [data-slot="number-field-decrement"]);
+@custom-variant number-field-increment (& [data-slot="number-field-increment"]);
 
 @custom-variant pressed (&:is([data-pressed]));
 @custom-variant starting-style (&:is([data-starting-style]));

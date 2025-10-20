@@ -14,7 +14,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    radius: {
+      control: "select",
+      options: ["none", "sm", "md", "lg", "full"],
+    },
+  },
 
   args: {
     placeholder: "Enter a number",

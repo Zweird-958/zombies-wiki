@@ -1,7 +1,10 @@
 import { NumberField as BaseNumberField } from "@base-ui-components/react/number-field"
 import { Minus, MoveHorizontal, MoveVertical, Plus } from "lucide-react"
 
-import { numberField } from "@/components/ui/number-field/variants"
+import {
+  type NumberFieldVariants,
+  numberField,
+} from "@/components/ui/number-field/variants"
 import { cn } from "@/utils/cn"
 
 const styles = numberField()
@@ -18,17 +21,19 @@ export const NumberField = ({ className, ...props }: NumberFieldProps) => (
 
 export type NumberFieldInputProps = {
   hideActions?: boolean
-} & BaseNumberField.Input.Props
+} & BaseNumberField.Input.Props &
+  Omit<NumberFieldVariants, "isGroup">
 
 export const NumberFieldInput = ({
   className,
+  radius,
   hideActions,
   ...props
 }: NumberFieldInputProps) => {
   if (hideActions) {
     return (
       <BaseNumberField.Input
-        className={cn(styles.input({ isGroup: false }), className)}
+        className={cn(styles.input({ isGroup: false, radius }), className)}
         data-slot="number-field-input"
         {...props}
       />
@@ -37,14 +42,17 @@ export const NumberFieldInput = ({
 
   return (
     <BaseNumberField.Group
-      className={styles.group()}
+      className={styles.group({ radius })}
       data-slot="number-field-group"
     >
       <BaseNumberField.Decrement data-slot="number-field-decrement">
         <Minus />
       </BaseNumberField.Decrement>
       <BaseNumberField.Input
-        className={cn(styles.input({ isGroup: true }), className)}
+        className={cn(
+          styles.input({ isGroup: true, radius: "none" }),
+          className,
+        )}
         data-slot="number-field-input"
         {...props}
       />
