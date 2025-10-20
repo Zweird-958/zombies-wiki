@@ -3,14 +3,20 @@ import { tv } from "tailwind-variants"
 export const combobox = tv({
   slots: {
     trigger: [
-      "border-input relative w-full rounded-md border px-2 py-1 text-left transition-all",
+      "border-input h-8 border outline-none",
+      "focused:ring focused:ring-ring focused:border-ring",
+      "pressed:ring pressed:ring-ring pressed:border-ring",
+      "relative w-full rounded-md px-2 py-1 text-left transition-all",
       "svg:text-muted-foreground svg-not-size:size-5",
       "disabled:opacity-disabled disabled:cursor-not-allowed",
       "active:not-disabled:scale-[0.98]",
     ],
     icon: "justifty-center absolute top-0 right-2 flex h-full items-center",
-    input:
-      "border-input w-full rounded-md border px-2 py-1 outline-0 focus:ring-2",
+    input: [
+      "border-input border",
+      "h-8 w-full rounded-md px-2 py-1 outline-none",
+      "focused:ring focused:ring-ring focused:border-ring",
+    ],
     separator: "border-border my-2 rounded-md border-[0.1px]",
     popup: [
       "border-border border",
