@@ -33,6 +33,12 @@ export const button = tv({
       outline: "border",
       solid: "",
     },
+    shadow: {
+      none: "shadow-none",
+      sm: "shadow-sm",
+      md: "shadow-md",
+      lg: "shadow-lg",
+    },
   },
   compoundVariants: [
     {
@@ -89,12 +95,38 @@ export const button = tv({
       variant: "solid",
       class: "bg-warning text-warning-foreground",
     },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "primary",
+      class: "shadow-primary/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "secondary",
+      class: "shadow-secondary/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "success",
+      class: "shadow-success/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "danger",
+      class: "shadow-danger/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "warning",
+      class: "shadow-warning/50",
+    },
   ],
   defaultVariants: {
     size: "md",
     color: "primary",
     radius: "md",
     variant: "solid",
+    shadow: "sm",
   },
 })
 

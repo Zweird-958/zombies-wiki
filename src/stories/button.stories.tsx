@@ -19,6 +19,7 @@ const meta = {
     size: { control: "select", options: ["sm", "md", "lg", "icon"] },
     variant: { control: "select", options: ["outline", "solid"] },
     radius: { control: "select", options: ["sm", "md", "lg", "none", "full"] },
+    shadow: { control: "select", options: ["none", "sm", "md", "lg"] },
     isPending: { control: "boolean" },
   },
 
