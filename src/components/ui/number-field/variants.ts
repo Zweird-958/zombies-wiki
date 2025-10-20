@@ -13,9 +13,9 @@ export const numberField = tv({
       "focused:ring focused:ring-ring focused:border-ring",
       "button:border-input button:p-2 button:border button:h-[inherit]",
       "button:flex button:items-center button:justify-center",
-      "button:text-accent-foreground button:bg-accent",
+      "button:not-disabled:hover:bg-accent button:not-disabled:hover:text-accent-foreground",
       "button:data-[slot=number-field-decrement]:rounded-l-md button:data-[slot=number-field-increment]:rounded-r-md",
-      "button:bg-transparent",
+      "button:bg-transparent button:aspect-square",
     ],
     input: [
       "border-input",
