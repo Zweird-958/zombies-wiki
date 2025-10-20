@@ -50,6 +50,17 @@ const ImageForm = () => {
   return <BaseForm form={form} type="image" />
 }
 
+const NumberForm = () => {
+  const form = useForm({
+    defaultValues: { quantity: 0 },
+    resolver: zodResolver(
+      z.object({ quantity: z.number().min(0, "Quantity must be at least 0") }),
+    ),
+  })
+
+  return <BaseForm form={form} type="number" />
+}
+
 export const Default: Story = {
   render: (args) => <DefaultForm {...args} />,
 }
@@ -63,4 +74,8 @@ export const Description: Story = {
 
 export const Image: Story = {
   render: (args) => <ImageForm {...args} />,
+}
+
+export const Number: Story = {
+  render: (args) => <NumberForm {...args} />,
 }

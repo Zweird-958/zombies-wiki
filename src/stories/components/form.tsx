@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Field } from "@base-ui-components/react/field"
 import { type ComponentProps, useState } from "react"
 import { useDropzone } from "react-dropzone"
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/form"
 import { useFormField } from "@/components/ui/form/hooks"
 import { FileDropzone, PreviewImage } from "@/components/ui/form/image"
+import { NumberField } from "@/components/ui/number-field"
 import { cn } from "@/utils/cn"
 
 type InputImageControllerProps = {
@@ -92,7 +94,7 @@ type Props<
   TTransformedValues = TFieldValues,
 > = {
   description?: string
-  type?: "text" | "image"
+  type?: "text" | "image" | "number"
   form: UseFormReturn<TFieldValues, TContext, TTransformedValues>
 }
 
@@ -148,6 +150,21 @@ export const BaseForm = <
                   onChange={onChange}
                   value={value as File | null}
                 />
+              </FormItem>
+            )}
+          />
+        )}
+        {type === "number" && (
+          <FormField
+            name="quantity"
+            render={({ field }) => (
+              <FormItem render={<NumberField onValueChange={field.onChange} />}>
+                <FormLabel>Quantity</FormLabel>
+                <FormInput inputType="number" {...field} />
+                {description && (
+                  <FormDescription>{description}</FormDescription>
+                )}
+                <FormError />
               </FormItem>
             )}
           />
