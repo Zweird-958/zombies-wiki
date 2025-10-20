@@ -2,19 +2,19 @@ import { type VariantProps, tv } from "tailwind-variants"
 
 export const button = tv({
   base: [
-    "flex h-fit w-fit items-center justify-center gap-2 px-4 py-2 text-sm transition-all",
+    "flex size-fit items-center justify-center gap-2 px-4 py-2 whitespace-nowrap transition-all outline-none",
     "disabled:opacity-disabled disabled:cursor-not-allowed",
-    "focus:ring-2 focus:ring-offset-2 focus:outline-none",
+    "focused:ring",
     "active:not-disabled:scale-95",
-    "svg-not-size:size-4",
+    "svg-not-size:size-4 svg:shrink-0",
   ],
   variants: {
     color: {
-      primary: "",
-      secondary: "",
-      success: "",
-      danger: "",
-      warning: "",
+      primary: "ring-primary/50",
+      secondary: "ring-secondary/50",
+      success: "ring-success/50",
+      danger: "ring-danger/50",
+      warning: "ring-warning/50",
     },
     size: {
       sm: "text-sm",
