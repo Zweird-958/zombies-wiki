@@ -19,7 +19,7 @@ export const numberField = tv({
     ],
     input: [
       "border-input",
-      "flex-1 px-2 py-1 text-center tabular-nums",
+      "placeholder:text-muted-foreground/70 flex-1 px-2 py-1 text-center tabular-nums",
       "focused:outline-none focused:ring focused:ring-ring focused:border-ring z-[1]",
     ],
     scrubArea: "*:cursor-ew-resize",
