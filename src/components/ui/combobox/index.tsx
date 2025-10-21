@@ -1,7 +1,7 @@
 "use client"
 
 import { Combobox as BaseCombobox } from "@base-ui-components/react/combobox"
-import { Check, ChevronDown } from "lucide-react"
+import { Check, ChevronDown, Search } from "lucide-react"
 
 import { combobox } from "@/components/ui/combobox/variants"
 import { cn } from "@/utils/cn"
@@ -33,7 +33,10 @@ export const ComboboxTrigger = ({
 export type ComboboxInputProps = BaseCombobox.Input.Props
 
 export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => (
-  <BaseCombobox.Input className={cn(styles.input(), className)} {...props} />
+  <div className={cn(styles.inputWrapper())}>
+    <Search />
+    <BaseCombobox.Input className={cn(styles.input(), className)} {...props} />
+  </div>
 )
 
 export type ComboboxSeparatorProps = BaseCombobox.Separator.Props
@@ -66,8 +69,8 @@ export const ComboboxPopup = ({
 
 export type ComboboxListProps = BaseCombobox.List.Props
 
-export const ComboboxList = (props: ComboboxListProps) => (
-  <BaseCombobox.List {...props} />
+export const ComboboxList = ({ className, ...props }: ComboboxListProps) => (
+  <BaseCombobox.List className={cn(styles.itemList(), className)} {...props} />
 )
 
 export type ComboboxItemProps = BaseCombobox.Item.Props

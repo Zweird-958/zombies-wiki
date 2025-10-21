@@ -106,9 +106,7 @@ export const Group: Story = {
           {(item: GroupItems) =>
             item.value && (
               <ComboboxGroup key={item.value} items={item.items}>
-                <ComboboxGroupLabel className="px-0.5 py-2">
-                  {item.label}
-                </ComboboxGroupLabel>
+                <ComboboxGroupLabel>{item.label}</ComboboxGroupLabel>
                 {item.items.map((food) => (
                   <ComboboxItem key={food.value} value={food}>
                     {food.label}
