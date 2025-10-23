@@ -12,6 +12,7 @@ import {
   ComboboxPopup,
   ComboboxSeparator,
   ComboboxTrigger,
+  ComboboxValue,
 } from "@/components/ui/combobox"
 import { FormError, FormInput, FormItem, FormLabel } from "@/components/ui/form"
 import { useQuery } from "@/hooks/use-query"
@@ -38,29 +39,24 @@ const MapsCombobox = ({ value, ...props }: Props) => {
     },
   )
 
-  const items = useMemo<GroupItems[]>(() => {
-    const commonItems = [
-      {
-        label: "",
-        value: "",
-        items: [{ label: t("map.placeholder"), value: "" }],
-      },
-    ]
+  const items = useMemo<GroupItems[]>(
+    () =>
+      data?.result.map((game) => ({
+        label: game.name,
+        value: game.id,
+        items:
+          game.maps?.map((map) => ({ label: map.name, value: map.id })) ?? [],
+      })) ?? [],
+    [data],
+  )
 
-    if (data) {
-      return [
-        ...commonItems,
-        ...data.result.map((game) => ({
-          label: game.name,
-          value: game.id,
-          items:
-            game.maps?.map((map) => ({ label: map.name, value: map.id })) ?? [],
-        })),
-      ]
-    }
+  const itemLabel = useMemo(() => {
+    const foundItem = items
+      .find((item) => item.items.some((map) => map.value === value))
+      ?.items.find((map) => map.value === value)
 
-    return commonItems
-  }, [data, t])
+    return foundItem ? foundItem.label : ""
+  }, [items, value])
 
   return (
     <FormItem>
@@ -71,7 +67,11 @@ const MapsCombobox = ({ value, ...props }: Props) => {
         {...props}
       >
         <FormLabel>{t("map.label")}</FormLabel>
-        <ComboboxTrigger />
+        <ComboboxTrigger>
+          <ComboboxValue>
+            {value === "" ? t("map.placeholder") : itemLabel}
+          </ComboboxValue>
+        </ComboboxTrigger>
         <FormError />
         <ComboboxPopup>
           <FormInput

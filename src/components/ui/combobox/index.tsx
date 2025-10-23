@@ -20,15 +20,20 @@ export type ComboboxTriggerProps = BaseCombobox.Trigger.Props
 
 export const ComboboxTrigger = ({
   className,
+  children,
   ...props
 }: ComboboxTriggerProps) => (
   <BaseCombobox.Trigger className={cn(styles.trigger(), className)} {...props}>
-    <BaseCombobox.Value />
+    {children}
     <BaseCombobox.Icon className={styles.icon()}>
       <ChevronDown />
     </BaseCombobox.Icon>
   </BaseCombobox.Trigger>
 )
+
+export type ComboboxValueProps = BaseCombobox.Value.Props
+
+export const ComboboxValue = BaseCombobox.Value
 
 export type ComboboxInputProps = BaseCombobox.Input.Props
 

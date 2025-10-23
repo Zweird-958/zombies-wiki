@@ -12,6 +12,7 @@ import {
   ComboboxPopup,
   ComboboxSeparator,
   ComboboxTrigger,
+  ComboboxValue,
 } from "@/components/ui/combobox"
 
 const meta = {
@@ -30,7 +31,6 @@ type Item = { label: string; value: string }
 type GroupItems = Item & { items: Item[] }
 
 const fruits: Item[] = [
-  { label: "Select a fruit", value: "" },
   { label: "Apple", value: "apple" },
   { label: "Banana", value: "banana" },
   { label: "Orange", value: "orange" },
@@ -40,11 +40,6 @@ const fruits: Item[] = [
 ]
 
 const foodGroups: GroupItems[] = [
-  {
-    label: "",
-    value: "",
-    items: [{ label: "Select a food", value: "" }],
-  },
   {
     label: "Fruits",
     value: "fruits",
@@ -67,19 +62,21 @@ const foodGroups: GroupItems[] = [
 
 const DefaultCombobox = (props: ComponentProps<typeof Combobox>) => (
   <Combobox {...props}>
-    <ComboboxTrigger className="min-w-72" />
+    <ComboboxTrigger className="min-w-72">
+      <ComboboxValue>
+        {(value: Item | null) => (value ? value.label : "Select a fruit")}
+      </ComboboxValue>
+    </ComboboxTrigger>
     <ComboboxPopup>
       <ComboboxInput placeholder="Select a fruit..." />
       <ComboboxSeparator />
       <ComboboxEmpty>No fruits found.</ComboboxEmpty>
       <ComboboxList>
-        {(item: Item) =>
-          item.value && (
-            <ComboboxItem key={item.value} value={item}>
-              {item.label}
-            </ComboboxItem>
-          )
-        }
+        {(item: Item) => (
+          <ComboboxItem key={item.value} value={item}>
+            {item.label}
+          </ComboboxItem>
+        )}
       </ComboboxList>
     </ComboboxPopup>
   </Combobox>
@@ -90,31 +87,33 @@ export const Default: Story = {
 
   args: {
     items: fruits,
-    defaultValue: fruits[0],
+    defaultValue: null,
   },
 }
 
 export const Group: Story = {
   render: (args) => (
     <Combobox {...args}>
-      <ComboboxTrigger className="min-w-72" />
+      <ComboboxTrigger className="min-w-72">
+        <ComboboxValue>
+          {(value: Item | null) => (value ? value.label : "Select a food")}
+        </ComboboxValue>
+      </ComboboxTrigger>
       <ComboboxPopup>
         <ComboboxInput placeholder="Select a food..." />
         <ComboboxSeparator />
         <ComboboxEmpty>No food found.</ComboboxEmpty>
         <ComboboxList>
-          {(item: GroupItems) =>
-            item.value && (
-              <ComboboxGroup key={item.value} items={item.items}>
-                <ComboboxGroupLabel>{item.label}</ComboboxGroupLabel>
-                {item.items.map((food) => (
-                  <ComboboxItem key={food.value} value={food}>
-                    {food.label}
-                  </ComboboxItem>
-                ))}
-              </ComboboxGroup>
-            )
-          }
+          {(item: GroupItems) => (
+            <ComboboxGroup key={item.value} items={item.items}>
+              <ComboboxGroupLabel>{item.label}</ComboboxGroupLabel>
+              {item.items.map((food) => (
+                <ComboboxItem key={food.value} value={food}>
+                  {food.label}
+                </ComboboxItem>
+              ))}
+            </ComboboxGroup>
+          )}
         </ComboboxList>
       </ComboboxPopup>
     </Combobox>
@@ -122,7 +121,7 @@ export const Group: Story = {
 
   args: {
     items: foodGroups,
-    defaultValue: foodGroups[0].items[0],
+    defaultValue: null,
   },
 }
 

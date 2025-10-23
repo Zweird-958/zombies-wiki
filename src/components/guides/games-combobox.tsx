@@ -10,6 +10,7 @@ import {
   ComboboxPopup,
   ComboboxSeparator,
   ComboboxTrigger,
+  ComboboxValue,
 } from "@/components/ui/combobox"
 import { FormError, FormInput, FormItem, FormLabel } from "@/components/ui/form"
 import { useQuery } from "@/hooks/use-query"
@@ -28,21 +29,20 @@ const GamesCombobox = ({ value, ...props }: Props) => {
     queryKey: ["games-combobox"],
   })
 
-  const items = useMemo<Item[]>(() => {
-    const commonItems = [{ label: t("game.placeholder"), value: "" }]
+  const items = useMemo<Item[]>(
+    () =>
+      data?.result.map((game) => ({
+        label: game.name,
+        value: game.id,
+      })) ?? [],
+    [data],
+  )
 
-    if (data) {
-      return [
-        ...commonItems,
-        ...data.result.map((game) => ({
-          label: game.name,
-          value: game.id,
-        })),
-      ]
-    }
+  const itemLabel = useMemo(() => {
+    const foundItem = items.find((item) => item.value === value)
 
-    return commonItems
-  }, [data, t])
+    return foundItem ? foundItem.label : ""
+  }, [items, value])
 
   return (
     <FormItem>
@@ -54,7 +54,11 @@ const GamesCombobox = ({ value, ...props }: Props) => {
         {...props}
       >
         <FormLabel>{t("game.label")}</FormLabel>
-        <ComboboxTrigger />
+        <ComboboxTrigger>
+          <ComboboxValue>
+            {value === "" ? t("game.placeholder") : itemLabel}
+          </ComboboxValue>
+        </ComboboxTrigger>
         <FormError />
         <ComboboxPopup>
           <FormInput
