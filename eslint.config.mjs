@@ -270,7 +270,7 @@ export default defineConfig(
     },
   },
   {
-    files: ["src/components/ui/**/*.tsx"],
+    files: ["src/components/ui/**/*.tsx", "src/components/ui/**/variants.ts"],
     rules: {
       "max-lines": [
         "error",

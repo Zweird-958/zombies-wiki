@@ -2,25 +2,25 @@ import { type VariantProps, tv } from "tailwind-variants"
 
 export const button = tv({
   base: [
-    "flex h-fit w-fit items-center justify-center gap-2 px-4 py-2 text-sm transition-all",
+    "flex size-fit items-center justify-center gap-2 px-4 py-2 whitespace-nowrap transition-all outline-none",
     "disabled:opacity-disabled disabled:cursor-not-allowed",
-    "focus:ring-2 focus:ring-offset-2 focus:outline-none",
+    "focused:ring",
     "active:not-disabled:scale-95",
-    "svg-not-size:size-4",
+    "svg-not-size:size-4 svg:shrink-0",
   ],
   variants: {
     color: {
-      primary: "",
-      secondary: "",
-      success: "",
-      danger: "",
-      warning: "",
+      primary: "ring-primary/50",
+      secondary: "ring-secondary/50",
+      success: "ring-success/50",
+      danger: "ring-danger/50",
+      warning: "ring-warning/50",
     },
     size: {
       sm: "text-sm",
       md: "text-base",
       lg: "px-4 py-3 text-lg",
-      icon: "p-2",
+      icon: "aspect-square p-2",
     },
     radius: {
       none: "rounded-none",
@@ -30,14 +30,36 @@ export const button = tv({
       full: "rounded-full",
     },
     variant: {
-      outline: "border",
+      outline: "border hover:bg-current/5",
       solid: "",
+      ghost: "hover:bg-current/30",
+    },
+    shadow: {
+      none: "shadow-none",
+      sm: "",
+      md: "",
+      lg: "",
     },
   },
   compoundVariants: [
     {
       size: ["sm", "md"],
       class: "px-3 py-1",
+    },
+    {
+      variant: ["outline", "solid"],
+      shadow: "sm",
+      class: "shadow-sm",
+    },
+    {
+      variant: ["outline", "solid"],
+      shadow: "md",
+      class: "shadow-md",
+    },
+    {
+      variant: ["outline", "solid"],
+      shadow: "lg",
+      class: "shadow-lg",
     },
     {
       color: "primary",
@@ -67,27 +89,77 @@ export const button = tv({
     {
       color: "primary",
       variant: "solid",
-      class: "bg-primary text-primary-foreground",
+      class: "bg-primary text-primary-foreground hover:bg-primary/90",
     },
     {
       color: "secondary",
       variant: "solid",
-      class: "bg-secondary text-secondary-foreground",
+      class: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
     },
     {
       color: "success",
       variant: "solid",
-      class: "bg-success text-success-foreground",
+      class: "bg-success text-success-foreground hover:bg-success/90",
     },
     {
       color: "danger",
       variant: "solid",
-      class: "bg-danger text-danger-foreground",
+      class: "bg-danger text-danger-foreground hover:bg-danger/90",
     },
     {
       color: "warning",
       variant: "solid",
-      class: "bg-warning text-warning-foreground",
+      class: "bg-warning text-warning-foreground hover:bg-warning/90",
+    },
+    {
+      color: "primary",
+      variant: "ghost",
+      class: "text-primary",
+    },
+    {
+      color: "secondary",
+      variant: "ghost",
+      class: "text-secondary",
+    },
+    {
+      color: "success",
+      variant: "ghost",
+      class: "text-success",
+    },
+    {
+      color: "danger",
+      variant: "ghost",
+      class: "text-danger",
+    },
+    {
+      color: "warning",
+      variant: "ghost",
+      class: "text-warning",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "primary",
+      class: "shadow-primary/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "secondary",
+      class: "shadow-secondary/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "success",
+      class: "shadow-success/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "danger",
+      class: "shadow-danger/50",
+    },
+    {
+      shadow: ["sm", "md", "lg"],
+      color: "warning",
+      class: "shadow-warning/50",
     },
   ],
   defaultVariants: {
@@ -95,6 +167,7 @@ export const button = tv({
     color: "primary",
     radius: "md",
     variant: "solid",
+    shadow: "sm",
   },
 })
 

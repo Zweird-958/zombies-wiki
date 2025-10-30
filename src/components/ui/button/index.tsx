@@ -13,13 +13,14 @@ export const Button = ({
   size,
   radius,
   variant,
+  shadow,
   disabled,
   isPending,
   children,
   ...props
 }: ButtonProps) => (
   <button
-    className={cn(button({ color, size, radius, variant, className }))}
+    className={cn(button({ color, size, radius, variant, shadow }), className)}
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     disabled={isPending || disabled}
     {...props}
