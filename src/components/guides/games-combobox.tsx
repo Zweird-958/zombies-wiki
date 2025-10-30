@@ -51,6 +51,7 @@ const GamesCombobox = ({ value, ...props }: Props) => {
         defaultValue=""
         disabled={isPending}
         value={isPending ? "" : value}
+        inputPlacement="inside"
         {...props}
       >
         <FormLabel>{t("game.label")}</FormLabel>

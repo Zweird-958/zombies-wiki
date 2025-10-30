@@ -64,6 +64,7 @@ const MapsCombobox = ({ value, ...props }: Props) => {
         items={items}
         disabled={isPending}
         value={isPending ? "" : value}
+        inputPlacement="inside"
         {...props}
       >
         <FormLabel>{t("map.label")}</FormLabel>

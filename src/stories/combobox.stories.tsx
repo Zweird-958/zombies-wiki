@@ -62,14 +62,8 @@ const foodGroups: GroupItems[] = [
 
 const DefaultCombobox = (props: ComponentProps<typeof Combobox>) => (
   <Combobox {...props}>
-    <ComboboxTrigger className="min-w-72">
-      <ComboboxValue>
-        {(value: Item | null) => (value ? value.label : "Select a fruit")}
-      </ComboboxValue>
-    </ComboboxTrigger>
+    <ComboboxInput placeholder="Select a fruit..." />
     <ComboboxPopup>
-      <ComboboxInput placeholder="Select a fruit..." />
-      <ComboboxSeparator />
       <ComboboxEmpty>No fruits found.</ComboboxEmpty>
       <ComboboxList>
         {(item: Item) => (
@@ -94,14 +88,8 @@ export const Default: Story = {
 export const Group: Story = {
   render: (args) => (
     <Combobox {...args}>
-      <ComboboxTrigger className="min-w-72">
-        <ComboboxValue>
-          {(value: Item | null) => (value ? value.label : "Select a food")}
-        </ComboboxValue>
-      </ComboboxTrigger>
+      <ComboboxInput placeholder="Select a food..." />
       <ComboboxPopup>
-        <ComboboxInput placeholder="Select a food..." />
-        <ComboboxSeparator />
         <ComboboxEmpty>No food found.</ComboboxEmpty>
         <ComboboxList>
           {(item: GroupItems) => (
@@ -122,6 +110,36 @@ export const Group: Story = {
   args: {
     items: foodGroups,
     defaultValue: null,
+  },
+}
+
+export const InputInside: Story = {
+  render: (args) => (
+    <Combobox {...args}>
+      <ComboboxTrigger>
+        <ComboboxValue>
+          {(value: Item | null) => (value ? value.label : "Select a fruit ")}
+        </ComboboxValue>
+      </ComboboxTrigger>
+      <ComboboxPopup>
+        <ComboboxInput placeholder="Select a fruit..." />
+        <ComboboxSeparator />
+        <ComboboxEmpty>No fruits found.</ComboboxEmpty>
+        <ComboboxList>
+          {(item: Item) => (
+            <ComboboxItem key={item.value} value={item}>
+              {item.label}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxPopup>
+    </Combobox>
+  ),
+
+  args: {
+    items: fruits,
+    defaultValue: null,
+    inputPlacement: "inside",
   },
 }
 
