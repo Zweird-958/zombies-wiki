@@ -14,7 +14,16 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    radius: {
+      control: "select",
+      options: ["none", "sm", "md", "lg", "full"],
+    },
+    shadow: {
+      control: "select",
+      options: ["none", "sm", "md", "lg"],
+    },
+  },
 
   args: {
     placeholder: "Enter a number",
@@ -65,5 +74,17 @@ export const Disabled: Story = {
   ),
   args: {
     disabled: true,
+  },
+}
+
+export const Invalid: Story = {
+  render: ({ ...args }) => (
+    <NumberField aria-invalid={args["aria-invalid"]}>
+      <Label>Number</Label>
+      <NumberFieldInput {...args} />
+    </NumberField>
+  ),
+  args: {
+    "aria-invalid": true,
   },
 }
