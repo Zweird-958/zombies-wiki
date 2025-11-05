@@ -1,8 +1,11 @@
+/* eslint-disable max-lines */
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
-import type { ComponentProps } from "react"
+import { type ComponentProps, useRef } from "react"
 
 import {
   Combobox,
+  ComboboxChip,
+  ComboboxChips,
   ComboboxEmpty,
   ComboboxGroup,
   ComboboxGroupLabel,
@@ -10,6 +13,7 @@ import {
   ComboboxItem,
   ComboboxList,
   ComboboxPopup,
+  type ComboboxProps,
   ComboboxSeparator,
   ComboboxTrigger,
   ComboboxValue,
@@ -140,6 +144,111 @@ export const InputInside: Story = {
     items: fruits,
     defaultValue: null,
     inputPlacement: "inside",
+  },
+}
+
+const MulitpleCombobox = <
+  ItemValue,
+  SelectedValue = ItemValue,
+  Multiple extends boolean | undefined = false,
+>({
+  items,
+}: ComboboxProps<ItemValue, SelectedValue, Multiple>) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  return (
+    <Combobox items={items} multiple>
+      <ComboboxChips ref={containerRef}>
+        <ComboboxValue>
+          {(value: Item[]) => (
+            <>
+              {value.map((fruit) => (
+                <ComboboxChip key={fruit.value} aria-label={fruit.value}>
+                  {fruit.label}
+                </ComboboxChip>
+              ))}
+              <ComboboxInput
+                placeholder={value.length > 0 ? "" : "e.g. Apple"}
+              />
+            </>
+          )}
+        </ComboboxValue>
+      </ComboboxChips>
+
+      <ComboboxPopup anchor={containerRef}>
+        <ComboboxEmpty>No fruits found.</ComboboxEmpty>
+        <ComboboxList>
+          {(item: Item) => (
+            <ComboboxItem key={item.value} value={item}>
+              {item.label}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxPopup>
+    </Combobox>
+  )
+}
+
+export const Multiple: Story = {
+  render: (args) => <MulitpleCombobox {...args} />,
+
+  args: {
+    items: fruits,
+  },
+}
+
+const MulitpleInsideCombobox = <
+  ItemValue,
+  SelectedValue = ItemValue,
+  Multiple extends boolean | undefined = false,
+>({
+  items,
+}: ComboboxProps<ItemValue, SelectedValue, Multiple>) => {
+  const containerRef = useRef<HTMLButtonElement | null>(null)
+
+  return (
+    <Combobox inputPlacement="inside" items={items} multiple>
+      <ComboboxTrigger ref={containerRef}>
+        <ComboboxChips>
+          <ComboboxValue>
+            {(value: Item[]) =>
+              value.length === 0 ? (
+                "Select a fruit"
+              ) : (
+                <>
+                  {value.map((fruit) => (
+                    <ComboboxChip key={fruit.value} aria-label={fruit.value}>
+                      {fruit.label}
+                    </ComboboxChip>
+                  ))}
+                </>
+              )
+            }
+          </ComboboxValue>
+        </ComboboxChips>
+      </ComboboxTrigger>
+
+      <ComboboxPopup anchor={containerRef}>
+        <ComboboxInput placeholder="Select a fruit..." />
+        <ComboboxSeparator />
+        <ComboboxEmpty>No fruits found.</ComboboxEmpty>
+        <ComboboxList>
+          {(item: Item) => (
+            <ComboboxItem key={item.value} value={item}>
+              {item.label}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxPopup>
+    </Combobox>
+  )
+}
+
+export const MultipleInputInside: Story = {
+  render: (args) => <MulitpleInsideCombobox {...args} />,
+
+  args: {
+    items: fruits,
   },
 }
 

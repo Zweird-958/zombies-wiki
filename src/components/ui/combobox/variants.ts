@@ -26,6 +26,15 @@ export const combobox = tv({
     itemList: "px-2",
     empty: "cursor-not-allowed px-4 text-sm select-none",
     groupLabel: "text-muted-foreground px-1 py-2 text-xs",
+    chips: "flex w-64 flex-wrap items-center gap-0.5",
+    chip: [
+      "bg-background text-foreground border-border border",
+      "flex cursor-default items-center gap-1 rounded-md px-1.5 py-[0.2rem] text-sm outline-none",
+    ],
+    chipRemove: [
+      "svg-not-size:size-4",
+      "text-muted-foreground hover:text-foreground transition-colors",
+    ],
   },
   variants: {
     placement: {
@@ -50,9 +59,28 @@ export const combobox = tv({
         inputWrapper: "relative",
         trigger: "absolute right-2 bottom-0 h-full items-center justify-center",
         input: "pr-7",
+        chips: [
+          "has-[&[data-slot=combobox-input]:focus]:ring-ring has-[&[data-slot=combobox-input]:focus]:border-ring has-[&[data-slot=combobox-input]:focus]:ring",
+          "border-border rounded-md border px-1.5 py-1",
+        ],
       },
     },
+    multiple: {
+      true: {
+        input: "min-w-12 flex-1 rounded-md bg-transparent pl-1.5 outline-none",
+      },
+      false: {},
+    },
   },
+  compoundVariants: [
+    {
+      placement: "inside",
+      multiple: true,
+      className: {
+        trigger: "h-fit",
+      },
+    },
+  ],
 })
 
 export type ComboboxVariants = VariantProps<typeof combobox>

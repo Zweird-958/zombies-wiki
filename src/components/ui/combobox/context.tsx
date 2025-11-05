@@ -7,6 +7,7 @@ import { combobox } from "@/components/ui/combobox/variants"
 type ComboboxContextValue = {
   inputPlacement: "inside" | "outside"
   styles: ReturnType<typeof combobox>
+  multiple: boolean
 }
 
 const ComboboxContext = createContext<ComboboxContextValue>(
@@ -16,16 +17,18 @@ const ComboboxContext = createContext<ComboboxContextValue>(
 export type ComboboxProviderProps = {
   children: ReactNode
   inputPlacement?: "inside" | "outside"
+  multiple?: boolean
 }
 
 export const ComboboxProvider = ({
   children,
   inputPlacement = "outside",
+  multiple = false,
 }: ComboboxProviderProps) => {
-  const styles = combobox({ placement: inputPlacement })
+  const styles = combobox({ placement: inputPlacement, multiple })
 
   return (
-    <ComboboxContext value={{ inputPlacement, styles }}>
+    <ComboboxContext value={{ inputPlacement, styles, multiple }}>
       {children}
     </ComboboxContext>
   )

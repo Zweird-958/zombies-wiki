@@ -1,7 +1,8 @@
 "use client"
 
 import { Combobox as BaseCombobox } from "@base-ui-components/react/combobox"
-import { Check, ChevronDown, Search } from "lucide-react"
+import { Check, ChevronDown, Search, X } from "lucide-react"
+import type { Ref } from "react"
 
 import {
   ComboboxProvider,
@@ -26,12 +27,14 @@ export const Combobox = <
   inputPlacement,
   ...props
 }: ComboboxProps<ItemValue, SelectedValue, Multiple>) => (
-  <ComboboxProvider inputPlacement={inputPlacement}>
+  <ComboboxProvider inputPlacement={inputPlacement} multiple={props.multiple}>
     <BaseCombobox.Root {...props} />
   </ComboboxProvider>
 )
 
-export type ComboboxTriggerProps = BaseCombobox.Trigger.Props
+export type ComboboxTriggerProps = {
+  ref?: Ref<HTMLButtonElement>
+} & BaseCombobox.Trigger.Props
 
 export const ComboboxTrigger = ({
   className,
@@ -57,15 +60,27 @@ export type ComboboxValueProps = BaseCombobox.Value.Props
 
 export const ComboboxValue = BaseCombobox.Value
 
-export type ComboboxInputProps = BaseCombobox.Input.Props
+export type ComboboxInputProps = Omit<BaseCombobox.Input.Props, "multiple">
 
 export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => {
-  const { styles, inputPlacement: placement } = useCombobox()
+  const { styles, inputPlacement: placement, multiple } = useCombobox()
 
   if (placement === "outside") {
+    if (multiple) {
+      return (
+        <BaseCombobox.Input
+          multiple={multiple}
+          data-slot="combobox-input"
+          className={cn(styles.input(), className)}
+          {...props}
+        />
+      )
+    }
+
     return (
       <div className={cn(styles.inputWrapper())}>
         <BaseCombobox.Input
+          data-slot="combobox-input"
           className={cn(input(), styles.input(), className)}
           {...props}
         />
@@ -78,6 +93,7 @@ export const ComboboxInput = ({ className, ...props }: ComboboxInputProps) => {
     <div className={cn(styles.inputWrapper())}>
       <Search />
       <BaseCombobox.Input
+        data-slot="combobox-input"
         className={cn(styles.input(), className)}
         {...props}
       />
@@ -101,18 +117,24 @@ export const ComboboxSeparator = ({
   )
 }
 
-export type ComboboxPopupProps = BaseCombobox.Popup.Props
+export type ComboboxPopupProps = BaseCombobox.Popup.Props &
+  Pick<BaseCombobox.Positioner.Props, "anchor">
 
 export const ComboboxPopup = ({
   className,
   children,
+  anchor,
   ...props
 }: ComboboxPopupProps) => {
   const { styles } = useCombobox()
 
   return (
     <BaseCombobox.Portal>
-      <BaseCombobox.Positioner className="outline-0" sideOffset={4}>
+      <BaseCombobox.Positioner
+        className="outline-0"
+        sideOffset={4}
+        anchor={anchor}
+      >
         <BaseCombobox.Popup
           className={cn(styles.popup(), className)}
           {...props}
@@ -187,5 +209,40 @@ export const ComboboxGroupLabel = ({
       className={cn(styles.groupLabel(), className)}
       {...props}
     />
+  )
+}
+
+export type ComboboxChipsProps = {
+  ref?: Ref<HTMLDivElement>
+} & BaseCombobox.Chips.Props
+
+export const ComboboxChips = ({ className, ...props }: ComboboxChipsProps) => {
+  const { styles } = useCombobox()
+
+  return (
+    <BaseCombobox.Chips className={cn(styles.chips(), className)} {...props} />
+  )
+}
+
+export type ComboboxChipProps = BaseCombobox.Chip.Props
+
+export const ComboboxChip = ({
+  className,
+  children,
+  ...props
+}: ComboboxChipProps) => {
+  const { styles } = useCombobox()
+
+  return (
+    <BaseCombobox.Chip className={cn(styles.chip(), className)} {...props}>
+      {children}
+      <BaseCombobox.ChipRemove
+        className={styles.chipRemove()}
+        data-slot="combobox-chip-remove"
+        aria-label="Remove"
+      >
+        <X />
+      </BaseCombobox.ChipRemove>
+    </BaseCombobox.Chip>
   )
 }
