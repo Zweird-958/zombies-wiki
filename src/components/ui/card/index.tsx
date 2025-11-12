@@ -1,18 +1,31 @@
-import { Slot } from "@radix-ui/react-slot"
+import { mergeProps } from "@base-ui-components/react/merge-props"
+import { useRender } from "@base-ui-components/react/use-render"
 import * as React from "react"
 
 import { card } from "@/components/ui/card/variants"
+import { cn } from "@/utils/cn"
 
-export type CardProps = {
-  asChild?: boolean
-} & React.ComponentProps<"div">
+const styles = card()
 
-export const Card = ({ asChild, className, ...props }: CardProps) => {
-  const Comp = asChild ? Slot : "div"
+export type CardProps = useRender.ComponentProps<"div">
 
-  return (
-    <Comp data-slot="card" className={card().base({ className })} {...props} />
-  )
+export const Card = ({ render, className, ...props }: CardProps) => {
+  const element = useRender({
+    defaultTagName: "div",
+    render,
+    state: {
+      slot: "card",
+    },
+    stateAttributesMapping: {
+      slot: (state) => ({ "data-slot": state }),
+    },
+    props: mergeProps<"div">(
+      { className: cn(styles.base(), className) },
+      props,
+    ),
+  })
+
+  return element
 }
 
 export type CardHeaderProps = React.ComponentProps<"div">
@@ -20,7 +33,7 @@ export type CardHeaderProps = React.ComponentProps<"div">
 export const CardHeader = ({ className, ...props }: CardHeaderProps) => (
   <div
     data-slot="card-header"
-    className={card().header({ className })}
+    className={cn(styles.header(), className)}
     {...props}
   />
 )
@@ -30,7 +43,7 @@ export type CardTitleProps = React.ComponentProps<"div">
 export const CardTitle = ({ className, ...props }: CardTitleProps) => (
   <div
     data-slot="card-title"
-    className={card().title({ className })}
+    className={cn(styles.title(), className)}
     {...props}
   />
 )
@@ -43,7 +56,7 @@ export const CardDescription = ({
 }: CardDescriptionProps) => (
   <div
     data-slot="card-description"
-    className={card().description({ className })}
+    className={cn(styles.description(), className)}
     {...props}
   />
 )
@@ -53,7 +66,7 @@ export type CardActionProps = React.ComponentProps<"div">
 export const CardAction = ({ className, ...props }: CardActionProps) => (
   <div
     data-slot="card-action"
-    className={card().action({ className })}
+    className={cn(styles.action(), className)}
     {...props}
   />
 )
@@ -63,7 +76,7 @@ export type CardContentProps = React.ComponentProps<"div">
 export const CardContent = ({ className, ...props }: CardContentProps) => (
   <div
     data-slot="card-content"
-    className={card().content({ className })}
+    className={cn(styles.content(), className)}
     {...props}
   />
 )
@@ -73,7 +86,7 @@ export type CardFooterProps = React.ComponentProps<"div">
 export const CardFooter = ({ className, ...props }: CardFooterProps) => (
   <div
     data-slot="card-footer"
-    className={card().footer({ className })}
+    className={cn(styles.footer(), className)}
     {...props}
   />
 )
