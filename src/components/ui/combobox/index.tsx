@@ -45,11 +45,12 @@ export const ComboboxTrigger = ({
 
   return (
     <BaseCombobox.Trigger
+      data-slot="combobox-trigger"
       className={cn(styles.trigger(), className)}
       {...props}
     >
       {children}
-      <BaseCombobox.Icon className={styles.icon()}>
+      <BaseCombobox.Icon className={styles.icon()} data-slot="combobox-icon">
         <ChevronDown />
       </BaseCombobox.Icon>
     </BaseCombobox.Trigger>
@@ -111,6 +112,7 @@ export const ComboboxSeparator = ({
 
   return (
     <BaseCombobox.Separator
+      data-slot="combobox-separator"
       className={cn(styles.separator(), className)}
       {...props}
     />
@@ -131,11 +133,13 @@ export const ComboboxPopup = ({
   return (
     <BaseCombobox.Portal>
       <BaseCombobox.Positioner
+        data-slot="combobox-popup-positioner"
         className="outline-0"
         sideOffset={4}
         anchor={anchor}
       >
         <BaseCombobox.Popup
+          data-slot="combobox-popup"
           className={cn(styles.popup(), className)}
           {...props}
         >
@@ -153,6 +157,7 @@ export const ComboboxList = ({ className, ...props }: ComboboxListProps) => {
 
   return (
     <BaseCombobox.List
+      data-slot="combobox-list"
       className={cn(styles.itemList(), className)}
       {...props}
     />
@@ -169,8 +174,12 @@ export const ComboboxItem = ({
   const { styles } = useCombobox()
 
   return (
-    <BaseCombobox.Item className={cn(styles.item(), className)} {...props}>
-      <BaseCombobox.ItemIndicator>
+    <BaseCombobox.Item
+      data-slot="combobox-item"
+      className={cn(styles.item(), className)}
+      {...props}
+    >
+      <BaseCombobox.ItemIndicator data-slot="combobox-item-indicator">
         <Check />
       </BaseCombobox.ItemIndicator>
       <div>{children}</div>
@@ -186,7 +195,7 @@ export const ComboboxEmpty = ({ className, ...props }: ComboboxEmptyProps) => {
   return (
     <BaseCombobox.Empty
       className={cn(styles.empty(), className)}
-      data-slot="empty"
+      data-slot="combobox-empty"
       {...props}
     />
   )
@@ -194,7 +203,9 @@ export const ComboboxEmpty = ({ className, ...props }: ComboboxEmptyProps) => {
 
 export type ComboboxGroupProps = BaseCombobox.Group.Props
 
-export const ComboboxGroup = BaseCombobox.Group
+export const ComboboxGroup = (props: ComboboxGroupProps) => (
+  <BaseCombobox.Group data-slot="combobox-group" {...props} />
+)
 
 export type ComboboxGroupLabelProps = BaseCombobox.GroupLabel.Props
 
@@ -206,6 +217,7 @@ export const ComboboxGroupLabel = ({
 
   return (
     <BaseCombobox.GroupLabel
+      data-slot="combobox-group-label"
       className={cn(styles.groupLabel(), className)}
       {...props}
     />
@@ -220,7 +232,11 @@ export const ComboboxChips = ({ className, ...props }: ComboboxChipsProps) => {
   const { styles } = useCombobox()
 
   return (
-    <BaseCombobox.Chips className={cn(styles.chips(), className)} {...props} />
+    <BaseCombobox.Chips
+      data-slot="combobox-chips"
+      className={cn(styles.chips(), className)}
+      {...props}
+    />
   )
 }
 
@@ -234,7 +250,11 @@ export const ComboboxChip = ({
   const { styles } = useCombobox()
 
   return (
-    <BaseCombobox.Chip className={cn(styles.chip(), className)} {...props}>
+    <BaseCombobox.Chip
+      data-slot="combobox-chip"
+      className={cn(styles.chip(), className)}
+      {...props}
+    >
       {children}
       <BaseCombobox.ChipRemove
         className={styles.chipRemove()}
