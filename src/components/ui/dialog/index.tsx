@@ -3,6 +3,7 @@ import { X } from "lucide-react"
 import type { ComponentProps } from "react"
 
 import { dialog } from "@/components/ui/dialog/variants"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/utils/cn"
 
 const styles = dialog()
@@ -49,12 +50,22 @@ export const DialogPopup = ({
 
 export type DialogContentProps = ComponentProps<"div">
 
-export const DialogContent = ({ className, ...props }: DialogContentProps) => (
-  <div
-    data-slot="dialog-content"
-    className={cn(styles.content(), className)}
-    {...props}
-  />
+export const DialogContent = ({
+  className,
+  children,
+  ...props
+}: DialogContentProps) => (
+  <div data-slot="dialog-content" className={styles.content()} {...props}>
+    <ScrollArea
+      classNames={{
+        base: "h-auto w-full",
+        viewport: "border-none rounded-none",
+        content: cn("p-0 pr-4 pt-2", className),
+      }}
+    >
+      {children}
+    </ScrollArea>
+  </div>
 )
 
 export type DialogTitleProps = BaseDialog.Title.Props
