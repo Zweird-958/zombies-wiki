@@ -11,4 +11,5 @@ export const CreateGameSchema = z.object({
 
 export const GetGamesQueryParamsSchema = z.object({
   maps: z.coerce.boolean().optional(),
+  option: z.enum(["create-map", "list"]).default("list"),
 })

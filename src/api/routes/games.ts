@@ -7,6 +7,7 @@ import { formatGame, formatSingleGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { slugify } from "@/api/utils/slugify"
 import { uploadImage } from "@/api/utils/upload-image"
+import { images, maps } from "@/db/schemas"
 import { games } from "@/db/schemas/games"
 import { gamesWithMaps } from "@/db/views"
 import { SlugParamSchema } from "@/schemas/common"
@@ -46,7 +47,7 @@ export const gamesApp = new Hono()
     "/",
     zValidator("query", GetGamesQueryParamsSchema),
     async ({ req, var: { db, send } }) => {
-      const { maps: withMaps } = req.valid("query")
+      const { maps: withMaps, option } = req.valid("query")
 
       if (withMaps) {
         const allGames = await db.select().from(gamesWithMaps)
@@ -54,18 +55,33 @@ export const gamesApp = new Hono()
         return send(allGames.map(formatGame))
       }
 
-      const gamesResult = await db.query.games.findMany({
-        columns: {
-          id: true,
-          name: true,
-          slug: true,
-        },
-        with: {
-          image: {
-            columns: { url: true },
+      if (option === "create-map") {
+        const gamesResult = await db.query.games.findMany({
+          columns: {
+            id: true,
+            name: true,
+            slug: true,
           },
-        },
-      })
+          with: {
+            image: {
+              columns: { url: true },
+            },
+          },
+        })
+
+        return send(gamesResult.map(formatGame))
+      }
+
+      const gamesResult = await db
+        .select({
+          id: games.id,
+          name: games.name,
+          slug: games.slug,
+          image: { url: images.url },
+        })
+        .from(games)
+        .innerJoin(images, eq(games.imageId, images.id))
+        .innerJoin(maps, eq(maps.gameId, games.id))
 
       return send(gamesResult.map(formatGame))
     },

@@ -25,9 +25,12 @@ type Props = {
 const GamesCombobox = ({ value, ...props }: Props) => {
   const t = useTranslations("forms.createMap")
 
-  const { data, isPending } = useQuery(client.games.$get, {
-    queryKey: ["games-combobox"],
-  })
+  const { data, isPending } = useQuery(
+    () => client.games.$get({ query: { option: "create-map" } }),
+    {
+      queryKey: ["games-combobox"],
+    },
+  )
 
   const items = useMemo<Item[]>(
     () =>
