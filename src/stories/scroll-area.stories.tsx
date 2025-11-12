@@ -1,4 +1,6 @@
+import { faker } from "@faker-js/faker"
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
+import Image from "next/image"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
 
@@ -9,9 +11,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {},
-
-  args: {},
+  argTypes: {
+    orientation: { control: "select", options: ["horizontal", "vertical"] },
+  },
+  args: {
+    orientation: "vertical",
+  },
 } satisfies Meta<typeof ScrollArea>
 
 export default meta
@@ -43,6 +48,26 @@ export const Default: Story = {
           mollit amet anim officia nulla quis enim dolor aliqua velit. Magna
           officia aliquip ex.
         </p>
+      </>
+    ),
+  },
+}
+
+export const Horizontal: Story = {
+  args: {
+    orientation: "horizontal",
+    children: (
+      <>
+        {new Array(6).fill(null).map((_) => (
+          <div className="relative flex size-[200px] items-center justify-center rounded-md p-4">
+            <Image
+              src={faker.image.url({ width: 200, height: 200 })}
+              alt="Random"
+              fill
+              className="rounded-md"
+            />
+          </div>
+        ))}
       </>
     ),
   },
