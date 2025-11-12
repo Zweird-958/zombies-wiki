@@ -16,7 +16,7 @@ export const dialog = tv({
       "svg-not-size:size-4 svg:pointer-events-none svg:shrink-0",
       "disabled:pointer-events-none",
     ],
-    content: "pt-2",
+    content: "flex max-h-[500px] pt-2",
     title: "text-lg font-medium",
     description: "text-muted-foreground text-sm",
   },

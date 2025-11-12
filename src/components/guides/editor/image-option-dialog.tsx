@@ -57,7 +57,7 @@ const ImageOptionButton = () => {
 
       <DialogPopup className="w-[1000px]">
         <DialogTitle className="text-lg font-medium">{t("title")}</DialogTitle>
-        <DialogContent className="flex flex-wrap justify-center gap-4">
+        <DialogContent className="flex flex-wrap justify-center gap-4 py-2">
           {images.length === 0 ? (
             <p>{t("empty")}</p>
           ) : (
