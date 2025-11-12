@@ -7,7 +7,7 @@ export const scrollArea = tv({
       "border-border h-full w-full overscroll-contain rounded-md border",
     content: "px-4 py-3",
     scrollbar:
-      "bg-muted relative m-1 flex justify-center rounded-md opacity-0 transition-all group-hover:opacity-100",
+      "bg-muted relative m-1 flex rounded-md opacity-0 transition-all group-hover:opacity-100",
     thumb: "bg-muted-foreground w-full rounded-md",
   },
   variants: {
