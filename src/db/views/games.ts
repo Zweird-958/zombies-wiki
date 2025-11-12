@@ -9,7 +9,7 @@ export const gamesWithMaps = pgView("games_with_maps").as((qb) =>
     .select({
       id: games.id,
       name: games.name,
-      normalizedName: games.normalizedName,
+      slug: games.slug,
       image: {
         url: images.url,
       },
@@ -18,7 +18,7 @@ export const gamesWithMaps = pgView("games_with_maps").as((qb) =>
             json_build_object(
               'id', ${maps.id},
               'name', ${maps.name},
-              'normalizedName', ${maps.normalizedName}
+              'slug', ${maps.slug}
             )
           )
         `.as("maps"),

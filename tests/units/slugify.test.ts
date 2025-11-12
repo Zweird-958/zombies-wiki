@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
 
-import { normalizeName } from "@/api/utils/normalize-name"
+import { slugify } from "@/api/utils/slugify"
 
-describe("normalizeName", () => {
+describe("slugify", () => {
   it("should normalize game names correctly", () => {
     const testCases = [
       { input: "Call of Duty: Black Ops", expected: "call-of-duty-black-ops" },
@@ -26,9 +26,9 @@ describe("normalizeName", () => {
     ]
 
     testCases.forEach(({ input, expected }) => {
-      const normalized = normalizeName(input)
+      const slug = slugify(input)
 
-      expect(normalized).toBe(expected)
+      expect(slug).toBe(expected)
     })
   })
 
@@ -47,8 +47,9 @@ describe("normalizeName", () => {
     ]
 
     testCases.forEach(({ input, expected }) => {
-      const normalized = normalizeName(input)
-      expect(normalized).toBe(expected)
+      const slug = slugify(input)
+
+      expect(slug).toBe(expected)
     })
   })
 })

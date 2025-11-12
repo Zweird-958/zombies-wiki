@@ -8,7 +8,7 @@ import { commonColumns } from "@/db/utils"
 export const games = pgTable("games", {
   ...commonColumns,
   name: text("name").notNull().unique(),
-  normalizedName: text("normalized_name").notNull().unique(),
+  slug: text("slug").notNull().unique(),
   imageId: uuid("image_id")
     .references(() => images.id)
     .notNull(),

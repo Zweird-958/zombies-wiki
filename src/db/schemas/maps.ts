@@ -9,7 +9,7 @@ import { commonColumns } from "@/db/utils"
 export const maps = pgTable("maps", {
   ...commonColumns,
   name: text("name").notNull(),
-  normalizedName: text("normalized_name").notNull(),
+  slug: text("slug").notNull(),
   imageId: uuid("image_id")
     .references(() => images.id)
     .notNull(),
