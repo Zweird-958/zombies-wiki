@@ -4,11 +4,11 @@ import ItemCard from "@/components/items/item-card"
 import { routes } from "@/utils/routes"
 
 type Props = {
-  normalizedName: string
+  slug: string
 } & Omit<ComponentProps<typeof ItemCard>, "href">
 
-const GameCard = ({ normalizedName, ...props }: Props) => (
-  <ItemCard href={routes.game(normalizedName)} {...props} />
+const GameCard = ({ slug, ...props }: Props) => (
+  <ItemCard href={routes.game(slug)} {...props} />
 )
 
 export default GameCard

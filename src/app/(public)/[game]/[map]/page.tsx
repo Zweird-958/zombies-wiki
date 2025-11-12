@@ -13,7 +13,7 @@ const Page = async ({ params }: Props) => {
   const { map: mapName, game } = await params
   const t = await getTranslations("maps")
   const data = await (
-    await client.maps[":name"].$get({ param: { name: mapName } })
+    await client.maps[":slug"].$get({ param: { slug: mapName } })
   ).json()
 
   if ("error" in data) {

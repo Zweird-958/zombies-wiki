@@ -17,7 +17,6 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     environment: "jsdom",
-    setupFiles: ["dotenv/config"],
     projects: [
       {
         extends: true,
@@ -41,6 +40,23 @@ export default defineConfig({
             ],
           },
           setupFiles: [".storybook/vitest.setup.ts"],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          include: ["tests/units/**/*.{test,spec}.{ts,tsx,js,jsx}"],
+          environment: "node",
+        },
+      },
+
+      {
+        extends: true,
+        test: {
+          name: "integration",
+          include: ["tests/integrations/**/*.{test,spec}.{ts,tsx,js,jsx}"],
+          environment: "node",
         },
       },
     ],

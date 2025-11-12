@@ -7,3 +7,7 @@ export const name = z
   .transform((text) => text.replace(/\s+/gu, " "))
 
 export const id = z.uuid("required")
+
+export const SlugParamSchema = z.object({
+  slug: z.string().trim().min(1, "required"),
+})

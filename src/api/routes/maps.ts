@@ -5,9 +5,10 @@ import { Hono } from "hono"
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { formatSingleMap } from "@/api/utils/maps/format-map"
 import { isMapExists } from "@/api/utils/maps/is-map-exists"
-import { normalizeName } from "@/api/utils/normalize-name"
+import { slugify } from "@/api/utils/slugify"
 import { uploadImage } from "@/api/utils/upload-image"
 import { maps } from "@/db/schemas/maps"
+import { SlugParamSchema } from "@/schemas/common"
 import { CreateMapSchema } from "@/schemas/maps"
 
 export const mapsApp = new Hono()
@@ -18,38 +19,38 @@ export const mapsApp = new Hono()
     ...isAuthorized({ maps: ["create"] }),
     async ({ req, var: { send, db, fail } }) => {
       const { name, image, gameId } = req.valid("form")
-      const normalizedName = normalizeName(name)
+      const slug = slugify(name)
 
-      if (await isMapExists({ name: normalizedName, gameId }, db)) {
+      if (await isMapExists({ slug, gameId }, db)) {
         return fail("CONFLICT", `${name} already exists`)
       }
 
       const imageId = await uploadImage({
         image,
-        name: normalizedName,
+        name: slug,
         folder: `maps/${gameId}`,
         db,
       })
 
       const [map] = await db
         .insert(maps)
-        .values({ name, imageId, normalizedName, gameId })
+        .values({ name, imageId, slug, gameId })
         .returning()
 
       return send(map)
     },
   )
   .get(
-    "/:name",
-    zValidator("param", CreateMapSchema.pick({ name: true })),
+    "/:slug",
+    zValidator("param", SlugParamSchema),
     async ({ req, var: { send, db, fail } }) => {
-      const { name } = req.valid("param")
+      const { slug } = req.valid("param")
 
       const map = await db.query.maps.findFirst({
         columns: {
           name: true,
         },
-        where: eq(maps.normalizedName, name),
+        where: eq(maps.slug, slug),
         with: {
           guides: {
             columns: { id: true, name: true },
@@ -64,7 +65,7 @@ export const mapsApp = new Hono()
       })
 
       if (!map) {
-        return fail("NOT_FOUND", `Map with name '${name}' not found`)
+        return fail("NOT_FOUND", `Map with slug '${slug}' not found`)
       }
 
       return send(formatSingleMap(map))

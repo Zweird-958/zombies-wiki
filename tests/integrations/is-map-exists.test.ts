@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker"
 import { beforeAll, describe, expect, it } from "vitest"
 
 import { isMapExists } from "@/api/utils/maps/is-map-exists"
-import { normalizeName } from "@/api/utils/normalize-name"
+import { slugify } from "@/api/utils/slugify"
 import { db } from "@/db"
 import { games, images, maps } from "@/db/schemas"
 
@@ -10,13 +10,13 @@ const name = faker.word.words({ count: { min: 1, max: 5 } })
 
 const gameData: Omit<typeof games.$inferInsert, "imageId"> = {
   name,
-  normalizedName: normalizeName(name),
+  slug: slugify(name),
   releaseYear: faker.number.int({ min: 1970, max: 2050 }),
 }
 
 const mapData: Omit<typeof maps.$inferInsert, "imageId" | "gameId"> = {
   name: faker.word.words({ count: { min: 1, max: 5 } }),
-  normalizedName: "",
+  slug: "",
 }
 
 let gameId = ""
@@ -41,17 +41,14 @@ beforeAll(async () => {
 
 describe("isMapExists", () => {
   it("should return true if the map exists", async () => {
-    const isExists = await isMapExists(
-      { name: mapData.normalizedName, gameId },
-      db,
-    )
+    const isExists = await isMapExists({ slug: mapData.slug, gameId }, db)
 
     expect(isExists).toBe(true)
   })
 
   it("should return false if the map exists but for another game", async () => {
     const isExists = await isMapExists(
-      { name: mapData.normalizedName, gameId: faker.string.uuid() },
+      { slug: mapData.slug, gameId: faker.string.uuid() },
       db,
     )
 
@@ -60,7 +57,7 @@ describe("isMapExists", () => {
 
   it("should return false if the map does not exist", async () => {
     const isExists = await isMapExists(
-      { name: faker.word.words({ count: { min: 6, max: 7 } }), gameId },
+      { slug: faker.word.words({ count: { min: 6, max: 7 } }), gameId },
       db,
     )
 

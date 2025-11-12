@@ -2,20 +2,18 @@ import { faker } from "@faker-js/faker"
 import { describe, expect, it } from "vitest"
 
 import { formatGame } from "@/api/utils/games/format-game"
-import { normalizeName } from "@/api/utils/normalize-name"
+import { slugify } from "@/api/utils/slugify"
 import { config } from "@/configs/api"
 
 const name = faker.lorem.words(3)
-const normalizedName = normalizeName(name)
+const slug = slugify(name)
 
 const game = {
   id: faker.string.uuid(),
   name,
-  normalizedName,
-  image: { url: normalizedName },
-  maps: [
-    { id: faker.string.uuid(), name: faker.lorem.words(2), normalizedName },
-  ],
+  slug,
+  image: { url: slug },
+  maps: [{ id: faker.string.uuid(), name: faker.lorem.words(2), slug }],
 }
 
 describe("formatGame", () => {
@@ -25,7 +23,7 @@ describe("formatGame", () => {
     expect(formattedGame).toEqual({
       id: game.id,
       name: game.name,
-      normalizedName: game.normalizedName,
+      slug: game.slug,
       image: `${config.upload.publicUrl}${game.image.url}`,
       maps: game.maps,
     })

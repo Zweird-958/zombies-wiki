@@ -5,10 +5,11 @@ import { Hono } from "hono"
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { formatGame, formatSingleGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
-import { normalizeName } from "@/api/utils/normalize-name"
+import { slugify } from "@/api/utils/slugify"
 import { uploadImage } from "@/api/utils/upload-image"
 import { games } from "@/db/schemas/games"
 import { gamesWithMaps } from "@/db/views"
+import { SlugParamSchema } from "@/schemas/common"
 import { CreateGameSchema, GetGamesQueryParamsSchema } from "@/schemas/games"
 
 export const gamesApp = new Hono()
@@ -20,22 +21,22 @@ export const gamesApp = new Hono()
     async ({ req, var: { send, db, fail } }) => {
       const { name, image, releaseYear } = req.valid("form")
 
-      const normalizedName = normalizeName(name)
+      const slug = slugify(name)
 
-      if (await isGameExists(normalizedName, db)) {
+      if (await isGameExists(slug, db)) {
         return fail("CONFLICT", `${name} already exists`)
       }
 
       const imageId = await uploadImage({
         image,
-        name: normalizedName,
+        name: slug,
         folder: "games",
         db,
       })
 
       const [game] = await db
         .insert(games)
-        .values({ name, imageId, normalizedName, releaseYear })
+        .values({ name, imageId, slug, releaseYear })
         .returning()
 
       return send(game)
@@ -57,7 +58,7 @@ export const gamesApp = new Hono()
         columns: {
           id: true,
           name: true,
-          normalizedName: true,
+          slug: true,
         },
         with: {
           image: {
@@ -70,19 +71,19 @@ export const gamesApp = new Hono()
     },
   )
   .get(
-    "/:name",
-    zValidator("param", CreateGameSchema.pick({ name: true })),
+    "/:slug",
+    zValidator("param", SlugParamSchema),
     async ({ req, var: { db, send, fail } }) => {
-      const { name } = req.valid("param")
+      const { slug } = req.valid("param")
 
       const gamesResult = await db.query.games.findFirst({
         columns: {
           name: true,
         },
-        where: eq(games.normalizedName, normalizeName(name)),
+        where: eq(games.slug, slug),
         with: {
           maps: {
-            columns: { id: true, name: true, normalizedName: true },
+            columns: { id: true, name: true, slug: true },
             with: {
               image: { columns: { url: true } },
             },
@@ -91,7 +92,7 @@ export const gamesApp = new Hono()
       })
 
       if (!gamesResult) {
-        return fail("NOT_FOUND", `Game with name '${name}' not found`)
+        return fail("NOT_FOUND", `Game with slug '${slug}' not found`)
       }
 
       return send(formatSingleGame(gamesResult))

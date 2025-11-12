@@ -4,7 +4,7 @@ import type { UnformattedMap } from "@/types/maps"
 type Game = {
   id: string
   name: string
-  normalizedName: string
+  slug: string
   image: {
     url: string
   }
@@ -14,7 +14,7 @@ type Game = {
 export const formatGame = (game: Game) => ({
   id: game.id,
   name: game.name,
-  normalizedName: game.normalizedName,
+  slug: game.slug,
   image: `${config.upload.publicUrl}${game.image.url}`,
   maps: game.maps,
 })
@@ -23,7 +23,7 @@ type SingleGame = Pick<Game, "name"> & {
   maps: {
     id: string
     name: string
-    normalizedName: string
+    slug: string
     image: { url: string }
   }[]
 }

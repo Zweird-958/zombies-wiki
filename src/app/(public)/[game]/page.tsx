@@ -10,7 +10,7 @@ type Props = {
 
 const GamePage = async ({ params }: Props) => {
   const { game } = await params
-  const response = await client.games[":name"].$get({ param: { name: game } })
+  const response = await client.games[":slug"].$get({ param: { slug: game } })
   const data = await response.json()
 
   if ("error" in data) {

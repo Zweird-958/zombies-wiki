@@ -4,7 +4,7 @@ import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { formatGuide } from "@/api/utils/guides/format-guide"
-import { normalizeName } from "@/api/utils/normalize-name"
+import { slugify } from "@/api/utils/slugify"
 import { uploadImage } from "@/api/utils/upload-image"
 import { guides, steps as stepsTable } from "@/db/schemas"
 import { CreateGuideFormDataSchema } from "@/schemas/api"
@@ -22,7 +22,7 @@ export const guidesApp = new Hono()
       const result = await db.transaction(async (tx) => {
         const imageId = await uploadImage({
           image,
-          name: normalizeName(name),
+          name: slugify(name),
           folder: `guides/${mapId}`,
           db,
         })
