@@ -5,7 +5,7 @@ import { formatImage } from "@/api/utils/images/format-image"
 
 export const imagesApp = new Hono()
   .basePath("/images")
-  .post(
+  .get(
     "/",
     ...isAuthorized({ images: ["list"] }),
     async ({ var: { send, db } }) => {
