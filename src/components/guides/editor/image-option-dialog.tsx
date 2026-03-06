@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { type MouseEvent, useState } from "react"
 
-import { client } from "@/api/client"
 import { useEditor } from "@/components/guides/editor/use-editor"
 import {
   Dialog,
@@ -14,16 +13,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Toggle } from "@/components/ui/toggle"
-import { useQuery } from "@/hooks/use-query"
+import { useImages } from "@/hooks/use-images"
 
 const ImageOptionButton = () => {
   const { editor } = useEditor()
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations("forms.createStep.image")
 
-  const { data: { result: images = [] } = {} } = useQuery(client.images.$post, {
-    queryKey: ["images"],
-  })
+  const { images } = useImages()
 
   const handleSelectImage = (event: MouseEvent<HTMLButtonElement>) => {
     const { imageUrl } = event.currentTarget.dataset as { imageUrl: string }
