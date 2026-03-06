@@ -58,7 +58,10 @@
       },
       "image": {
         "title": "Select an image",
-        "empty": "No images available"
+        "empty": "No images available",
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format",
+        "submit": "Add Image"
       },
       "submit": "Add Step"
     },

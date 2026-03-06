@@ -6,3 +6,7 @@ export const image = z
   .file("file-invalid-type")
   .max(MAXIMUM_FILE_SIZE, "file-too-large")
   .mime(["image/png", "image/jpeg"], "file-invalid-type")
+
+export const CreateImageSchema = z.object({
+  image,
+})

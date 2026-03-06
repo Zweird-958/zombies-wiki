@@ -1,4 +1,4 @@
-import ImageOptionButton from "@/components/guides/editor/image-option-dialog"
+import ImageOptionButton from "@/components/guides/editor/image-option-button"
 import OptionButton from "@/components/guides/editor/option-button"
 import { Toolbar, ToolbarButton, ToolbarGroup } from "@/components/ui/toolbar"
 

@@ -58,7 +58,10 @@
       },
       "image": {
         "title": "Sélectionner une image",
-        "empty": "Aucune image disponible"
+        "empty": "Aucune image disponible",
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG",
+        "submit": "Ajouter une image"
       },
       "submit": "Ajouter une étape"
     },

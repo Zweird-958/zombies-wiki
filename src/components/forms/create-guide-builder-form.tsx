@@ -10,6 +10,7 @@ import { toast } from "sonner"
 import { client } from "@/api/client"
 import CreateGuideForm from "@/components/forms/create-guide-form"
 import CreateStepForm from "@/components/forms/create-step-form"
+import ImageOptionDialog from "@/components/guides/editor/image-option-dialog"
 import StepAccordionItem from "@/components/steps/step-accordion-item"
 import { Accordion } from "@/components/ui/accordion/accordion"
 import { Form, FormWrapper } from "@/components/ui/form"
@@ -69,6 +70,7 @@ const CreateGuideBuilderForm = () => {
           <CreateStepForm addStep={addStep} />
         </FormWrapper>
       </Form>
+      <ImageOptionDialog />
       <Accordion>
         {steps.map((step) => (
           <StepAccordionItem key={step.id} {...step} />

@@ -8,7 +8,6 @@ import EditorToolbar from "@/components/guides/editor/editor-toolbar"
 import { useEditor } from "@/components/guides/editor/use-editor"
 import { FormError, FormItem, FormLabel } from "@/components/ui/form"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { ImagesProvider } from "@/hooks/use-images"
 import type { StepParagraph } from "@/types/steps"
 
 type Props = {
@@ -26,9 +25,7 @@ const StepEditorInput = ({ onChange }: Props) => {
   return (
     <FormItem>
       <FormLabel>{t("content.label")}</FormLabel>
-      <ImagesProvider>
-        <EditorToolbar />
-      </ImagesProvider>
+      <EditorToolbar />
       <ScrollArea className="[&_[data-slot=scroll-area-content]]:h-full [&_[data-slot=scroll-area-content]]:p-0">
         <EditorContent
           editor={editor}
