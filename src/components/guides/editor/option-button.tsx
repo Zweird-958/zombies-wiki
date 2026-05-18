@@ -1,19 +1,19 @@
 import { Bold, Underline } from "lucide-react"
 
 import { useEditor } from "@/components/guides/editor/use-editor"
-import { Toggle } from "@/components/ui/toggle"
+import { Toggle, type ToggleProps } from "@/components/ui/toggle"
 import type { MarkType } from "@/types/steps"
 
 type Props = {
   option: Exclude<MarkType, "image">
-}
+} & Pick<ToggleProps, "disabled">
 
 const icons: Record<Exclude<MarkType, "image">, React.ElementType> = {
   bold: Bold,
   underline: Underline,
 }
 
-const OptionButton = ({ option }: Props) => {
+const OptionButton = ({ option, disabled }: Props) => {
   const { editor } = useEditor()
   const Icon = icons[option]
 
@@ -28,7 +28,11 @@ const OptionButton = ({ option }: Props) => {
   }
 
   return (
-    <Toggle onClick={onClick} pressed={editor.isActive(option)}>
+    <Toggle
+      onClick={onClick}
+      pressed={editor.isActive(option)}
+      disabled={disabled}
+    >
       <Icon />
     </Toggle>
   )
