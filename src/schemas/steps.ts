@@ -19,7 +19,7 @@ export const stepMark = commonMark.or(imageMark)
 
 export const StepContentSchema = z.object({
   type: z.literal("text"),
-  text: z.string().trim().optional(),
+  text: z.string().optional(),
   marks: z.array(stepMark).optional(),
 })
 
