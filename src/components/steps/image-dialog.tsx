@@ -20,7 +20,7 @@ const ImageDialog = ({ children, imageUrl }: Props) => (
   <Dialog>
     <DialogTrigger className="text-image svg-not-size:size-4 inline-flex items-center gap-0.5 outline-0">
       {children}
-      <ImageIcon />
+      <ImageIcon className="mr-1" />
     </DialogTrigger>
 
     <DialogPopup className="w-full p-0 xl:max-w-[1200px]">
