@@ -45,3 +45,19 @@ docker compose up # -d to run in detached mode
 
 pnpm run dev
 ```
+
+### Run tests
+
+```bash
+# Run unit tests
+pnpm test:unit
+
+# Run integration tests
+pnpm test:integration
+
+# Run Storybook tests
+pnpm test:storybook
+
+# Run all tests
+pnpm test
+```

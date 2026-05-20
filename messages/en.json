@@ -47,6 +47,24 @@
       "success": "Guide created successfully",
       "submit": "Create Guide"
     },
+    "editGuide": {
+      "title": "Edit Guide",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter guide name"
+      },
+      "map": {
+        "label": "Map",
+        "placeholder": "Select a map",
+        "empty": "No maps found."
+      },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
+      "success": "Guide updated successfully",
+      "submit": "Update Guide"
+    },
     "createStep": {
       "title": "Create Step",
       "name": {
@@ -61,6 +79,21 @@
         "empty": "No images available"
       },
       "submit": "Add Step"
+    },
+    "editStep": {
+      "title": "Edit   Step",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter step name"
+      },
+      "content": {
+        "label": "Step content"
+      },
+      "image": {
+        "title": "Select an image",
+        "empty": "No images available"
+      },
+      "submit": "Edit Step"
     },
     "createMap": {
       "title": "Create Map",
@@ -120,6 +153,7 @@
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
     },
     "createGuide": {},
+    "editGuide": {},
     "createMap": {
       "CONFLICT": "A map with this name already exists"
     }

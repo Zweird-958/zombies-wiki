@@ -1,10 +1,10 @@
 import z from "zod"
 
 import { normalizeStep } from "@/api/utils/steps/normalize-step"
-import { CreateGuideSchema } from "@/schemas/guides"
-import { CreateStepSchema } from "@/schemas/steps"
+import { CreateGuideSchema, EditGuideSchema } from "@/schemas/guides"
+import { CreateStepSchema, EditStepSchema } from "@/schemas/steps"
 
-const stepsStringify = z.preprocess((val) => {
+const formatSteps = (val: unknown) => {
   if (typeof val === "string") {
     const steps = JSON.parse(val) as z.infer<typeof CreateStepSchema>[]
 
@@ -16,8 +16,26 @@ const stepsStringify = z.preprocess((val) => {
   }
 
   return val
-}, z.array(CreateStepSchema))
+}
+
+const createStepsStringify = z.preprocess(
+  formatSteps,
+  z.array(CreateStepSchema),
+)
+const editStepsStringify = z.preprocess(formatSteps, z.array(EditStepSchema))
 
 export const CreateGuideFormDataSchema = CreateGuideSchema.omit({
   steps: true,
-}).and(z.object({ steps: stepsStringify }))
+}).and(
+  z.object({
+    steps: createStepsStringify,
+  }),
+)
+
+export const EditGuideFormDataSchema = EditGuideSchema.omit({
+  steps: true,
+}).and(
+  z.object({
+    steps: editStepsStringify,
+  }),
+)

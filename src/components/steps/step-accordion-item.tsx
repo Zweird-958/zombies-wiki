@@ -11,12 +11,14 @@ type Props = {
   id: string
   name: string
   content: StepParagraph[]
+  children?: React.ReactNode
 }
 
-const StepAccordionItem = ({ id, name, content }: Props) => (
+const StepAccordionItem = ({ id, name, content, children }: Props) => (
   <AccordionItem value={id}>
-    <AccordionHeader>
+    <AccordionHeader className="flex items-center">
       <AccordionTrigger>{name}</AccordionTrigger>
+      {children}
     </AccordionHeader>
     <AccordionPanel>{renderStep(content, id)}</AccordionPanel>
   </AccordionItem>
