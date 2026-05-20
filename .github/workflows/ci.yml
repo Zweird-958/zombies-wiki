@@ -72,6 +72,8 @@ jobs:
 
       - name: Integration
         run: pnpm run test:integration
+        env:
+          DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
 
   storybook:
     runs-on: ubuntu-latest
