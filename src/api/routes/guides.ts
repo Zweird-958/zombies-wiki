@@ -1,14 +1,16 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { formatGuide } from "@/api/utils/guides/format-guide"
-import { slugify } from "@/api/utils/slugify"
-import { uploadImage } from "@/api/utils/upload-image"
-import { guides, steps as stepsTable } from "@/db/schemas"
-import { CreateGuideFormDataSchema } from "@/schemas/api"
+import {
+  CreateGuideFormDataSchema,
+  EditGuideFormDataSchema,
+} from "@/schemas/api"
 import { GetGuideSchema } from "@/schemas/guides"
+import { createGuide } from "@/utils/guides/create-guide"
+import { editGuide } from "@/utils/guides/edit-guide"
+import { getGuide } from "@/utils/guides/get-guide"
 
 export const guidesApp = new Hono()
   .basePath("/guides")
@@ -17,34 +19,9 @@ export const guidesApp = new Hono()
     zValidator("form", CreateGuideFormDataSchema),
     ...isAuthorized({ guides: ["create"] }),
     async ({ req, var: { send, db } }) => {
-      const { name, mapId, steps, image } = req.valid("form")
+      const guide = req.valid("form")
 
-      const result = await db.transaction(async (tx) => {
-        const imageId = await uploadImage({
-          image,
-          name: slugify(name),
-          folder: `guides/${mapId}`,
-          db,
-        })
-
-        const [guide] = await tx
-          .insert(guides)
-          .values({ name, mapId, imageId })
-          .returning()
-
-        const stepsResult = await tx
-          .insert(stepsTable)
-          .values(
-            steps.map((step, index) => ({
-              guideId: guide.id,
-              order: index + 1,
-              ...step,
-            })),
-          )
-          .returning()
-
-        return { ...guide, steps: stepsResult }
-      })
+      const result = await createGuide(db, guide)
 
       return send(result)
     },
@@ -55,27 +32,32 @@ export const guidesApp = new Hono()
     async ({ var: { db, send, fail }, req }) => {
       const { id } = req.valid("param")
 
-      const guide = await db.query.guides.findFirst({
-        columns: {
-          name: true,
-        },
-        where: eq(guides.id, id),
-        with: {
-          steps: {
-            columns: {
-              id: true,
-              name: true,
-              content: true,
-            },
-            orderBy: stepsTable.order,
-          },
-        },
-      })
+      const guide = await getGuide(db, { id })
 
       if (!guide) {
         return fail("NOT_FOUND")
       }
 
       return send(formatGuide(guide))
+    },
+  )
+  .patch(
+    "/:id",
+    zValidator("param", GetGuideSchema),
+    zValidator("form", EditGuideFormDataSchema),
+    ...isAuthorized({ guides: ["update"] }),
+    async ({ req, var: { db, send, fail } }) => {
+      const { id } = req.valid("param")
+      const data = req.valid("form")
+
+      const guide = await getGuide(db, { id })
+
+      if (!guide) {
+        return fail("NOT_FOUND")
+      }
+
+      const result = await editGuide(db, guide, data)
+
+      return send(result)
     },
   )

@@ -2,7 +2,7 @@ import z from "zod"
 
 import { id, name } from "@/schemas/common"
 import { image } from "@/schemas/images"
-import { CreateStepSchema } from "@/schemas/steps"
+import { CreateStepSchema, EditStepSchema } from "@/schemas/steps"
 
 export const CreateGuideSchema = z.object({
   name,
@@ -13,4 +13,11 @@ export const CreateGuideSchema = z.object({
 
 export const GetGuideSchema = z.object({
   id,
+})
+
+export const EditGuideSchema = z.object({
+  name: z.preprocess((val) => (val === "" ? null : val), name.nullish()),
+  image: z.preprocess((val) => (val === "" ? null : val), image.nullish()),
+  mapId: z.preprocess((val) => (val === "" ? null : val), id.nullish()),
+  steps: z.array(EditStepSchema).min(1, "required"),
 })

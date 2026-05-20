@@ -1,6 +1,6 @@
 import z from "zod"
 
-import { name } from "@/schemas/common"
+import { id, name } from "@/schemas/common"
 
 export const markType = z.enum(["bold", "underline", "image"])
 
@@ -28,16 +28,24 @@ export const StepParagraphSchema = z.object({
   content: z.array(StepContentSchema).optional(),
 })
 
+const content = z
+  .array(StepParagraphSchema)
+  .min(1, "required")
+  .refine(
+    (val) =>
+      val.some(
+        (paragraph) => paragraph.content && paragraph.content.length > 0,
+      ),
+    "required",
+  )
+
 export const CreateStepSchema = z.object({
   name,
-  content: z
-    .array(StepParagraphSchema)
-    .min(1, "required")
-    .refine(
-      (val) =>
-        val.some(
-          (paragraph) => paragraph.content && paragraph.content.length > 0,
-        ),
-      "required",
-    ),
+  content,
+})
+
+export const EditStepSchema = z.object({
+  stepId: id.optional().or(z.literal("")),
+  name,
+  content,
 })

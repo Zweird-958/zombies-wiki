@@ -2,6 +2,7 @@ import type z from "zod"
 
 import type {
   CreateStepSchema,
+  EditStepSchema,
   StepContentSchema,
   StepParagraphSchema,
   markType,
@@ -17,3 +18,5 @@ export type StepMark = z.infer<typeof stepMark>
 export type StepContent = z.infer<typeof StepContentSchema>
 
 export type StepParagraph = z.infer<typeof StepParagraphSchema>
+
+export type EditStep = z.infer<typeof EditStepSchema>

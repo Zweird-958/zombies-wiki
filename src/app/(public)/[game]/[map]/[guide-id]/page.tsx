@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation"
 
 import { client } from "@/api/client"
-import StepAccordionItem from "@/components/steps/step-accordion-item"
-import { Accordion } from "@/components/ui/accordion/accordion"
+import GuidePage from "@/components/guides/guide-page"
 
 type Props = {
   params: Promise<{ game: string; "guide-id": string }>
 }
 
-const GuidePage = async ({ params }: Props) => {
+const Page = async ({ params }: Props) => {
   const { "guide-id": guideId } = await params
   const response = await client.guides[":id"].$get({ param: { id: guideId } })
   const data = await response.json()
@@ -17,18 +16,7 @@ const GuidePage = async ({ params }: Props) => {
     notFound()
   }
 
-  const { name, steps } = data.result
-
-  return (
-    <div className="mx-auto w-full max-w-6xl px-8">
-      <h1 className="pb-8 text-center text-xl font-semibold">{name}</h1>
-      <Accordion defaultValue={steps.map((step) => step.id)}>
-        {steps.map((step) => (
-          <StepAccordionItem key={step.id} {...step} />
-        ))}
-      </Accordion>
-    </div>
-  )
+  return <GuidePage guide={data.result} />
 }
 
-export default GuidePage
+export default Page
