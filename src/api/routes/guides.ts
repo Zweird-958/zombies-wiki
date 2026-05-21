@@ -9,6 +9,7 @@ import {
 } from "@/schemas/api"
 import { GetGuideSchema } from "@/schemas/guides"
 import { createGuide } from "@/utils/guides/create-guide"
+import { deleteGuide } from "@/utils/guides/delete-guide"
 import { editGuide } from "@/utils/guides/edit-guide"
 import { getGuide } from "@/utils/guides/get-guide"
 
@@ -59,5 +60,23 @@ export const guidesApp = new Hono()
       const result = await editGuide(db, guide, data)
 
       return send(result)
+    },
+  )
+  .delete(
+    "/:id",
+    zValidator("param", GetGuideSchema),
+    ...isAuthorized({ guides: ["delete"] }),
+    async ({ var: { db, send, fail }, req }) => {
+      const { id } = req.valid("param")
+
+      const guide = await getGuide(db, { id })
+
+      if (!guide) {
+        return fail("NOT_FOUND")
+      }
+
+      const deletedGuide = await deleteGuide(db, guide)
+
+      return send(deletedGuide)
     },
   )

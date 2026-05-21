@@ -65,6 +65,9 @@
       "success": "Guide updated successfully",
       "submit": "Update Guide"
     },
+    "deleteGuide": {
+      "success": "Guide deleted successfully"
+    },
     "createStep": {
       "title": "Create Step",
       "name": {
@@ -150,10 +153,13 @@
       "CONFLICT": "A game with this name already exists"
     },
     "signIn": {
-      "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
+      "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password"
     },
     "createGuide": {},
     "editGuide": {},
+    "deleteGuide": {
+      "NOT_FOUND": "Guide not found"
+    },
     "createMap": {
       "CONFLICT": "A map with this name already exists"
     }

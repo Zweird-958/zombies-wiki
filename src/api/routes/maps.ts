@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
+import { eq, isNull } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
@@ -7,6 +7,7 @@ import { formatSingleMap } from "@/api/utils/maps/format-map"
 import { isMapExists } from "@/api/utils/maps/is-map-exists"
 import { slugify } from "@/api/utils/slugify"
 import { uploadImage } from "@/api/utils/upload-image"
+import { guides } from "@/db/schemas"
 import { maps } from "@/db/schemas/maps"
 import { SlugParamSchema } from "@/schemas/common"
 import { CreateMapSchema } from "@/schemas/maps"
@@ -53,6 +54,7 @@ export const mapsApp = new Hono()
         where: eq(maps.slug, slug),
         with: {
           guides: {
+            where: isNull(guides.deletedAt),
             columns: { id: true, name: true },
             with: {
               image: {
