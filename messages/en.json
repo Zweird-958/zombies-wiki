@@ -115,6 +115,9 @@
       },
       "success": "Map created successfully",
       "submit": "Create Map"
+    },
+    "deleteMap": {
+      "success": "Map deleted successfully"
     }
   },
   "errors": {
@@ -162,6 +165,9 @@
     },
     "createMap": {
       "CONFLICT": "A map with this name already exists"
+    },
+    "deleteMap": {
+      "NOT_FOUND": "Map not found"
     }
   },
   "header": {

@@ -8,6 +8,7 @@ import { slugify } from "@/api/utils/slugify"
 import { SlugParamSchema } from "@/schemas/common"
 import { CreateMapSchema } from "@/schemas/maps"
 import { createMap } from "@/utils/maps/create-map"
+import { deleteMap } from "@/utils/maps/delete-map"
 import { getMap } from "@/utils/maps/get-map"
 
 export const mapsApp = new Hono()
@@ -42,5 +43,23 @@ export const mapsApp = new Hono()
       }
 
       return send(formatSingleMap(map))
+    },
+  )
+  .delete(
+    "/:slug",
+    zValidator("param", SlugParamSchema),
+    ...isAuthorized({ maps: ["delete"] }),
+    async ({ req, var: { send, db, fail } }) => {
+      const { slug } = req.valid("param")
+
+      const map = await getMap(db, { slug })
+
+      if (!map) {
+        return fail("NOT_FOUND", `Map with slug '${slug}' not found`)
+      }
+
+      const deletedMap = await deleteMap(db, { slug })
+
+      return send(deletedMap)
     },
   )

@@ -1,4 +1,4 @@
-import { eq, isNull } from "drizzle-orm"
+import { and, eq, isNull } from "drizzle-orm"
 
 import type { DB } from "@/db"
 import { guides, maps } from "@/db/schemas"
@@ -8,7 +8,7 @@ export const getMap = (db: DB, { slug }: { slug: string }) =>
     columns: {
       name: true,
     },
-    where: eq(maps.slug, slug),
+    where: and(eq(maps.slug, slug), isNull(maps.deletedAt)),
     with: {
       guides: {
         where: isNull(guides.deletedAt),

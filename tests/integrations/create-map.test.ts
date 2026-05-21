@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker"
 import { describe, expect, it } from "vitest"
 
+import { slugify } from "@/api/utils/slugify"
 import { db } from "@/db"
 import { createMap } from "@/utils/maps/create-map"
 
 import { createFile } from "../utils/create-file"
 import { generateGame } from "../utils/generate-game"
-import { slugify } from "@/api/utils/slugify"
 
 describe("createMap", () => {
   it("should create a map", async () => {

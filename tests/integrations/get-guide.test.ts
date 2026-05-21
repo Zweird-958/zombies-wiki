@@ -1,7 +1,9 @@
 import { faker } from "@faker-js/faker"
+import { eq } from "drizzle-orm"
 import { describe, expect, it } from "vitest"
 
 import { db } from "@/db"
+import { guides } from "@/db/schemas"
 import { getGuide } from "@/utils/guides/get-guide"
 
 import { generateGuide } from "../utils/generate-guide"
@@ -13,11 +15,11 @@ describe("getGuide", () => {
     const result = await getGuide(db, { id: guide.id })
 
     const steps = await db.query.steps.findMany({
-      where: (step, { eq }) => eq(step.guideId, guide.id),
+      where: (step) => eq(step.guideId, guide.id),
     })
 
     const image = await db.query.images.findFirst({
-      where: (img, { eq }) => eq(img.id, guide.imageId),
+      where: (img) => eq(img.id, guide.imageId),
     })
 
     expect(result).toBeDefined()
@@ -36,5 +38,18 @@ describe("getGuide", () => {
 
   it("should throw an error if the guide ID is invalid", async () => {
     await expect(getGuide(db, { id: "invalid-id" })).rejects.toThrow()
+  })
+
+  it("should return undefined if the guide is deleted", async () => {
+    const guide = await generateGuide()
+
+    await db
+      .update(guides)
+      .set({ deletedAt: new Date() })
+      .where(eq(guides.id, guide.id))
+
+    const result = await getGuide(db, { id: guide.id })
+
+    expect(result).toBeUndefined()
   })
 })

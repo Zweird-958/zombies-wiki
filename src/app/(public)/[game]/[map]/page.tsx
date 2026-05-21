@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { client } from "@/api/client"
 import GuideCard from "@/components/guides/guide-card"
 import ItemsLayout from "@/components/items/items-layout"
+import DeleteMap from "@/components/maps/delete-map"
 
 type Props = {
   params: Promise<{ game: string; map: string }>
@@ -27,6 +28,7 @@ const Page = async ({ params }: Props) => {
       {data.result.guides.map((guide) => (
         <GuideCard key={guide.id} game={game} map={mapName} {...guide} />
       ))}
+      <DeleteMap />
     </ItemsLayout>
   )
 }

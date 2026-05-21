@@ -115,6 +115,9 @@
       },
       "success": "Carte créée avec succès",
       "submit": "Créer une carte"
+    },
+    "deleteMap": {
+      "success": "Carte supprimée avec succès"
     }
   },
   "errors": {
@@ -162,6 +165,9 @@
     },
     "createMap": {
       "CONFLICT": "Une carte avec ce nom existe déjà"
+    },
+    "deleteMap": {
+      "NOT_FOUND": "Carte non trouvée"
     }
   },
   "header": {

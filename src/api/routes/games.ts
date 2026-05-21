@@ -84,6 +84,7 @@ export const gamesApp = new Hono()
         with: {
           maps: {
             columns: { id: true, name: true, slug: true },
+            where: ({ deletedAt }, { isNull }) => isNull(deletedAt),
             with: {
               image: { columns: { url: true } },
             },
