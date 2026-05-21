@@ -118,6 +118,9 @@
     },
     "deleteMap": {
       "success": "Carte supprimée avec succès"
+    },
+    "deleteGame": {
+      "success": "Jeu supprimé avec succès"
     }
   },
   "errors": {
@@ -168,6 +171,9 @@
     },
     "deleteMap": {
       "NOT_FOUND": "Carte non trouvée"
+    },
+    "deleteGame": {
+      "NOT_FOUND": "Jeu non trouvé"
     }
   },
   "header": {
