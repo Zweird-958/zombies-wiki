@@ -1,4 +1,6 @@
 import { faker } from "@faker-js/faker"
+import { generateGuide } from "@tests/utils/generate-guide"
+import { generateMap } from "@tests/utils/generate-map"
 import { eq } from "drizzle-orm"
 import { describe, expect, it } from "vitest"
 
@@ -6,9 +8,6 @@ import { slugify } from "@/api/utils/slugify"
 import { db } from "@/db"
 import { guides, maps } from "@/db/schemas"
 import { getMap } from "@/utils/maps/get-map"
-
-import { generateGuide } from "../utils/generate-guide"
-import { generateMap } from "../utils/generate-map"
 
 describe("getMap", () => {
   it("should return a map by ID", async () => {

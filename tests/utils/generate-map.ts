@@ -13,8 +13,15 @@ export const generateMap = async ({
 }: {
   gameId?: string
   imageId?: string
-} = {}) => {
-  const name = faker.word.words({ count: { min: 1, max: 5 } })
+} = {}): Promise<typeof maps.$inferSelect> => {
+  const name = faker.word.words({ count: { min: 1, max: 20 } })
+
+  if (
+    await db.query.maps.findFirst({ where: (m, { eq }) => eq(m.name, name) })
+  ) {
+    return generateMap({ imageId, gameId })
+  }
+
   const data = {
     name,
     slug: slugify(name),

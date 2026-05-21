@@ -1,15 +1,14 @@
 import { faker } from "@faker-js/faker"
+import { createFile } from "@tests/utils/create-file"
+import { generateGuide } from "@tests/utils/generate-guide"
+import { generateMap } from "@tests/utils/generate-map"
+import { generateStep, generateStepDb } from "@tests/utils/generate-step"
 import { describe, expect, it } from "vitest"
 
 import { db } from "@/db"
-import { EditGuideFormData } from "@/types/guides"
+import type { EditGuideFormData } from "@/types/guides"
 import { editGuide } from "@/utils/guides/edit-guide"
 import { getGuide } from "@/utils/guides/get-guide"
-
-import { createFile } from "../utils/create-file"
-import { generateGuide } from "../utils/generate-guide"
-import { generateMap } from "../utils/generate-map"
-import { generateStep, generateStepDb } from "../utils/generate-step"
 
 describe("editGuide", () => {
   it("should edit a guide", async () => {

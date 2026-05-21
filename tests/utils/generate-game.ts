@@ -6,8 +6,17 @@ import { games } from "@/db/schemas"
 
 import { generateImage } from "./generate-image"
 
-export const generateGame = async (imageId?: string) => {
-  const name = faker.word.words({ count: { min: 1, max: 5 } })
+export const generateGame = async (
+  imageId?: string,
+): Promise<typeof games.$inferSelect> => {
+  const name = faker.word.words({ count: { min: 1, max: 20 } })
+
+  if (
+    await db.query.games.findFirst({ where: (g, { eq }) => eq(g.name, name) })
+  ) {
+    return generateGame(imageId)
+  }
+
   const data: Omit<typeof games.$inferInsert, "imageId"> = {
     name,
     slug: slugify(name),

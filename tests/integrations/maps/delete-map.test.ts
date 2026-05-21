@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker"
+import { generateMap } from "@tests/utils/generate-map"
 import { eq } from "drizzle-orm"
 import { describe, expect, it } from "vitest"
 
@@ -6,8 +7,6 @@ import { db } from "@/db"
 import { maps } from "@/db/schemas"
 import { deleteMap } from "@/utils/maps/delete-map"
 import { getMap } from "@/utils/maps/get-map"
-
-import { generateMap } from "../utils/generate-map"
 
 describe("deleteMap", () => {
   it("should delete a map by slug", async () => {

@@ -1,4 +1,4 @@
-import { eq, sql } from "drizzle-orm"
+import { and, eq, isNull, sql } from "drizzle-orm"
 import { pgView } from "drizzle-orm/pg-core"
 
 import { games, images, maps } from "@/db/schemas"
@@ -26,5 +26,6 @@ export const gamesWithMaps = pgView("games_with_maps").as((qb) =>
     .from(games)
     .innerJoin(maps, eq(maps.gameId, games.id))
     .innerJoin(images, eq(images.id, games.imageId))
+    .where(and(isNull(games.deletedAt), isNull(maps.deletedAt)))
     .groupBy(games.id, games.name, images.url),
 )
