@@ -6,9 +6,14 @@ import { formatGame, formatSingleGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { slugify } from "@/api/utils/slugify"
 import { SlugParamSchema } from "@/schemas/common"
-import { CreateGameSchema, GetGamesQueryParamsSchema } from "@/schemas/games"
+import {
+  CreateGameSchema,
+  EditGameSchema,
+  GetGamesQueryParamsSchema,
+} from "@/schemas/games"
 import { createGame } from "@/utils/games/create-game"
 import { deleteGame } from "@/utils/games/delete-game"
+import { editGame } from "@/utils/games/edit-game"
 import { getGame } from "@/utils/games/get-game"
 import { listGames } from "@/utils/games/list-games"
 import { listGamesWithMaps } from "@/utils/games/list-games-with-maps"
@@ -81,5 +86,25 @@ export const gamesApp = new Hono()
       const deletedGame = await deleteGame(db, { slug })
 
       return send(deletedGame)
+    },
+  )
+  .patch(
+    "/:slug",
+    zValidator("param", SlugParamSchema),
+    zValidator("form", EditGameSchema),
+    ...isAuthorized({ games: ["update"] }),
+    async ({ req, var: { db, send, fail } }) => {
+      const { slug } = req.valid("param")
+      const data = req.valid("form")
+
+      const game = await getGame(db, { slug })
+
+      if (!game) {
+        return fail("NOT_FOUND", `Game with slug '${slug}' not found`)
+      }
+
+      const result = await editGame(db, game, data)
+
+      return send(result)
     },
   )

@@ -6,7 +6,11 @@ import { games } from "@/db/schemas"
 export const getGame = (db: DB, { slug }: { slug: string }) =>
   db.query.games.findFirst({
     columns: {
+      id: true,
       name: true,
+      imageId: true,
+      releaseYear: true,
+      slug: true,
     },
     where: and(eq(games.slug, slug), isNull(games.deletedAt)),
     with: {
@@ -17,5 +21,6 @@ export const getGame = (db: DB, { slug }: { slug: string }) =>
           image: { columns: { url: true } },
         },
       },
+      image: { columns: { url: true } },
     },
   })

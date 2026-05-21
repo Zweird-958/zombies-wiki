@@ -1,15 +1,13 @@
 import { notFound } from "next/navigation"
 
 import { client } from "@/api/client"
-import DeleteGame from "@/components/games/delete-game"
-import ItemsLayout from "@/components/items/items-layout"
-import MapCard from "@/components/maps/map-card"
+import GamePage from "@/components/games/game-page"
 
 type Props = {
   params: Promise<{ game: string }>
 }
 
-const GamePage = async ({ params }: Props) => {
+const Page = async ({ params }: Props) => {
   const { game } = await params
   const response = await client.games[":slug"].$get({ param: { slug: game } })
   const data = await response.json()
@@ -18,14 +16,7 @@ const GamePage = async ({ params }: Props) => {
     notFound()
   }
 
-  return (
-    <ItemsLayout name={data.result.name}>
-      {data.result.maps.map((map) => (
-        <MapCard key={map.id} game={game} {...map} />
-      ))}
-      <DeleteGame />
-    </ItemsLayout>
-  )
+  return <GamePage game={data.result} />
 }
 
-export default GamePage
+export default Page

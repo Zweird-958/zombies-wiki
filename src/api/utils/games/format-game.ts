@@ -1,35 +1,24 @@
 import { config } from "@/configs/api"
-import type { UnformattedMap } from "@/types/maps"
+import type { Game } from "@/types/games"
+import type { listGames } from "@/utils/games/list-games"
+import type { listGamesWithMaps } from "@/utils/games/list-games-with-maps"
 
-type Game = {
-  id: string
-  name: string
-  slug: string
-  image: {
-    url: string
-  }
-  maps?: UnformattedMap[]
-}
+type GamesWithMaps = Awaited<ReturnType<typeof listGamesWithMaps>>
+type Games = Awaited<ReturnType<typeof listGames>>
 
-export const formatGame = (game: Game) => ({
+export const formatGame = (game: GamesWithMaps[number] | Games[number]) => ({
   id: game.id,
   name: game.name,
   slug: game.slug,
   image: `${config.upload.publicUrl}${game.image.url}`,
-  maps: game.maps,
+  maps: "maps" in game ? game.maps : [],
 })
 
-type SingleGame = Pick<Game, "name"> & {
-  maps: {
-    id: string
-    name: string
-    slug: string
-    image: { url: string }
-  }[]
-}
-
-export const formatSingleGame = (game: SingleGame) => ({
+export const formatSingleGame = (game: Game) => ({
   name: game.name,
+  slug: game.slug,
+  image: `${config.upload.publicUrl}${game.image.url}`,
+  releaseYear: game.releaseYear,
   maps: game.maps.map(({ image, ...map }) => ({
     ...map,
     image: `${config.upload.publicUrl}${image.url}`,

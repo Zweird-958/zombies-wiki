@@ -17,6 +17,23 @@
       "success": "Jeu créé avec succès",
       "submit": "Créer un jeu"
     },
+    "editGame": {
+      "title": "Modifier un jeu",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom du jeu"
+      },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
+      "releaseYear": {
+        "label": "Année de sortie",
+        "placeholder": "Entrez l'année de sortie"
+      },
+      "success": "Jeu modifié avec succès",
+      "submit": "Modifier le jeu"
+    },
     "signIn": {
       "title": "Se connecter",
       "email": {
@@ -156,6 +173,9 @@
       "required": "Au moins une étape est requise"
     },
     "createGame": {
+      "CONFLICT": "Un jeu avec ce nom existe déjà"
+    },
+    "editGame": {
       "CONFLICT": "Un jeu avec ce nom existe déjà"
     },
     "signIn": {
