@@ -118,6 +118,9 @@
     },
     "deleteMap": {
       "success": "Map deleted successfully"
+    },
+    "deleteGame": {
+      "success": "Game deleted successfully"
     }
   },
   "errors": {
@@ -168,6 +171,9 @@
     },
     "deleteMap": {
       "NOT_FOUND": "Map not found"
+    },
+    "deleteGame": {
+      "NOT_FOUND": "Game not found"
     }
   },
   "header": {

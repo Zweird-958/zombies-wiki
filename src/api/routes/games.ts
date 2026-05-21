@@ -1,15 +1,15 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 
 import { isAuthorized } from "@/api/handlers/is-authorized"
 import { formatGame, formatSingleGame } from "@/api/utils/games/format-game"
 import { isGameExists } from "@/api/utils/games/is-game-exists"
 import { slugify } from "@/api/utils/slugify"
-import { games } from "@/db/schemas/games"
 import { SlugParamSchema } from "@/schemas/common"
 import { CreateGameSchema, GetGamesQueryParamsSchema } from "@/schemas/games"
 import { createGame } from "@/utils/games/create-game"
+import { deleteGame } from "@/utils/games/delete-game"
+import { getGame } from "@/utils/games/get-game"
 import { listGames } from "@/utils/games/list-games"
 import { listGamesWithMaps } from "@/utils/games/list-games-with-maps"
 
@@ -56,26 +56,30 @@ export const gamesApp = new Hono()
     async ({ req, var: { db, send, fail } }) => {
       const { slug } = req.valid("param")
 
-      const gamesResult = await db.query.games.findFirst({
-        columns: {
-          name: true,
-        },
-        where: eq(games.slug, slug),
-        with: {
-          maps: {
-            columns: { id: true, name: true, slug: true },
-            where: ({ deletedAt }, { isNull }) => isNull(deletedAt),
-            with: {
-              image: { columns: { url: true } },
-            },
-          },
-        },
-      })
+      const gamesResult = await getGame(db, { slug })
 
       if (!gamesResult) {
         return fail("NOT_FOUND", `Game with slug '${slug}' not found`)
       }
 
       return send(formatSingleGame(gamesResult))
+    },
+  )
+  .delete(
+    "/:slug",
+    zValidator("param", SlugParamSchema),
+    ...isAuthorized({ games: ["delete"] }),
+    async ({ req, var: { db, send, fail } }) => {
+      const { slug } = req.valid("param")
+
+      const game = await getGame(db, { slug })
+
+      if (!game) {
+        return fail("NOT_FOUND", `Game with slug '${slug}' not found`)
+      }
+
+      const deletedGame = await deleteGame(db, { slug })
+
+      return send(deletedGame)
     },
   )

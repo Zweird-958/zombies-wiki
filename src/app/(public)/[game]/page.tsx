@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 
 import { client } from "@/api/client"
+import DeleteGame from "@/components/games/delete-game"
 import ItemsLayout from "@/components/items/items-layout"
 import MapCard from "@/components/maps/map-card"
 
@@ -22,6 +23,7 @@ const GamePage = async ({ params }: Props) => {
       {data.result.maps.map((map) => (
         <MapCard key={map.id} game={game} {...map} />
       ))}
+      <DeleteGame />
     </ItemsLayout>
   )
 }
