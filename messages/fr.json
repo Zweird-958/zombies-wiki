@@ -80,6 +80,9 @@
       },
       "submit": "Ajouter une étape"
     },
+    "deleteGuide": {
+      "success": "Guide supprimé avec succès"
+    },
     "editStep": {
       "title": "Modifier une étape",
       "name": {
@@ -154,6 +157,9 @@
     },
     "createGuide": {},
     "editGuide": {},
+    "deleteGuide": {
+      "NOT_FOUND": "Guide non trouvé"
+    },
     "createMap": {
       "CONFLICT": "Une carte avec ce nom existe déjà"
     }

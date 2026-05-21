@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm"
+import { and, eq, isNull } from "drizzle-orm"
 
 import type { DB } from "@/db"
 import { steps } from "@/db/schemas"
@@ -12,7 +12,7 @@ export const getGuide = (db: DB, { id }: { id: string }) =>
       mapId: true,
       imageId: true,
     },
-    where: eq(guides.id, id),
+    where: and(eq(guides.id, id), isNull(guides.deletedAt)),
     with: {
       steps: {
         columns: {

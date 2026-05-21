@@ -1,10 +1,10 @@
-import CreatGuideForm from "@/components/forms/create-guide-builder-form"
+import CreateGuideBuilderForm from "@/components/forms/create-guide-builder-form"
 import { EditorProvider } from "@/components/guides/editor/use-editor"
 
-const CreatGuidePage = () => (
+const CreateGuidePage = () => (
   <EditorProvider>
-    <CreatGuideForm />
+    <CreateGuideBuilderForm />
   </EditorProvider>
 )
 
-export default CreatGuidePage
+export default CreateGuidePage
