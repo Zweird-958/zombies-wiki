@@ -1,12 +1,11 @@
 import { faker } from "@faker-js/faker"
+import { generateGuide } from "@tests/utils/generate-guide"
 import { eq } from "drizzle-orm"
 import { describe, expect, it } from "vitest"
 
 import { db } from "@/db"
 import { guides } from "@/db/schemas"
 import { getGuide } from "@/utils/guides/get-guide"
-
-import { generateGuide } from "../utils/generate-guide"
 
 describe("getGuide", () => {
   it("should return a guide by ID", async () => {

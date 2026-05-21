@@ -1,12 +1,11 @@
 import { faker } from "@faker-js/faker"
+import { createFile } from "@tests/utils/create-file"
+import { generateMap } from "@tests/utils/generate-map"
+import { generateStep } from "@tests/utils/generate-step"
 import { describe, expect, it } from "vitest"
 
 import { db } from "@/db"
 import { createGuide } from "@/utils/guides/create-guide"
-
-import { createFile } from "../utils/create-file"
-import { generateMap } from "../utils/generate-map"
-import { generateStep } from "../utils/generate-step"
 
 describe("createGuide", () => {
   it("should create a guide", async () => {
