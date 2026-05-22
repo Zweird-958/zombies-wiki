@@ -133,6 +133,24 @@
       "success": "Carte créée avec succès",
       "submit": "Créer une carte"
     },
+    "editMap": {
+      "title": "Modifier une carte",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Entrez le nom de la carte"
+      },
+      "image": {
+        "label": "Télécharger une image",
+        "description": "L'image doit faire moins de 5 Mo et être au format PNG ou JPG"
+      },
+      "game": {
+        "label": "Jeu",
+        "placeholder": "Sélectionnez un jeu",
+        "empty": "Aucun jeu trouvé."
+      },
+      "success": "Carte modifiée avec succès",
+      "submit": "Modifier la carte"
+    },
     "deleteMap": {
       "success": "Carte supprimée avec succès"
     },
@@ -176,7 +194,8 @@
       "CONFLICT": "Un jeu avec ce nom existe déjà"
     },
     "editGame": {
-      "CONFLICT": "Un jeu avec ce nom existe déjà"
+      "CONFLICT": "Un jeu avec ce nom existe déjà",
+      "NOT_FOUND": "Jeu non trouvé"
     },
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Email ou mot de passe invalide"
@@ -188,6 +207,10 @@
     },
     "createMap": {
       "CONFLICT": "Une carte avec ce nom existe déjà"
+    },
+    "editMap": {
+      "CONFLICT": "Une carte avec ce nom existe déjà",
+      "NOT_FOUND": "Carte non trouvée"
     },
     "deleteMap": {
       "NOT_FOUND": "Carte non trouvée"
