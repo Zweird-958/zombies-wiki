@@ -29,7 +29,6 @@
     "@base-ui-components/react": "1.0.0-beta.4",
     "@hono/zod-validator": "^0.7.2",
     "@hookform/resolvers": "^5.2.2",
-    "@radix-ui/react-slot": "^1.2.3",
     "@tanstack/react-query": "^5.87.4",
     "@tiptap/react": "^3.4.4",
     "@tiptap/starter-kit": "^3.4.4",
