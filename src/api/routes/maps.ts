@@ -6,9 +6,10 @@ import { formatSingleMap } from "@/api/utils/maps/format-map"
 import { isMapExists } from "@/api/utils/maps/is-map-exists"
 import { slugify } from "@/api/utils/slugify"
 import { SlugParamSchema } from "@/schemas/common"
-import { CreateMapSchema } from "@/schemas/maps"
+import { CreateMapSchema, EditMapSchema } from "@/schemas/maps"
 import { createMap } from "@/utils/maps/create-map"
 import { deleteMap } from "@/utils/maps/delete-map"
+import { editMap } from "@/utils/maps/edit-map"
 import { getMap } from "@/utils/maps/get-map"
 
 export const mapsApp = new Hono()
@@ -61,5 +62,25 @@ export const mapsApp = new Hono()
       const deletedMap = await deleteMap(db, { slug })
 
       return send(deletedMap)
+    },
+  )
+  .patch(
+    "/:slug",
+    zValidator("param", SlugParamSchema),
+    zValidator("form", EditMapSchema),
+    ...isAuthorized({ maps: ["update"] }),
+    async ({ req, var: { db, send, fail } }) => {
+      const { slug } = req.valid("param")
+      const data = req.valid("form")
+
+      const map = await getMap(db, { slug })
+
+      if (!map) {
+        return fail("NOT_FOUND", `Map with slug '${slug}' not found`)
+      }
+
+      const result = await editMap(db, map, data)
+
+      return send(result)
     },
   )

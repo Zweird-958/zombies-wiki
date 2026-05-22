@@ -29,16 +29,14 @@ const DeleteMap = () => {
   )
 
   return (
-    <div className="absolute right-4 bottom-4 flex gap-4">
-      <Button
-        size="icon"
-        color="danger"
-        onClick={() => deleteMap({ param: { slug: map } })}
-        isPending={isDeleting}
-      >
-        <Trash2 />
-      </Button>
-    </div>
+    <Button
+      size="icon"
+      color="danger"
+      onClick={() => deleteMap({ param: { slug: map } })}
+      isPending={isDeleting}
+    >
+      <Trash2 />
+    </Button>
   )
 }
 

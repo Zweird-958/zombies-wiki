@@ -5,6 +5,7 @@ import { client } from "@/api/client"
 import GuideCard from "@/components/guides/guide-card"
 import ItemsLayout from "@/components/items/items-layout"
 import DeleteMap from "@/components/maps/delete-map"
+import MapPage from "@/components/maps/map-page"
 
 type Props = {
   params: Promise<{ game: string; map: string }>
@@ -21,16 +22,7 @@ const Page = async ({ params }: Props) => {
     notFound()
   }
 
-  return (
-    <ItemsLayout
-      name={t("title", { game: data.result.game, map: data.result.name })}
-    >
-      {data.result.guides.map((guide) => (
-        <GuideCard key={guide.id} game={game} map={mapName} {...guide} />
-      ))}
-      <DeleteMap />
-    </ItemsLayout>
-  )
+  return <MapPage map={data.result} />
 }
 
 export default Page

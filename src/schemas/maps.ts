@@ -8,3 +8,9 @@ export const CreateMapSchema = z.object({
   image,
   gameId: id,
 })
+
+export const EditMapSchema = z.object({
+  image: z.preprocess((val) => (val === "" ? null : val), image.nullish()),
+  name: z.preprocess((val) => (val === "" ? null : val), name.nullish()),
+  gameId: z.preprocess((val) => (val === "" ? null : val), id.nullish()),
+})

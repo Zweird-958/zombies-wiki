@@ -1,18 +1,5 @@
 import { config } from "@/configs/api"
-
-type Map = {
-  name: string
-  guides: {
-    id: string
-    name: string
-    image: {
-      url: string
-    }
-  }[]
-  game: {
-    name: string
-  }
-}
+import type { Map } from "@/types/maps"
 
 export const formatSingleMap = (map: Map) => ({
   name: map.name,
@@ -21,4 +8,7 @@ export const formatSingleMap = (map: Map) => ({
     image: `${config.upload.publicUrl}${image.url}`,
   })),
   game: map.game.name,
+  image: `${config.upload.publicUrl}${map.image.url}`,
+  gameId: map.gameId,
+  slug: map.slug,
 })

@@ -133,6 +133,24 @@
       "success": "Map created successfully",
       "submit": "Create Map"
     },
+    "editMap": {
+      "title": "Edit Map",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter map name"
+      },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
+      "game": {
+        "label": "Game",
+        "placeholder": "Select a game",
+        "empty": "No games found."
+      },
+      "success": "Map updated successfully",
+      "submit": "Update Map"
+    },
     "deleteMap": {
       "success": "Map deleted successfully"
     },
@@ -176,7 +194,8 @@
       "CONFLICT": "A game with this name already exists"
     },
     "editGame": {
-      "CONFLICT": "A game with this name already exists"
+      "CONFLICT": "A game with this name already exists",
+      "NOT_FOUND": "Game not found"
     },
     "signIn": {
       "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password"
@@ -188,6 +207,10 @@
     },
     "createMap": {
       "CONFLICT": "A map with this name already exists"
+    },
+    "editMap": {
+      "CONFLICT": "A map with this name already exists",
+      "NOT_FOUND": "Map not found"
     },
     "deleteMap": {
       "NOT_FOUND": "Map not found"
