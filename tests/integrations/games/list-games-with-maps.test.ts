@@ -26,7 +26,14 @@ describe("listGamesWithMaps", () => {
 
     const games = (
       await db.query.games.findMany({
-        where: ({ deletedAt }, { isNull }) => isNull(deletedAt),
+        where: ({ deletedAt, id }, { isNull, and }) =>
+          and(
+            isNull(deletedAt),
+            inArray(
+              id,
+              result.map((r) => r.id),
+            ),
+          ),
         columns: {
           id: true,
           name: true,
@@ -76,6 +83,7 @@ describe("listGamesWithMaps", () => {
     })
 
     expect(result).toBeDefined()
+
     expect(games.every(({ deletedAt }) => deletedAt === null)).toBe(true)
   })
 
