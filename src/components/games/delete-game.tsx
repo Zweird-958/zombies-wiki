@@ -9,9 +9,10 @@ import { client } from "@/api/client"
 import { Button } from "@/components/ui/button"
 import { useError } from "@/hooks/use-error"
 import { useMutation } from "@/hooks/use-mutation"
+import { cn } from "@/utils/cn"
 import { routes } from "@/utils/routes"
 
-const DeleteGame = () => {
+const DeleteGame = ({ className }: { className?: string }) => {
   const t = useTranslations("forms.deleteGame")
   const { onError } = useError("deleteGame")
   const router = useRouter()
@@ -29,7 +30,7 @@ const DeleteGame = () => {
   )
 
   return (
-    <div className="absolute right-4 bottom-4 flex gap-4">
+    <div className={cn("absolute right-4 bottom-4 flex gap-4", className)}>
       <Button
         size="icon"
         color="danger"

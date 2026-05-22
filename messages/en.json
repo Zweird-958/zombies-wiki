@@ -17,6 +17,23 @@
       "success": "Game created successfully",
       "submit": "Create Game"
     },
+    "editGame": {
+      "title": "Edit Game",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter game name"
+      },
+      "image": {
+        "label": "Upload an image",
+        "description": "Image must be less than 5MB and in PNG, JPG format"
+      },
+      "releaseYear": {
+        "label": "Release Year",
+        "placeholder": "Enter release year"
+      },
+      "success": "Game updated successfully",
+      "submit": "Update Game"
+    },
     "signIn": {
       "title": "Sign In",
       "email": {
@@ -156,6 +173,9 @@
       "required": "At least one step is required"
     },
     "createGame": {
+      "CONFLICT": "A game with this name already exists"
+    },
+    "editGame": {
       "CONFLICT": "A game with this name already exists"
     },
     "signIn": {

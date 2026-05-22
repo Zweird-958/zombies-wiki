@@ -44,8 +44,7 @@ const MapsCombobox = ({ value, ...props }: Props) => {
       data?.result.map((game) => ({
         label: game.name,
         value: game.id,
-        items:
-          game.maps?.map((map) => ({ label: map.name, value: map.id })) ?? [],
+        items: game.maps.map((map) => ({ label: map.name, value: map.id })),
       })) ?? [],
     [data],
   )

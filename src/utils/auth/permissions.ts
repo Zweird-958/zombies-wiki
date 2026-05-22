@@ -1,7 +1,7 @@
 import { createAccessControl } from "better-auth/plugins/access"
 
 const statement = {
-  games: ["create", "delete"],
+  games: ["create", "update", "delete"],
   guides: ["create", "update", "delete"],
   maps: ["create", "delete"],
   images: ["list"],
@@ -10,7 +10,7 @@ const statement = {
 export const ac = createAccessControl(statement)
 
 export const admin = ac.newRole({
-  games: ["create", "delete"],
+  games: ["create", "update", "delete"],
   guides: ["create", "update", "delete"],
   maps: ["create", "delete"],
   images: ["list"],
